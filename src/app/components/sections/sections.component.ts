@@ -9,6 +9,12 @@ import { SKILLS } from '../../mocks/skills-mock';
 import { Projects } from '../../mocks/projects';
 import { PROJECTS } from '../../mocks/projects-mock';
 
+import { Academics } from '../../mocks/academic';
+import { ACADEMICS } from '../../mocks/academic-mock';
+
+import { Experiences } from '../../mocks/experience';
+import { EXPERIENCES } from '../../mocks/experience-mock';
+
 @Component({
   selector: 'app-sections',
   templateUrl: './sections.component.html',
@@ -18,6 +24,8 @@ export class SectionsComponent implements OnInit {
   biography: Biography[] = BIOGRAPHY;
   skills: Skills[] = SKILLS;
   projects: Projects[] = PROJECTS;
+  academics: Academics[] = ACADEMICS;
+  experiences: Experiences[] = EXPERIENCES;
   
   constructor() { }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card-default',
@@ -6,7 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./card-default.component.css']
 })
 export class CardDefaultComponent implements OnInit {
+  @Input() imageCard: string = "";
+  @Input() altCard: string = "imagen ilustrativa";
+  // @Input() btnEditImgSetID: string = "";
+  // @Input() btnEditSetID: string = "";
+  // atributos en comun
+  @Input() titleCard: string = "";
+  @Input() descripcionCard: string = "";
+  @Input() desde: string = "";
+  @Input() hasta: string = "";
+  @Input() tareas: string[] = [];
 
+  //atributos particulares de experiencia laboral
+  @Input() refe_per: string = "";
+  @Input() refe_tel: string = "";
   constructor() { }
 
   ngOnInit(): void {
