@@ -56,7 +56,10 @@
     </h3>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <app-card-projects
-        *ngFor="let number of [0, 1, 2, 3, 4]"
+        *ngFor="let project of projects"
+        [imageProject]="project.foto"
+        [titleProject]="project.nombre"
+        [descripcionProject]="project.descripcion"
       ></app-card-projects>
     </div>
   </div>

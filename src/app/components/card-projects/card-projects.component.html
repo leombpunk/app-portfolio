@@ -1,24 +1,23 @@
 <div class="col">
   <div class="card h-100 shadow col-btn">
     <img
-      src="./assets/images/project5.png"
+      [src]="imageProject"
       class="card-img-top img-fluid rounded-start academic"
       style="width: 200px; height: auto; align-self: center;"
-      alt="proyecto"
+      alt="imagen del proyecto"
     />
     <div class="testeando"> <!-- quitando la clase row se "arregla"-->
-      <app-button-edit></app-button-edit>
+      <app-button-edit btnEditID="btnEditImgProject"></app-button-edit>
       <app-button-delete></app-button-delete>
     </div>
     <div class="col-btn">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
+        <h5 class="card-title">{{ titleProject }}</h5>
         <p class="card-text">
-          This is a longer card with supporting text below as a natural lead-in
-          to additional content. This content is a little bit longer.
+          {{ descripcionProject }}
         </p>
         <div class="testeando"> <!-- quitando la clase row se "arregla"-->
-          <app-button-edit></app-button-edit>
+          <app-button-edit btnEditID="btnEditProject"></app-button-edit>
           <app-button-delete></app-button-delete>
         </div>
       </div>
