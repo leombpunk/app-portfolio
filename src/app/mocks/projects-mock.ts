@@ -1,4 +1,4 @@
-import { Projects } from '../mocks/projects';
+import { Projects } from './projects';
 export const PROJECTS: Projects[] = [
     {
         id: 1,

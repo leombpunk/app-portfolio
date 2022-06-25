@@ -1,4 +1,4 @@
-import { Skills } from '../mocks/skills';
+import { Skills } from './skills';
 export const SKILLS: Skills[] = [
     { 
         id: 1,
