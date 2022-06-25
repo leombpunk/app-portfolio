@@ -14,20 +14,19 @@
     </div>
     <div class="col-md-10 col-btn">
       <div class="card-body">
-        <h5 class="card-title">{{ titleCard }}</h5>
+        <h4 class="card-title">{{ titleCard }}</h4>
         <p class="card-text">
           {{ descripcionCard }}
         </p>
-        <p class="text-muted"> <!-- poner las tareas/habilidades -->
-
-        </p>
         <p class="card-text">
-          <small class="text-muted">Desde: {{ desde }} - Hasta: {{ hasta }}</small>
+          <small class="text-muted"
+            >Desde: {{ desde }} - Hasta: {{ hasta }}</small
+          >
         </p>
-        <!-- las referencias -->
         <p class="text-muted">
-          
+          <li *ngFor="let tarea of tareas">{{ tarea }}</li>
         </p>
+        <p class="text-muted">{{ refe_per }} {{ refe_tel }}</p>
         <div class="testeando">
           <app-button-edit btnEditID="btnEditSetID"></app-button-edit>
           <app-button-delete></app-button-delete>
