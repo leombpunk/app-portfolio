@@ -1,1 +1,104 @@
 /* You can add global styles to this file, and also import other style files */
+/* * {
+    border-color: royalblue;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 2px;
+}  */
+body {
+    background-attachment: fixed;
+    background-image: linear-gradient(
+      to right bottom,
+      #0d1d3a,
+      #1a2f55 52%,
+      #365a83
+    );
+  }
+  .container-fluid {
+    max-width: 1100px;
+  }
+  .carousel {
+    padding-top: 60px;
+  }
+  .academic {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  section,
+  footer {
+    padding-top: 70px;
+    padding-bottom: 15px;
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  h3 {
+    color: white;
+  }
+  meter {
+    width: 85%;
+    height: 30px;
+  }
+  
+  /*testeando clases de estilos*/
+  .redes {
+    /* border: solid; */
+    display: flex;
+  }
+  .redes a {
+    transition: all 0.3s linear;
+  }
+  .redes a:hover {
+    transform: scale(1.5);
+  }
+  .github:hover {
+    color: black;
+  }
+  .linkedin:hover {
+    color: #04009a;
+  }
+  .mail:hover {
+      color: blue;
+  }
+  .testeando {
+    display: flex;
+    position: absolute;
+    /* border: solid; */
+    top: 0rem;
+    left: 0rem;
+    justify-content: end;
+    width: 100%;
+  }
+  .col-btn {
+    position: relative;
+  }
+  
+  .col-btn img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .img-btn {
+    color: black;
+  }
+  
+  .col-btn div.card-body {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card-btn {
+    color: black;
+  }
+  
+  .btn-circle {
+    width: 35px;
+    height: 35px;
+    padding: 6px 0px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.42857;
+    margin: 3px;
+  }
+  

@@ -1,0 +1,60 @@
+<section id="section-about">
+  <div class="container-fluid">
+    <h3>Acerca de mí</h3>
+    <app-card-biography
+      *ngFor = "let bio of biography"
+        [githubLink] = "bio.github"
+        [linkedinLink] = "bio.linkedin"
+        [imageURL] = "bio.foto"
+        [titleBio] = "bio.titulo"
+        [descripcionBio] = "bio.descripcion"
+    >
+    </app-card-biography>
+  </div>
+</section>
+
+<section id="section-experience">
+  <div class="container-fluid">
+    <h3>
+      Experiencia laboral
+      <app-button-add></app-button-add>
+    </h3>
+    <app-card-default *ngFor="let number of [0, 1, 2]"></app-card-default>
+  </div>
+</section>
+
+<section id="section-academic">
+  <div class="container-fluid">
+    <h3>
+      Educación
+      <app-button-add></app-button-add>
+    </h3>
+    <app-card-default *ngFor="let number of [0, 1, 2]"></app-card-default>
+  </div>
+</section>
+
+<section id="section-skills">
+  <div class="container-fluid">
+    <h3>
+      Habilidades
+      <app-button-add></app-button-add>
+    </h3>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <app-card-skills *ngFor="let number of [0, 1, 2, 3, 4]"></app-card-skills>
+    </div>
+  </div>
+</section>
+
+<section id="section-projects">
+  <div class="container-fluid">
+    <h3>
+      Proyectos
+      <app-button-add></app-button-add>
+    </h3>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <app-card-projects
+        *ngFor="let number of [0, 1, 2, 3, 4]"
+      ></app-card-projects>
+    </div>
+  </div>
+</section>
