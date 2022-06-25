@@ -3,7 +3,7 @@ export const PROJECTS: Projects[] = [
     {
         id: 1,
         idUser: 1,
-        nombre: "primer projecto",
+        nombre: "Primer projecto",
         descripcion: "proyecto de tal y cual, son mamadas, etc.",
         fecha: "12/05/2014",
         enlaceRepo: "un enlace a git",
@@ -13,7 +13,7 @@ export const PROJECTS: Projects[] = [
     {
         id: 2,
         idUser: 1,
-        nombre: "segundo projecto",
+        nombre: "Segundo projecto",
         descripcion: "proyecto de tal y cual, son mamadas, etc.",
         fecha: "12/05/2014",
         enlaceRepo: "un enlace a git",
@@ -23,7 +23,7 @@ export const PROJECTS: Projects[] = [
     {
         id: 3,
         idUser: 1,
-        nombre: "tercer projecto",
+        nombre: "Tercer projecto",
         descripcion: "proyecto de tal y cual, son mamadas, etc.",
         fecha: "12/05/2014",
         enlaceRepo: "un enlace a git",
@@ -33,7 +33,7 @@ export const PROJECTS: Projects[] = [
     {
         id: 4,
         idUser: 1,
-        nombre: "cuarto projecto",
+        nombre: "Cuarto projecto",
         descripcion: "proyecto de tal y cual, son mamadas, etc.",
         fecha: "12/05/2014",
         enlaceRepo: "un enlace a git",
