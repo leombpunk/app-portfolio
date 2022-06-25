@@ -40,7 +40,10 @@
       <app-button-add></app-button-add>
     </h3>
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      <app-card-skills *ngFor="let number of [0, 1, 2, 3, 4]"></app-card-skills>
+      <app-card-skills *ngFor="let skill of skills"
+      [titleSkill]="skill.descripcion"
+      [nivelSkill]="skill.nivel"
+      [senioritySkill]="skill.seniority"></app-card-skills>
     </div>
   </div>
 </section>
