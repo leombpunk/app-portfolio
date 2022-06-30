@@ -1,1 +1,68 @@
-<p>modal-add-edit-project works!</p>
+<div class="modal-header">
+  <h5 class="modal-title" id="staticBackdropLabel">Datos del proyecto</h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="close"
+    (click)="dismissModal()"
+  ></button>
+</div>
+<form action="#" method="post" id="form-project">
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="nombrePro" class="form-label">Nombre:</label>
+      <input
+        type="text"
+        id="nombrePro"
+        name="nombrePro"
+        class="form-control shadow"
+        placeholder="Ingrese el nombre del proyecto"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="descripcionPro" class="form-label">Descripcion:</label>
+      <textarea
+        id="descripcionPro"
+        name="descripcion"
+        class="form-control shadow"
+        cols="10"
+        rows="5"
+        placeholder="Describa su proyecto, herramientas utilizadas, ect..."
+        required
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="repositorio" class="form-label">Repositorio (enlace):</label>
+      <input
+        type="text"
+        id="repositorio"
+        name="repositorio"
+        class="form-control shadow"
+        placeholder="Ingrese el URL del repositorio"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="sitio" class="form-label">Sitio (demo):</label>
+      <input
+        type="text"
+        id="sitio"
+        name="sitio"
+        class="form-control shadow"
+        placeholder="Ingrese el URL del sitio"
+      />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary shadow"
+      data-bs-dismiss="modal"
+      (click)="closeModal()"
+    >
+      Cerrar
+    </button>
+    <button type="button" class="btn btn-primary shadow">Aceptar</button>
+  </div>
+</form>

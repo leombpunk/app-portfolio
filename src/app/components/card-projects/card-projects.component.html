@@ -6,7 +6,8 @@
       style="width: 200px; height: auto; align-self: center;"
       alt="imagen del proyecto"
     />
-    <div class="testeando"> <!-- quitando la clase row se "arregla"-->
+    <div class="testeando">
+      <!-- quitando la clase row se "arregla"-->
       <app-button-edit btnEditID="btnEditImgProject"></app-button-edit>
       <app-button-delete></app-button-delete>
     </div>
@@ -16,8 +17,12 @@
         <p class="card-text">
           {{ descripcionProject }}
         </p>
-        <div class="testeando"> <!-- quitando la clase row se "arregla"-->
-          <app-button-edit btnEditID="btnEditProject"></app-button-edit>
+        <div class="testeando">
+          <!-- quitando la clase row se "arregla"-->
+          <app-button-edit
+            btnEditID="btnEditProject"
+            modalTarget="project"
+          ></app-button-edit>
           <app-button-delete></app-button-delete>
         </div>
       </div>

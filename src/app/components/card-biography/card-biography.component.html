@@ -1,4 +1,5 @@
-<div class="card mb-3 shadow"> <!-- parametrizar este componente-->
+<div class="card mb-3 shadow">
+  <!-- parametrizar este componente-->
   <div class="row g-0">
     <div class="col-md-3 col-btn">
       <img
@@ -19,7 +20,11 @@
           {{ descripcionBio }}
         </p>
         <div class="testeando">
-          <app-button-edit btnEditID="btnEditBiography"></app-button-edit>
+          <app-button-edit
+            btnEditID="btnEditBiography"
+            modalId="#modalAddEditBiography"
+            modalTarget="biography"
+          ></app-button-edit>
         </div>
       </div>
     </div>

@@ -1,1 +1,93 @@
-<p>modal-add-edit-experience works!</p>
+<div class="modal-header">
+  <h5 class="modal-title" id="staticBackdropLabel">Datos del Puesto</h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="close"
+    (click)="dismissModal()"
+  ></button>
+</div>
+<form action="#" method="post" id="form-experience">
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="cargo" class="form-label">Cargo:</label>
+      <input
+        type="text"
+        id="cargo"
+        name="cargo"
+        class="form-control shadow"
+        placeholder="Ingrese su cargo o puesto"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="empresa" class="form-label">Nombre de la Empresa:</label>
+      <input
+        type="text"
+        name="empresa"
+        id="empresa"
+        class="form-control shadow"
+        placeholder="Ingrese el nombre de la Empresa"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <div class="row">
+        <div class="col-6">
+          <label for="desde" class="form-label">Desde:</label>
+          <input
+            type="date"
+            name="desde"
+            id="desde"
+            class="form-control shadow"
+            required
+          />
+        </div>
+        <div class="col-6">
+          <label for="hasta" class="form-label">Hasta:</label>
+          <input
+            type="date"
+            name="hasta"
+            id="hasta"
+            class="form-control shadow"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="referencia" class="form-label">Contacto de Referencia:</label>
+      <input
+        type="text"
+        name="referencia"
+        id="referencia"
+        class="form-control shadow"
+        placeholder="Telefono de referencia"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="tareas" class="form-label">Tareas realizadas:</label>
+      <textarea
+        name="tareas"
+        id="tareas"
+        class="form-control shadow"
+        cols="30"
+        rows="5"
+        placeholder="Nombre las tareas entre comas (,) ¡es muy importante!"
+        required
+      ></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary shadow"
+      data-bs-dismiss="modal"
+      (click)="closeModal()"
+    >
+      Cerrar
+    </button>
+    <button type="button" class="btn btn-primary shadow">Aceptar</button>
+  </div>
+</form>

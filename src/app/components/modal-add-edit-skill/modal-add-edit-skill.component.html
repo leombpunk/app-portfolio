@@ -1,1 +1,81 @@
-<p>modal-add-edit-skill works!</p>
+<div class="modal-header">
+  <h5 class="modal-title" id="staticBackdropLabel">Datos de la habilidad</h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="close"
+    (click)="dismissModal()"
+  ></button>
+</div>
+<form action="#" method="post" id="form-skill">
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción:</label>
+      <input
+        type="text"
+        id="descripcion"
+        name="descripcion"
+        class="form-control shadow"
+        placeholder="Ej.: PHP, JavaScript, MS World, MS Escel, etc."
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="nivel" class="form-label">Nivel(0-10):</label>
+      <input
+        type="range"
+        name="nivel"
+        id="nivel"
+        class="form-range shadow"
+        value="0"
+        min="0"
+        max="10"
+        step="1"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="rango" class="form-label">Rango:</label>
+      <select
+        name="rango"
+        id="rango"
+        class="form-select shadow"
+        placeholder="Seleccione algo"
+        required
+      >
+        <option value="0" selected></option>
+        <option value="1">Trainee (aprendiz)</option>
+        <option value="2">Junior (novato)</option>
+        <option value="3">Semi Senior (intermedio)</option>
+        <option value="4">Senior (avnazado)</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="tipo" class="form-label">Tipo habilidad:</label>
+      <select
+        name="tipo"
+        id="tipo"
+        class="form-select shadow"
+        placeholder="Seleccione algo"
+        required
+      >
+        <option value="0" selected></option>
+        <option value="1">Habilidad Dura</option>
+        <option value="2">Habilidad Blanda</option>
+        <option value="3">Herramienta</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary shadow"
+      data-bs-dismiss="modal"
+      (click)="closeModal()"
+    >
+      Cerrar
+    </button>
+    <button type="button" class="btn btn-primary shadow">Aceptar</button>
+  </div>
+</form>

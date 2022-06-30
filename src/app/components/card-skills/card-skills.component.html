@@ -3,9 +3,12 @@
     <div class="card-body">
       <h4 class="card-title">{{ titleSkill }}</h4>
       <meter id="disk_c" [value]="nivelSkill" min="0" max="10"></meter>
-      <p>{{ senioritySkill }} </p>
+      <p>{{ senioritySkill }}</p>
       <div class="testeando">
-        <app-button-edit btnEditID="btnEditSkill"></app-button-edit>
+        <app-button-edit
+          btnEditID="btnEditSkill"
+          modalTarget="skill"
+        ></app-button-edit>
         <app-button-delete></app-button-delete>
       </div>
     </div>

@@ -1,1 +1,179 @@
-<p>modal-add-edit-biography works!</p>
+<div class="modal-header">
+  <h5 class="modal-title" id="modal-basic-title">Datos de perfil</h5>
+  <button
+    type="button"
+    class="btn-close"
+    
+    aria-label="Close"
+    (click)="dismissModal()"
+  ></button>
+</div>
+<form action="#" method="post" id="form-about-me" autocomplete="off">
+  <div class="modal-body">
+    <!-- tabs inicio -->
+    <ul class="nav nav-tabs" role="tablist" id="pestañas">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="tab-biography"
+          data-bs-toggle="tab"
+          data-bs-target="#biography"
+          type="button"
+          role="tab"
+          aria-controls="biography"
+          aria-selected="true"
+        >
+          Biografía
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="tab-social"
+          data-bs-toggle="tab"
+          data-bs-target="#social"
+          type="button"
+          role="tab"
+          aria-controls="social"
+          aria-selected="false"
+        >
+          Redes Sociales
+        </button>
+      </li>
+    </ul>
+    <!-- tabs fin -->
+
+    <!-- tabs content inicio -->
+    <div class="tab-content" id="contenidoPestañas">
+      <div
+        class="tab-pane fade show active"
+        id="biography"
+        role="tabpanel"
+        aria-labelledby="tab-biography"
+      >
+        <div class="mb-3">
+          <label for="titulo" class="form-label">Titulo:</label>
+          <input
+            type="text"
+            name="titulo"
+            id="titulo"
+            class="form-control shadow"
+            placeholder="Ej.: Su titulo académico o puesto de trabajo"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input
+            type="text"
+            name="nombre"
+            id="nombre"
+            class="form-control shadow"
+            placeholder="Ingrese su nombre"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="apellido" class="form-label">Apellido:</label>
+          <input
+            type="text"
+            name="apellido"
+            id="apellido"
+            class="form-control shadow"
+            placeholder="Ingrese su apellido"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="about-you" class="form-label">Acerca de tí:</label>
+          <textarea
+            name="about-you"
+            id="about-you"
+            cols="30"
+            rows="5"
+            class="form-control shadow"
+            placeholder="Escriba aqui algo acerca de usted..."
+          ></textarea>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="social"
+        role="tabpanel"
+        aria-labelledby="tab-social"
+      >
+        <div class="mb-3">
+          <label for="github" class="form-label">GitHub:</label>
+          <input
+            type="text"
+            name="github"
+            id="github"
+            class="form-control shadow"
+            placeholder="GitHub"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="linkedin" class="form-label">LinkedIn:</label>
+          <input
+            type="text"
+            name="linkedin"
+            id="linkedin"
+            class="form-control shadow"
+            placeholder="LinkedIn"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="facebook" class="form-label">Facebook:</label>
+          <input
+            type="text"
+            name="facebook"
+            id="facebook"
+            class="form-control shadow"
+            placeholder="Facebook"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="youtube" class="form-label">YouTube:</label>
+          <input
+            type="text"
+            name="youtube"
+            id="youtube"
+            class="form-control shadow"
+            placeholder="YouTube"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="instagram" class="form-label">Instagram:</label>
+          <input
+            type="text"
+            name="instagram"
+            id="instagram"
+            class="form-control shadow"
+            placeholder="Instagram"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="twitter" class="form-label">Twitter:</label>
+          <input
+            type="text"
+            name="twitter"
+            id="twitter"
+            class="form-control shadow"
+            placeholder="Twitter"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- tabs content fin -->
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary shadow"
+      
+      (click)="closeModal()"
+    >
+      Cerrar
+    </button>
+    <button type="submit" class="btn btn-primary shadow">
+      Aceptar
+    </button>
+  </div>
+</form>
