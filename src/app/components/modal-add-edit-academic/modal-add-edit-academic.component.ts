@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -8,6 +8,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal-add-edit-academic.component.css']
 })
 export class ModalAddEditAcademicComponent implements OnInit {
+
+  @Input() titleModal: string = "";
 
   constructor(private modalActive: NgbActiveModal) { }
 

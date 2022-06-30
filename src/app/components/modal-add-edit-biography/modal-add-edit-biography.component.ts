@@ -8,6 +8,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal-add-edit-biography.component.css']
 })
 export class ModalAddEditBiographyComponent implements OnInit {
+  
+  @Input() titleModal: string = "";
 
   constructor(private modalActive: NgbActiveModal) { }
 

@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardDefaultComponent implements OnInit {
   @Input() imageCard: string = "";
   @Input() altCard: string = "imagen ilustrativa";
+
+  @Input() apuntar: string = "";
   // @Input() btnEditImgSetID: string = "";
   // @Input() btnEditSetID: string = "";
   // atributos en comun
@@ -23,6 +25,7 @@ export class CardDefaultComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("apuntar:"+this.apuntar);
   }
 
 }
