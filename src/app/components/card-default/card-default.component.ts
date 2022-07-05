@@ -10,6 +10,8 @@ export class CardDefaultComponent implements OnInit {
   @Input() altCard: string = "imagen ilustrativa";
 
   @Input() apuntar: string = "";
+  @Input() type1: string = "1";
+  @Input() type2: string = "2";
   // @Input() btnEditImgSetID: string = "";
   // @Input() btnEditSetID: string = "";
   // atributos en comun

@@ -5,11 +5,8 @@
       <meter id="disk_c" [value]="nivelSkill" min="0" max="10"></meter>
       <p>{{ senioritySkill }}</p>
       <div class="testeando">
-        <app-button-edit
-          btnEditID="btnEditSkill"
-          modalTarget="skill"
-        ></app-button-edit>
-        <app-button-delete></app-button-delete>
+        <app-button-edit modalTarget="skill" type="1"></app-button-edit>
+        <app-button-delete modalTarget="project" type="1"></app-button-delete>
       </div>
     </div>
   </div>

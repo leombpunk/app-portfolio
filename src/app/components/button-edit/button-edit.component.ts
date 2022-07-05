@@ -8,6 +8,7 @@ import { ModalAddEditAcademicComponent } from '../modal-add-edit-academic/modal-
 import { ModalAddEditExperienceComponent } from '../modal-add-edit-experience/modal-add-edit-experience.component';
 import { ModalAddEditProjectComponent } from '../modal-add-edit-project/modal-add-edit-project.component';
 import { ModalAddEditSkillComponent } from '../modal-add-edit-skill/modal-add-edit-skill.component';
+import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
 
 @Component({
   selector: 'app-button-edit',
@@ -17,10 +18,8 @@ import { ModalAddEditSkillComponent } from '../modal-add-edit-skill/modal-add-ed
 export class ButtonEditComponent implements OnInit {
   faPenToSquare = faPenToSquare;
 
-  @Input() btnEditID: string = '';
-  // @Input() modalId: string = '';
-  //agregar un modalTarget para hacer un switch dentro de openModal()
   @Input() modalTarget: string = '';
+  @Input() type: string = "";
 
   constructor(private modalService: NgbModal) {}
 
@@ -28,10 +27,21 @@ export class ButtonEditComponent implements OnInit {
   // para pasarselo al servicio y poder hacer el get de la info solicitada
   // el id del registro y/o tambien junto con el id del usuario
   openModal() {
+    //evaluar el parametro si es 1 o 2 por ejemplo
+    //si es 1 cargar los modales de editar imagenes
+    //si es 2 cargar los modales de editar los datos
+    const modal = {
+      bio: this.type === '1' ? ModalAddEditBiographyComponent : ModalEditImageComponent,
+      experience: this.type === '1' ? ModalAddEditExperienceComponent : ModalEditImageComponent,
+      academic : this.type === '1' ? ModalAddEditAcademicComponent : ModalEditImageComponent, 
+      project: this.type === '1' ? ModalAddEditProjectComponent : ModalEditImageComponent,
+      skill: this.type === '1' ? ModalAddEditSkillComponent : ModalEditImageComponent
+    }
+
     console.log("modalTarget:"+this.modalTarget);
     switch (this.modalTarget) {
       case 'biography':
-        let wea = this.modalService.open(ModalAddEditBiographyComponent, {
+        let wea = this.modalService.open(modal.bio, {
           backdrop: 'static',
           centered: true
         });
@@ -39,7 +49,7 @@ export class ButtonEditComponent implements OnInit {
         wea.componentInstance.titleModal = 'Editar Perfil';
         break;
       case 'skill':
-        let wea2 = this.modalService.open(ModalAddEditSkillComponent, {
+        let wea2 = this.modalService.open(modal.skill, {
           backdrop: 'static',
           centered: true
         });
@@ -47,7 +57,7 @@ export class ButtonEditComponent implements OnInit {
         wea2.componentInstance.titleModal = 'Editar Habilidad';
         break;
       case 'project':
-        let wea3 = this.modalService.open(ModalAddEditProjectComponent, {
+        let wea3 = this.modalService.open(modal.project, {
           backdrop: 'static',
           centered: true
         });
@@ -55,7 +65,7 @@ export class ButtonEditComponent implements OnInit {
         wea3.componentInstance.titleModal = 'Editar Proyecto';
         break;
       case 'academic':
-        let wea4 = this.modalService.open(ModalAddEditAcademicComponent, {
+        let wea4 = this.modalService.open(modal.academic, {
           backdrop: 'static',
           centered: true
         });
@@ -63,7 +73,7 @@ export class ButtonEditComponent implements OnInit {
         wea4.componentInstance.titleModal = 'Editar Educación';
         break;
       case 'experience':
-        let wea5 = this.modalService.open(ModalAddEditExperienceComponent, {
+        let wea5 = this.modalService.open(modal.experience, {
           backdrop: 'static',
           centered: true
         });

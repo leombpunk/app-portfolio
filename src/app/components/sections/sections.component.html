@@ -17,7 +17,7 @@
   <div class="container-fluid">
     <h3>
       Experiencia laboral
-      <app-button-add></app-button-add>
+      <app-button-add modalTarget="experience"></app-button-add>
     </h3>
     <app-card-default
       *ngFor="let experience of experiences"
@@ -38,7 +38,7 @@
   <div class="container-fluid">
     <h3>
       Educación
-      <app-button-add></app-button-add>
+      <app-button-add modalTarget="academic"></app-button-add>
     </h3>
     <app-card-default
       *ngFor="let academic of academics"
@@ -57,7 +57,7 @@
   <div class="container-fluid">
     <h3>
       Habilidades
-      <app-button-add></app-button-add>
+      <app-button-add modalTarget="skill"></app-button-add>
     </h3>
     <div class="row row-cols-1 row-cols-md-4 g-4">
       <app-card-skills
@@ -74,7 +74,7 @@
   <div class="container-fluid">
     <h3>
       Proyectos
-      <app-button-add></app-button-add>
+      <app-button-add modalTarget="project"></app-button-add>
     </h3>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <app-card-projects

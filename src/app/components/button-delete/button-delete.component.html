@@ -1,9 +1,7 @@
 <button
   type="button"
-  id="btn-delete-skill-data"
-  data-bs-toggle="modal"
-  data-bs-target="#staticBackdrop-modal-data-skill-delete"
   class="btn btn-outline-danger card-btn btn-circle shadow"
+  (click)="openModal()"
 >
   <fa-icon [icon]="faTrashAlt"></fa-icon>
 </button>

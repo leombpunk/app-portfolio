@@ -9,8 +9,8 @@
         loading="lazy"
       />
       <div class="testeando">
-        <app-button-edit btnEditID="btnEditImgBiography"></app-button-edit>
-        <app-button-delete></app-button-delete>
+        <app-button-edit modalTarget="biography" type="2"></app-button-edit>
+        <app-button-delete modalTarget="biography" type="2"></app-button-delete>
       </div>
     </div>
     <div class="col-md-9 col-btn">
@@ -20,11 +20,7 @@
           {{ descripcionBio }}
         </p>
         <div class="testeando">
-          <app-button-edit
-            btnEditID="btnEditBiography"
-            modalId="#modalAddEditBiography"
-            modalTarget="biography"
-          ></app-button-edit>
+          <app-button-edit modalTarget="biography" type="1"></app-button-edit>
         </div>
       </div>
     </div>
@@ -33,7 +29,8 @@
     <div class="card-footer">
       <div class="card-text redes justify-content-center">
         <a
-          href="#"
+          
+          href="mailto:admin@gmail.com"
           target="_blank"
           class="btn btn-circle mail"
           style="font-size: 30px; width: 60px; height: 60px; border-radius: 30px"
