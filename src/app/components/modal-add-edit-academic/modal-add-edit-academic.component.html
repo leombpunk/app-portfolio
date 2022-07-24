@@ -8,18 +8,20 @@
     (click)="dismissModal()"
   ></button>
 </div>
-<form action="#" method="post" id="form-academic">
+<form [formGroup]="formAcademic" (ngSubmit)="onSubmit($event)">
   <div class="modal-body">
+    <input type="text" id="id" formControlName="id" value="0" style="display: none;">
     <div class="mb-3">
       <label for="titulo" class="form-label">Titulo:</label>
       <input
         type="text"
         id="titulo"
-        name="titulo"
+        formControlName="titulo"
         class="form-control shadow"
         placeholder="Ingrese su Titulo"
-        required
+        [class.border-danger]="TituloValid"
       />
+      <span *ngIf="TituloError" class="errorMessage"> {{ mErrTitulo }} </span>
     </div>
     <div class="mb-3">
       <label for="institucion" class="form-label"
@@ -27,43 +29,49 @@
       >
       <input
         type="text"
-        name="institucion"
         id="institucion"
+        formControlName="institucion"
         class="form-control shadow"
         placeholder="Ingrese el nombre de la Institución"
-        required
+        [class.border-danger]="InstitucionValid"
       />
+      <span *ngIf="InstitucionError" class="errorMessage"> {{ mErrInstituto }} </span>
     </div>
     <div class="mb-3">
       <label for="locacion" class="form-label">Lugar:</label>
       <input
         type="text"
         id="locacion"
-        name="locacion"
+        formControlName="locacion"
         class="form-control shadow"
         placeholder="Pais, Provincia (la coma ',' no es opcional)"
+        [class.border-danger]="LocacionValid"
       />
+      <span *ngIf="LocacionError" class="errorMessage"> {{ mErrLocacion }} </span>
     </div>
     <div class="mb-3">
       <div class="row">
         <div class="col-6">
-          <label for="desde" class="form-label">Desde:</label>
+          <label for="desde" class="form-label">Desde: {{ formAcademic.value.desde }}</label>
           <input
             type="date"
-            name="desde"
             id="desde"
+            formControlName="desde"
             class="form-control shadow"
-            required
+            [class.border-danger]="DesdeValid"
           />
+          <span *ngIf="DesdeError" class="errorMessage"> {{ mErrDesde }} </span>
         </div>
         <div class="col-6">
           <label for="hasta" class="form-label">Hasta:</label>
           <input
             type="date"
-            name="hasta"
             id="hasta"
+            formControlName="hasta"
             class="form-control shadow"
+            [class.border-danger]="HastaValid"
           />
+          <span *ngIf="HastaError" class="errorMessage"> {{ mErrHasta }} </span>
         </div>
       </div>
     </div>
@@ -77,6 +85,6 @@
     >
       Cerrar
     </button>
-    <button type="button" class="btn btn-primary shadow">Aceptar</button>
+    <button type="submit" class="btn btn-primary shadow">Aceptar</button>
   </div>
 </form>

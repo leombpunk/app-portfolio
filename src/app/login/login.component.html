@@ -2,36 +2,56 @@
 <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
   <div>
     <label for="username">Usuario: </label>
-    <input type="text" formControlName="username" id="username" [class.border-danger]="UsernameValid"/>
+    <input
+      type="text"
+      formControlName="username"
+      id="username"
+      [class.border-danger]="UsernameValid"
+    />
   </div>
   <div *ngIf="Username?.errors && Username?.touched">
     <p *ngIf="Username?.hasError('required')" class="error">
       El nombre de usuario es requerido.
     </p>
-    <p *ngIf="Username?.errors?.['minlength'] || Username?.errors?.['maxlength']" class="error">
-      El nombre de usuario debe tener una longuitud de 5 (minimo) a 12 (maximo) caracteres.
+    <p
+      *ngIf="Username?.errors?.['minlength'] || Username?.errors?.['maxlength']"
+      class="error"
+    >
+      El nombre de usuario debe tener una longuitud de 5 (minimo) a 12 (maximo)
+      caracteres.
     </p>
   </div>
   <br />
   <div>
     <label for="mail">Correo Electrónico: </label>
-    <input type="email" formControlName="mail" id="mail" [class.border-danger]="MailValid"/>
+    <input
+      type="email"
+      formControlName="mail"
+      id="mail"
+      [class.border-danger]="MailValid"
+    />
   </div>
   <div *ngIf="Mail?.errors && Mail?.touched">
     <p *ngIf="Mail?.hasError('required')" class="error">
       El e-mail es requerido.
     </p>
-    <p *ngIf="Mail?.hasError('email')" class="error"> <!-- el parametro que se le pasa 'email' hace referencia al tipo que tiene el iput y debe controlar -->
+    <p *ngIf="Mail?.hasError('email')" class="error">
+      <!-- el parametro que se le pasa 'email' hace referencia al tipo que tiene el iput y debe controlar -->
       El formato del e-mail debe ser valido.
     </p>
   </div>
   <br />
   <div>
     <label for="pass">Contraseña: </label>
-    <input type="password" formControlName="pass" id="pass" [class.border-danger]="PasswordValid"/>
+    <input
+      type="password"
+      formControlName="pass"
+      id="pass"
+      [class.border-danger]="PasswordValid"
+    />
   </div>
   <div *ngIf="Password?.errors && Password?.touched">
-    <p *ngIf="Password?.hasError('required')" class="error"> 
+    <p *ngIf="Password?.hasError('required')" class="error">
       La contraseña es requerido.
     </p>
     <p *ngIf="Password?.errors?.['minlength']" class="error">
@@ -44,12 +64,16 @@
   </div>
 </form>
 <div>
-  <p>Un debuger para mostrar que es posible hacer un biding directo al formulario 
-    <strong>{{form.value.username}} </strong>
-    <strong>{{form.value.mail}} </strong>
-    <strong>{{form.value.pass}} </strong>
+  <p>
+    Un debuger para mostrar que es posible hacer un biding directo al formulario
+    <strong>{{ form.value.username }} </strong>
+    <strong>{{ form.value.mail }} </strong>
+    <strong>{{ form.value.pass }} </strong>
     <!-- <strong>{{ Mail }}</strong> -->
-  <p> 
-  <br/>
-  <a routerLink="/" type="button">Inicio</a>
+  </p>
+
+  <p>
+    <br />
+    <a routerLink="/" type="button">Inicio</a>
+  </p>
 </div>

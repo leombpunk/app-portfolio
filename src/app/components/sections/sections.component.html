@@ -2,12 +2,13 @@
   <div class="container-fluid">
     <h3>Acerca de mí</h3>
     <app-card-biography
-      *ngFor="let bio of biography"
       [githubLink]="bio.github"
       [linkedinLink]="bio.linkedin"
       [imageURL]="bio.foto"
       [titleBio]="bio.titulo"
-      [descripcionBio]="bio.descripcion"
+      [descripcionBio]="bio.acercade"
+      [perfil_id]="bio.id"
+      [pasero]="bio"
     >
     </app-card-biography>
   </div>
@@ -42,9 +43,9 @@
     </h3>
     <app-card-default
       *ngFor="let academic of academics"
-      [imageCard]="academic.foto"
+      [imageCard]="academic.logo"
       [titleCard]="academic.titulo"
-      [descripcionCard]="academic.instituto"
+      [descripcionCard]="academic.institucion"
       [desde]="academic.desde"
       [hasta]="academic.hasta"
       [tareas]="academic.habilidades"
@@ -86,3 +87,13 @@
     </div>
   </div>
 </section>
+
+<ng-template>
+  <app-modal-add-edit-biography></app-modal-add-edit-biography>
+  <app-modal-add-edit-experience></app-modal-add-edit-experience>
+  <app-modal-add-edit-academic></app-modal-add-edit-academic>
+  <app-modal-add-edit-skill></app-modal-add-edit-skill>
+  <app-modal-add-edit-project></app-modal-add-edit-project>
+  <app-modal-edit-image></app-modal-edit-image>
+  <app-modal-delete-some></app-modal-delete-some>
+</ng-template>

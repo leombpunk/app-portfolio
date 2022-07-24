@@ -6,7 +6,7 @@
     (click)="dismissModal()"
   ></button>
 </div>
-<form action="#" method="post" id="form-about-me" autocomplete="off">
+<form [formGroup]="formBiography" (ngSubmit)="onSubmit($event)">
   <div class="modal-body">
     <!-- tabs inicio -->
     <ul class="nav nav-tabs" role="tablist" id="pestañas">
@@ -49,15 +49,19 @@
         role="tabpanel"
         aria-labelledby="tab-biography"
       >
+        <input type="text" id="id" formControlName="id" value="0" style="display: none;">
         <div class="mb-3">
           <label for="titulo" class="form-label">Titulo:</label>
           <input
             type="text"
             name="titulo"
             id="titulo"
+            formControlName="titulo"
             class="form-control shadow"
             placeholder="Ej.: Su titulo académico o puesto de trabajo"
+            [class.border-danger]="TituloValid"
           />
+          <span *ngIf="TituloError" class="errorMessage"> {{ mErrTitulo }} </span>
         </div>
         <div class="mb-3">
           <label for="nombre" class="form-label">Nombre:</label>
@@ -65,9 +69,12 @@
             type="text"
             name="nombre"
             id="nombre"
+            formControlName="nombre"
             class="form-control shadow"
             placeholder="Ingrese su nombre"
+            [class.border-danger]="NombreValid"
           />
+            <span *ngIf="NombreError" class="errorMessage"> {{ mErrNombre }} </span>
         </div>
         <div class="mb-3">
           <label for="apellido" class="form-label">Apellido:</label>
@@ -75,20 +82,26 @@
             type="text"
             name="apellido"
             id="apellido"
+            formControlName="apellido"
             class="form-control shadow"
             placeholder="Ingrese su apellido"
+            [class.border-danger]="ApellidoValid"
           />
+            <span *ngIf="ApellidoError" class="errorMessage"> {{ mErrApellido }} </span>
         </div>
         <div class="mb-3">
           <label for="about-you" class="form-label">Acerca de tí:</label>
           <textarea
             name="about-you"
             id="about-you"
+            formControlName="acercade"
             cols="30"
             rows="5"
             class="form-control shadow"
             placeholder="Escriba aqui algo acerca de usted..."
-          ></textarea>
+            [class.border-danger]="AcercadeValid"
+          >{{ bio.acercade }}</textarea>
+          <span *ngIf="AcercadeError" class="errorMessage"> {{ mErrAcercade }} </span>
         </div>
       </div>
       <div
@@ -103,59 +116,38 @@
             type="text"
             name="github"
             id="github"
+            formControlName="github"
             class="form-control shadow"
             placeholder="GitHub"
+            [class.border-danger]="GithubValid"
           />
+              <span *ngIf="GithubError" class="errorMessage"> {{ mErrGithub }} </span>
         </div>
         <div class="mb-3">
           <label for="linkedin" class="form-label">LinkedIn:</label>
           <input
             type="text"
             name="linkedin"
+            formControlName="linkedin"
             id="linkedin"
             class="form-control shadow"
             placeholder="LinkedIn"
+            [class.border-danger]="LinkedinValid"
           />
+              <span *ngIf="LinkedinError" class="errorMessage"> {{ mErrLinkedin }} </span>
         </div>
         <div class="mb-3">
-          <label for="facebook" class="form-label">Facebook:</label>
+          <label for="correo" class="form-label">Correo:</label>
           <input
-            type="text"
-            name="facebook"
-            id="facebook"
+            type="mail"
+            name="correo"
+            id="correo"
+            formControlName="correo"
             class="form-control shadow"
-            placeholder="Facebook"
+            placeholder="Correo"
+            [class.border-danger]="CorreoValid"
           />
-        </div>
-        <div class="mb-3">
-          <label for="youtube" class="form-label">YouTube:</label>
-          <input
-            type="text"
-            name="youtube"
-            id="youtube"
-            class="form-control shadow"
-            placeholder="YouTube"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="instagram" class="form-label">Instagram:</label>
-          <input
-            type="text"
-            name="instagram"
-            id="instagram"
-            class="form-control shadow"
-            placeholder="Instagram"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="twitter" class="form-label">Twitter:</label>
-          <input
-            type="text"
-            name="twitter"
-            id="twitter"
-            class="form-control shadow"
-            placeholder="Twitter"
-          />
+              <span *ngIf="CorreoError" class="errorMessage"> {{ mErrCorreo }} </span>
         </div>
       </div>
     </div>

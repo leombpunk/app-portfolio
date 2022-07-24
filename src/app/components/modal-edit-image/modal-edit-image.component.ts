@@ -6,9 +6,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-modal-edit-image',
   templateUrl: './modal-edit-image.component.html',
   styleUrls: ['./modal-edit-image.component.css']
-})
+}) 
 export class ModalEditImageComponent implements OnInit {
+
   @Input() titleModal: string = "";
+
   constructor(private modalActive: NgbActiveModal) { }
 
   closeModal() {

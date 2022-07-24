@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -53,6 +54,7 @@ import { ModalAddEditProjectComponent } from './components/modal-add-edit-projec
     AppRoutingModule,
     FormsModule, 
     ReactiveFormsModule, 
+    HttpClientModule, 
     FontAwesomeModule,
     NgbModule,
   ],

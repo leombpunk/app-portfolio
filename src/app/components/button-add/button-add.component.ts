@@ -21,7 +21,7 @@ export class ButtonAddComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   openModal() {
-    console.log("modalTarget:"+this.modalTarget);
+    // console.log("modalTarget:"+this.modalTarget);
     switch (this.modalTarget) {
       case 'skill':
         let wea2 = this.modalService.open(ModalAddEditSkillComponent, {

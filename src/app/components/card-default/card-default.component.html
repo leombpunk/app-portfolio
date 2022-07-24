@@ -8,28 +8,49 @@
         style="width: 130px; height: auto;"
       />
       <div class="testeando">
-        <app-button-edit [type]="type2" [modalTarget]="apuntar"></app-button-edit>
-        <app-button-delete [type]="type2" [modalTarget]="apuntar"></app-button-delete>
+        <app-button-edit
+          [type]="type2"
+          [modalTarget]="apuntar"
+        ></app-button-edit>
+        <app-button-delete
+          [type]="type2"
+          [modalTarget]="apuntar"
+        ></app-button-delete>
       </div>
     </div>
     <div class="col-md-10 col-btn">
       <div class="card-body">
         <h4 class="card-title">{{ titleCard }}</h4>
-        <p class="card-text">
-          {{ descripcionCard }}
-        </p>
-        <p class="card-text">
-          <small class="text-muted"
-            >Desde: {{ desde }} - Hasta: {{ hasta }}</small
-          >
-        </p>
-        <p class="text-muted">
-          <li *ngFor="let tarea of tareas">{{ tarea }}</li>
-        </p>
-        <p class="text-muted">{{ refe_per }} {{ refe_tel }}</p>
+        <!-- testing start-->
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+          <div class="col">
+            <p class="card-text">
+              {{ descripcionCard }}
+            </p>
+            <p class="card-text">
+              <small class="text-muted"
+                >Desde: {{ desde }} - Hasta: {{ hasta }}</small
+              >
+            </p>
+            <p class="text-muted">{{ refe_per }} {{ refe_tel }}</p>
+          </div>
+          <div class="col">
+            <p class="text-muted">
+              <li *ngFor="let tarea of tareas">{{ tarea }}</li>
+            </p>
+          </div>
+        </div>
+        <!-- testing end -->
+
         <div class="testeando">
-          <app-button-edit [type]="type1" [modalTarget]="apuntar"></app-button-edit>
-          <app-button-delete [type]="type2" [modalTarget]="apuntar"></app-button-delete>
+          <app-button-edit
+            [type]="type1"
+            [modalTarget]="apuntar"
+          ></app-button-edit>
+          <app-button-delete
+            [type]="type2"
+            [modalTarget]="apuntar"
+          ></app-button-delete>
         </div>
       </div>
     </div>

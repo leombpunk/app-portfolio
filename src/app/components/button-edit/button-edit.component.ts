@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,9 @@ import { ModalAddEditProjectComponent } from '../modal-add-edit-project/modal-ad
 import { ModalAddEditSkillComponent } from '../modal-add-edit-skill/modal-add-edit-skill.component';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
 
+import { Biography, Biography1 } from '../../mocks/biography';
+import { BiographyService } from 'src/app/services/biography.service';
+
 @Component({
   selector: 'app-button-edit',
   templateUrl: './button-edit.component.html',
@@ -19,9 +22,20 @@ export class ButtonEditComponent implements OnInit {
   faPenToSquare = faPenToSquare;
 
   @Input() modalTarget: string = '';
-  @Input() type: string = "";
+  @Input() type: string = '';
+  @Input() perfil_id: number = 0;
 
-  constructor(private modalService: NgbModal) {}
+  //codigo a testear
+  //esta variable recibira un objeto de tipo Biography1 para
+  //cargar los datos que contiene en el modal de editar perfil o biografia
+  @Input() perfilData: Biography1 = new Biography1();
+
+  constructor(
+    private modalService: NgbModal,
+    private serviceBio: BiographyService
+  ) {}
+
+  ngOnInit(): void {}
 
   // openModal deberia recibir un parametro o mas (id por ejemplo)
   // para pasarselo al servicio y poder hacer el get de la info solicitada
@@ -31,14 +45,27 @@ export class ButtonEditComponent implements OnInit {
     //si es 1 cargar los modales de editar imagenes
     //si es 2 cargar los modales de editar los datos
     const modal = {
-      bio: this.type === '1' ? ModalAddEditBiographyComponent : ModalEditImageComponent,
-      experience: this.type === '1' ? ModalAddEditExperienceComponent : ModalEditImageComponent,
-      academic : this.type === '1' ? ModalAddEditAcademicComponent : ModalEditImageComponent, 
-      project: this.type === '1' ? ModalAddEditProjectComponent : ModalEditImageComponent,
-      skill: this.type === '1' ? ModalAddEditSkillComponent : ModalEditImageComponent
-    }
-
-    console.log("modalTarget:"+this.modalTarget);
+      bio:
+        this.type === '1'
+          ? ModalAddEditBiographyComponent
+          : ModalEditImageComponent,
+      experience:
+        this.type === '1'
+          ? ModalAddEditExperienceComponent
+          : ModalEditImageComponent,
+      academic:
+        this.type === '1'
+          ? ModalAddEditAcademicComponent
+          : ModalEditImageComponent,
+      project:
+        this.type === '1'
+          ? ModalAddEditProjectComponent
+          : ModalEditImageComponent,
+      skill:
+        this.type === '1' ? ModalAddEditSkillComponent : ModalEditImageComponent
+    };
+    console.log('perfil_id(button): ' + this.perfil_id);
+    console.log('modalTarget:' + this.modalTarget);
     switch (this.modalTarget) {
       case 'biography':
         let wea = this.modalService.open(modal.bio, {
@@ -47,6 +74,20 @@ export class ButtonEditComponent implements OnInit {
         });
         //.result.then(result => {}, reason => {});
         wea.componentInstance.titleModal = 'Editar Perfil';
+
+        //testeo de seteo en formulario
+        wea.componentInstance.formBiography.setValue({
+          id: this.perfilData.id,
+          titulo: this.perfilData.titulo,
+          nombre: this.perfilData.nombre,
+          apellido: this.perfilData.apellido,
+          acercade: this.perfilData.acercade,
+          correo: this.perfilData.correo,
+          linkedin: this.perfilData.linkedin,
+          github: this.perfilData.github,
+        });
+        // modal.bio.formBiography.setValue({titulo: this.perfilData.titulo});
+        wea.componentInstance.bio = this.perfilData;
         break;
       case 'skill':
         let wea2 = this.modalService.open(modal.skill, {
@@ -85,6 +126,4 @@ export class ButtonEditComponent implements OnInit {
         break;
     }
   }
-
-  ngOnInit(): void {}
 }

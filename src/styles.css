@@ -102,3 +102,10 @@ body {
     margin: 3px;
   }
   
+.errorMessage {
+  color: red
+}
+
+.border-danger { 
+  border-color: red
+}

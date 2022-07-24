@@ -1,10 +1,11 @@
 export interface Academics {
     id?: number;
-    idUser: number;
-    instituto: string;
+    usuarios_id: number;
+    institucion: string;
     titulo: string;
+    // locacion: string;
     habilidades: string[]; //agregar a la base de datos ¿sí o no?
     desde: string;
     hasta: string;
-    foto: string;
+    logo: string;
 }
