@@ -33,7 +33,7 @@ export class BiographyService {
 
   //put
   public putBiography(id: any, data: any): Observable<Biography1> {
-    console.log('desde servicio<put>: ' + data.id + ' ' + data.nombre);
+    // console.log('desde servicio<put>: ' + data.id + ' ' + data.nombre);
     return this.http.put<Biography1>(
       this.apiUrl + `/editar/${id}`,
       {},

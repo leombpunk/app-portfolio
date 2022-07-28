@@ -59,12 +59,12 @@ export class SectionsComponent implements OnInit {
   }
 
   LoadData(){
-    console.log('bio.id1: ' + this.bio.id);
+    // console.log('bio.id1: ' + this.bio.id);
     this.serviceBio.getBiography().subscribe((bio: any) => {
       this.bio = bio;
       // console.log("bio: " + bio);
       this.bio.foto = this.urlImageApi + bio.foto;
-      console.log('bio git: ' + this.bio.github);
+      // console.log('bio git: ' + this.bio.github);
     });
   }
 

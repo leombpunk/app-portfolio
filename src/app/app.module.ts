@@ -26,6 +26,8 @@ import { ModalAddEditExperienceComponent } from './components/modal-add-edit-exp
 import { ModalAddEditAcademicComponent } from './components/modal-add-edit-academic/modal-add-edit-academic.component';
 import { ModalAddEditSkillComponent } from './components/modal-add-edit-skill/modal-add-edit-skill.component';
 import { ModalAddEditProjectComponent } from './components/modal-add-edit-project/modal-add-edit-project.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { ModalAddEditProjectComponent } from './components/modal-add-edit-projec
     ModalAddEditExperienceComponent,
     ModalAddEditAcademicComponent,
     ModalAddEditSkillComponent,
-    ModalAddEditProjectComponent
+    ModalAddEditProjectComponent,
+    AlertComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

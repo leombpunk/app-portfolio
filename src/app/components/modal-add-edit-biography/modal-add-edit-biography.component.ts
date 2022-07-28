@@ -180,13 +180,32 @@ export class ModalAddEditBiographyComponent implements OnInit {
 
   onSubmit(event: Event){
     event.preventDefault();
+    console.log("var bio.id: "+this.bio.id);
     console.log("id submit: "+this.formBiography.get('id'));
     let id: any = this.formBiography.get('id');
     let response: any;
-    this.service.putBiography(id, this.formBiography.value).subscribe((result:any)=> { 
-      response = result;
-      console.log(response);
-     });
+    this.service.putBiography(2, this.formBiography.value).subscribe({
+      next: (result) => {
+        response = result;
+        console.log("response: "+response);
+      },
+      error: (e) => {
+        console.log("errorcito");
+        console.log(e);
+        // console.error(e.ok);
+        console.log(e.ok);
+      }
+    });
+    //   (result:any)=> { 
+    //   response = result;
+    //   console.log("response: "+response);
+    // });
+    // if (response.statusText){
+    //   console.log("existe statusText");
+    // }
+    // else {
+    //   this.closeModal();
+    // }
   }
 
   closeModal() {

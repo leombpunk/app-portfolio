@@ -64,8 +64,8 @@ export class ButtonEditComponent implements OnInit {
       skill:
         this.type === '1' ? ModalAddEditSkillComponent : ModalEditImageComponent
     };
-    console.log('perfil_id(button): ' + this.perfil_id);
-    console.log('modalTarget:' + this.modalTarget);
+    // console.log('perfil_id(button): ' + this.perfil_id);
+    // console.log('modalTarget:' + this.modalTarget);
     switch (this.modalTarget) {
       case 'biography':
         let wea = this.modalService.open(modal.bio, {
