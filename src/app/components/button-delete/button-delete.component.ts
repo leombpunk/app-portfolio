@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-
 import { ModalDeleteSomeComponent } from '../modal-delete-some/modal-delete-some.component';
+import { Biography1 } from '../../mocks/biography';
 
 @Component({
   selector: 'app-button-delete',
@@ -15,6 +14,7 @@ export class ButtonDeleteComponent implements OnInit {
 
   @Input() modalTarget: string = '';
   @Input() type: string = "";
+  @Input() bioData: Biography1 = new Biography1();
 
   constructor(private modalService: NgbModal) { }
   openModal() {
@@ -38,6 +38,10 @@ export class ButtonDeleteComponent implements OnInit {
         });
         //.result.then(result => {}, reason => {});
         wea.componentInstance.descpCard = this.type === '2'?'la imagen del Perfil':'el Perfil';
+        wea.componentInstance.idUser = this.bioData.usuarios_id;
+        wea.componentInstance.idItem = this.bioData.id;
+        wea.componentInstance.idTarget = this.type;
+        wea.componentInstance.idModule = this.modalTarget;
         break;
       case 'skill':
         let wea2 = this.modalService.open(modal.skill, {

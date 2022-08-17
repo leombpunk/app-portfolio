@@ -17,6 +17,7 @@ import { EXPERIENCES } from '../../mocks/experience-mock';
 
 // import { Biography1 } from '../../mocks/prueba';
 import { BiographyService } from 'src/app/services/biography.service';
+import { WalkietalkieService } from '../../services/walkietalkie.service';
 
 @Component({
   selector: 'app-sections',
@@ -33,32 +34,37 @@ export class SectionsComponent implements OnInit {
 
   bio: Biography1 = {
     id: 0,
-    nombre: "",
-    apellido: "",
-    acercade: "",
-    correo: "",
-    titulo: "",
-    github: "",
-    linkedin: "",
-    foto: "",
+    nombre: '',
+    apellido: '',
+    acercade: '',
+    correo: '',
+    titulo: '',
+    github: '',
+    linkedin: '',
+    foto: '',
     usuarios_id: 0
   };
 
-  constructor(private serviceBio: BiographyService) {
+  constructor(
+    private serviceBio: BiographyService,
+    private comunicationService: WalkietalkieService
+  ) {
+      this.comunicationService.informarBio$.subscribe(
+        (value: boolean) => { 
+          console.log('value: '+value);
+          if (value){
+            console.log("dentro del if del servicio walkietalkie");
+            this.UpdateEvent();
+          }
+        }
+      );
   }
 
   ngOnInit(): void {
-    // console.log('bio.id1: ' + this.bio.id);
-    // this.serviceBio.getBiography().subscribe((bio: any) => {
-    //   this.bio = bio;
-    //   // console.log("bio: " + bio);
-    //   this.bio.foto = this.urlImageApi + bio.foto;
-    //   console.log('bio git: ' + this.bio.github);
-    // });
     this.LoadData();
   }
 
-  LoadData(){
+  LoadData() {
     // console.log('bio.id1: ' + this.bio.id);
     this.serviceBio.getBiography().subscribe((bio: any) => {
       this.bio = bio;
@@ -68,7 +74,9 @@ export class SectionsComponent implements OnInit {
     });
   }
 
-  UpdateEvent(){
+  UpdateEvent() {
+    console.log('update event');
     this.LoadData();
+    this.comunicationService.actualiceBio(false);
   }
 }

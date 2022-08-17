@@ -50,7 +50,12 @@ export class BiographyService {
       }
     );
   }
-  // public putBiography(id:any, data:any): Observable<Biography1>{
-  //   return this.http.put<Biography1>(this.apiUrl + `/editar/${id}`, data, httpOptions);
-  // }
+  
+  public setBioImage(id:any,data:FormData): Observable<any>{
+    return this.http.put(this.apiUrl + `/agregarImg/${id}`, data);
+  }
+
+  public deleteBioImage(id:any){
+    return this.http.delete(this.apiUrl + `/borrarImg/${id}`);
+  }
 }

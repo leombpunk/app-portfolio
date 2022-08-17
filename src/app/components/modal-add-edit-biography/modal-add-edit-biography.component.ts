@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Biography1 } from '../../mocks/biography';
 import { BiographyService } from '../../services/biography.service';
+import { WalkietalkieService } from '../../services/walkietalkie.service';
 
 @Component({
   selector: 'app-modal-add-edit-biography',
@@ -25,11 +26,15 @@ export class ModalAddEditBiographyComponent implements OnInit {
   mErrGithub: string = "";
   mErrLinkedin: string = "";
 
-  constructor(private modalActive: NgbActiveModal, private formBuilder: FormBuilder, private service: BiographyService) {
+  constructor(
+    private modalActive: NgbActiveModal, 
+    private formBuilder: FormBuilder, 
+    private service: BiographyService, 
+    private comunicationService: WalkietalkieService) {
     //podria mandar la foto con el dato de foto
     this.formBiography = this.formBuilder.group({
       id: [0,[Validators.minLength(1),Validators.maxLength(10)]],
-      titulo: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      titulo: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
       nombre: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       apellido: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       acercade: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(500)]],
@@ -180,32 +185,35 @@ export class ModalAddEditBiographyComponent implements OnInit {
 
   onSubmit(event: Event){
     event.preventDefault();
-    console.log("var bio.id: "+this.bio.id);
-    console.log("id submit: "+this.formBiography.get('id'));
+    // console.log("var bio.id: "+this.bio.id);
+    // console.log("id submit: "+this.formBiography.get('id'));
     let id: any = this.formBiography.get('id');
     let response: any;
-    this.service.putBiography(2, this.formBiography.value).subscribe({
-      next: (result) => {
-        response = result;
-        console.log("response: "+response);
-      },
-      error: (e) => {
-        console.log("errorcito");
-        console.log(e);
-        // console.error(e.ok);
-        console.log(e.ok);
-      }
-    });
-    //   (result:any)=> { 
-    //   response = result;
-    //   console.log("response: "+response);
-    // });
-    // if (response.statusText){
-    //   console.log("existe statusText");
-    // }
-    // else {
-    //   this.closeModal();
-    // }
+    if (this.formBiography.valid){
+      this.service.putBiography(id.value, this.formBiography.value).subscribe({
+        next: (result) => {
+          response = result;
+          console.log("response: ");
+          console.log(response);
+        },
+        error: (e) => {
+          console.log("errorcito");
+          console.log(e);
+          // console.error(e.ok);
+          console.log(e.ok);
+        },
+        complete: () => {
+          this.comunicationService.actualizarBio(true);
+          this.closeModal();
+        }
+      });
+    }
+    else {
+      this.formBiography.markAllAsTouched();
+      console.log(this.formBiography.value);
+      console.log("el formulario es invalido");
+    }
+    
   }
 
   closeModal() {

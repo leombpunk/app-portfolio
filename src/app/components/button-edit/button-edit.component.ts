@@ -25,9 +25,8 @@ export class ButtonEditComponent implements OnInit {
   @Input() type: string = '';
   @Input() perfil_id: number = 0;
 
-  //codigo a testear
   //esta variable recibira un objeto de tipo Biography1 para
-  //cargar los datos que contiene en el modal de editar perfil o biografia
+  //cargar los datos que contiene en el modal de editar perfil/biografia
   @Input() perfilData: Biography1 = new Biography1();
 
   constructor(
@@ -37,9 +36,6 @@ export class ButtonEditComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // openModal deberia recibir un parametro o mas (id por ejemplo)
-  // para pasarselo al servicio y poder hacer el get de la info solicitada
-  // el id del registro y/o tambien junto con el id del usuario
   openModal() {
     //evaluar el parametro si es 1 o 2 por ejemplo
     //si es 1 cargar los modales de editar imagenes
@@ -74,20 +70,31 @@ export class ButtonEditComponent implements OnInit {
         });
         //.result.then(result => {}, reason => {});
         wea.componentInstance.titleModal = 'Editar Perfil';
-
-        //testeo de seteo en formulario
-        wea.componentInstance.formBiography.setValue({
-          id: this.perfilData.id,
-          titulo: this.perfilData.titulo,
-          nombre: this.perfilData.nombre,
-          apellido: this.perfilData.apellido,
-          acercade: this.perfilData.acercade,
-          correo: this.perfilData.correo,
-          linkedin: this.perfilData.linkedin,
-          github: this.perfilData.github,
-        });
-        // modal.bio.formBiography.setValue({titulo: this.perfilData.titulo});
-        wea.componentInstance.bio = this.perfilData;
+        if (this.type === '1'){
+           //testeo de seteo en formulario
+          wea.componentInstance.formBiography.setValue({
+            id: this.perfilData.id,
+            titulo: this.perfilData.titulo,
+            nombre: this.perfilData.nombre,
+            apellido: this.perfilData.apellido,
+            acercade: this.perfilData.acercade,
+            correo: this.perfilData.correo,
+            linkedin: this.perfilData.linkedin,
+            github: this.perfilData.github,
+          });
+          // modal.bio.formBiography.setValue({titulo: this.perfilData.titulo});
+          wea.componentInstance.bio = this.perfilData;
+        }
+        else {
+          //cargar modal con imagen
+          console.log("perfildata: "+this.perfilData.id);
+          wea.componentInstance.id = this.perfilData.id;
+          wea.componentInstance.formBiographyImg.setValue({
+            id: this.perfilData.id,
+            img: '',
+          });
+        }
+       
         break;
       case 'skill':
         let wea2 = this.modalService.open(modal.skill, {
