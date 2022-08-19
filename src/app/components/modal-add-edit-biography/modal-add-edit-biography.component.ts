@@ -153,6 +153,10 @@ export class ModalAddEditBiographyComponent implements OnInit {
         this.mErrCorreo = "El correo debe contener de 3 a 100 carateres";
         return true;
       }
+      if (this.Correo?.hasError('email')){
+        this.mErrCorreo = "El correo no tiene el formato correcto.";
+        return true;
+      }
     }
     return false;
   }

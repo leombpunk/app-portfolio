@@ -132,16 +132,6 @@ export class ModalAddEditAcademicComponent implements OnInit {
     return false;
   }
 
-  //modals
-  closeModal() {
-    this.modalActive.close('Modal Closed');
-  }
-
-  dismissModal(){
-    this.modalActive.dismiss('Cross click');
-  }
-
-  //events
   onSubmit(event: Event){
     event.preventDefault();
     if(this.formAcademic.valid){
@@ -158,5 +148,14 @@ export class ModalAddEditAcademicComponent implements OnInit {
       console.log(this.formAcademic.value);
       console.log("el formulario es invalido");
     }
+  }
+
+  //modals
+  closeModal() {
+    this.modalActive.close('Modal Closed');
+  }
+
+  dismissModal(){
+    this.modalActive.dismiss('Cross click');
   }
 }

@@ -20,7 +20,9 @@
         formControlName="cargo"
         class="form-control shadow"
         placeholder="Ingrese su cargo o puesto"
+        [class.border-danger]="CargoValid"
       />
+      <span *ngIf="CargoError" class="errorMessage">{{ mErrCargo }}</span>
     </div>
     <div class="mb-3">
       <label for="empresa" class="form-label">Nombre de la Empresa:</label>
@@ -31,7 +33,9 @@
         formControlName="empresa"
         class="form-control shadow"
         placeholder="Ingrese el nombre de la Empresa"
+        [class.border-danger]="EmpresaValid"
       />
+      <span *ngIf="EmpresaError" class="errorMessage">{{ mErrEmpresa }}</span>
     </div>
     <div class="mb-3">
       <div class="row">
@@ -43,10 +47,12 @@
             id="desde"
             formControlName="desde"
             class="form-control shadow"
+            [class.border-danger]="DesdeValid"
           />
+          <span *ngIf="DesdeError" class="errorMessage">{{ mErrDesde }}</span>
         </div>
         <div class="col-6">
-          <label for="hasta" class="form-label">Hasta:</label>
+          <label for="hasta" class="form-label">Hasta: <span data-bs-toggle="tooltip" data-bs-placement="right" title="Dejar en blanco si es hasta la fecha actual">(?)</span></label>
           <input
             type="date"
             name="hasta"
