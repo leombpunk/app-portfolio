@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Experience } from '../../mocks/experience';
 
 @Component({
   selector: 'app-card-default',
@@ -6,6 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./card-default.component.css']
 })
 export class CardDefaultComponent implements OnInit {
+
+  // @Input() pasero:  = new ();
+
   @Input() imageCard: string = "";
   @Input() altCard: string = "imagen ilustrativa";
 
@@ -24,10 +28,14 @@ export class CardDefaultComponent implements OnInit {
   //atributos particulares de experiencia laboral
   @Input() refe_per: string = "";
   @Input() refe_tel: string = "";
+
+  @Input() dataEnter: Experience = new Experience();
+
   constructor() { }
 
   ngOnInit(): void {
     // console.log("apuntar:"+this.apuntar);
+    console.log(this.dataEnter);
   }
 
 }

@@ -10,3 +10,16 @@ export interface Experiences {
     refe_tel: string;
     foto: string;
 }
+
+export class Experience {
+    id: number = 0;
+    cargo: string = "";
+    tarea: string[] = []; //en el get hacer el split y guardarlo en las tareas
+    desde: string = "";
+    hasta: string = "";
+    logo: string = "";
+    empresa: string = "";
+    reftelef: string = "";
+    refnombre: string = "";
+    usuario_id: number = 0;
+}

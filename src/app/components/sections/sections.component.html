@@ -22,16 +22,17 @@
       <app-button-add modalTarget="experience"></app-button-add>
     </h3>
     <app-card-default
-      *ngFor="let experience of experiences"
-      [imageCard]="experience.foto"
+      *ngFor="let experience of expe"
+      [imageCard]="experience.logo"
       [titleCard]="experience.cargo"
       [descripcionCard]="experience.empresa"
       [desde]="experience.desde"
       [hasta]="experience.hasta"
-      [tareas]="experience.tareas"
-      [refe_tel]="experience.refe_tel"
-      [refe_per]="experience.refe_per"
+      [tareas]="experience.tarea"
+      [refe_tel]="experience.reftelef"
+      [refe_per]="experience.refnombre"
       [apuntar]="'experience'"
+      [dataEnter]="experience"
     ></app-card-default>
   </div>
 </section>

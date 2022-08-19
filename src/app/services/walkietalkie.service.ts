@@ -15,7 +15,7 @@ export class WalkietalkieService {
   private booleanExpe: boolean = false;
 
   constructor() { }
-  
+
   //aca es donde escucha? (donde hace es subscribe)
   informarBio$ = this.informarBio.asObservable();
   informarExpe$ = this.informarExpe.asObservable();
@@ -30,6 +30,16 @@ export class WalkietalkieService {
     this.booleanBio = value;
     console.log("actualiceBio: "+this.booleanBio);
     this.informarBio.next(this.booleanBio);
+  }
+
+  actualizarExpe(value:boolean){
+    console.log("actualizarExpe: "+value);
+    this.informarExpe.next(value);
+  }
+
+  actualiceExpe(value:boolean){
+    console.log("actualiceExpe: "+value);
+    this.informarExpe.next(value);
   }
 
 }

@@ -8,17 +8,18 @@
     (click)="dismissModal()"
   ></button>
 </div>
-<form action="#" method="post" id="form-experience">
+<form [formGroup]="formExperience" (ngSubmit)="onSubmit($event)">
   <div class="modal-body">
     <div class="mb-3">
+      <input type="text" id="id" formControlName="id" value="0" style="display: none;">
       <label for="cargo" class="form-label">Cargo:</label>
       <input
         type="text"
         id="cargo"
         name="cargo"
+        formControlName="cargo"
         class="form-control shadow"
         placeholder="Ingrese su cargo o puesto"
-        required
       />
     </div>
     <div class="mb-3">
@@ -27,9 +28,9 @@
         type="text"
         name="empresa"
         id="empresa"
+        formControlName="empresa"
         class="form-control shadow"
         placeholder="Ingrese el nombre de la Empresa"
-        required
       />
     </div>
     <div class="mb-3">
@@ -40,8 +41,8 @@
             type="date"
             name="desde"
             id="desde"
+            formControlName="desde"
             class="form-control shadow"
-            required
           />
         </div>
         <div class="col-6">
@@ -50,32 +51,44 @@
             type="date"
             name="hasta"
             id="hasta"
+            formControlName="hasta"
             class="form-control shadow"
           />
         </div>
       </div>
     </div>
     <div class="mb-3">
-      <label for="referencia" class="form-label">Contacto de Referencia:</label>
+      <label for="reftel" class="form-label">Contacto de Referencia:</label>
       <input
         type="text"
-        name="referencia"
-        id="referencia"
+        name="reftel"
+        id="reftel"
+        formControlName="reftel"
         class="form-control shadow"
         placeholder="Telefono de referencia"
-        required
       />
     </div>
+    <div class="mb-3">
+        <label for="refnombre" class="form-label">Nombre del Contacto de Referencia:</label>
+        <input
+          type="text"
+          name="refnombre"
+          id="refnombre"
+          formControlName="refnombre"
+          class="form-control shadow"
+          placeholder="Nombre del contacto de referencia"
+        />
+      </div>
     <div class="mb-3">
       <label for="tareas" class="form-label">Tareas realizadas:</label>
       <textarea
         name="tareas"
         id="tareas"
+        formControlName="tareas"
         class="form-control shadow"
         cols="30"
         rows="5"
         placeholder="Nombre las tareas entre comas (,) ¡es muy importante!"
-        required
       ></textarea>
     </div>
   </div>
@@ -88,6 +101,6 @@
     >
       Cerrar
     </button>
-    <button type="button" class="btn btn-primary shadow">Aceptar</button>
+    <button type="submit" class="btn btn-primary shadow">Aceptar</button>
   </div>
 </form>

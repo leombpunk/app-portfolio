@@ -10,7 +10,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalDeleteSomeComponent implements OnInit {
   @Input() descpCard: string = '';
-  
+
   @Input() idUser: string = ''; //el usuario del cual quiero borrar algo
   @Input() idItem: string = ''; //el item especifico que quiero borrar, ej.: el id del registro que quiero borrar (en la tabla 'perfil' seria 'id')
   @Input() idModule: string = ''; //el modulo de donde quiero borrar (de que tabla en la base de datos) ej.: perfil, habilidades, educacion, experiencia, etc
@@ -60,6 +60,12 @@ export class ModalDeleteSomeComponent implements OnInit {
       case 'skill':
         break;
       case 'experience':
+        if (this.idTarget === '1'){
+          //borrar datos
+        }
+        if (this.idTarget === '2'){
+          //borrar imagen
+        }
         break;
       case 'project':
         break;

@@ -12,11 +12,12 @@ import { PROJECTS } from '../../mocks/projects-mock';
 import { Academics } from '../../mocks/academic';
 import { ACADEMICS } from '../../mocks/academic-mock';
 
-import { Experiences } from '../../mocks/experience';
+import { Experiences, Experience } from '../../mocks/experience';
 import { EXPERIENCES } from '../../mocks/experience-mock';
 
 // import { Biography1 } from '../../mocks/prueba';
 import { BiographyService } from 'src/app/services/biography.service';
+import { ExperienceService } from 'src/app/services/experience.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 
 @Component({
@@ -30,7 +31,7 @@ export class SectionsComponent implements OnInit {
   skills: Skills[] = SKILLS;
   projects: Projects[] = PROJECTS;
   academics: Academics[] = ACADEMICS;
-  experiences: Experiences[] = EXPERIENCES;
+  // experiences: Experiences[] = EXPERIENCES;
 
   bio: Biography1 = {
     id: 0,
@@ -45,15 +46,29 @@ export class SectionsComponent implements OnInit {
     usuarios_id: 0
   };
 
+  expe: Experience[] = [{
+    id: 0,
+    cargo: '',
+    tarea: [],
+    desde: '',
+    hasta: '',
+    logo: "",
+    empresa: "",
+    reftelef: "",
+    refnombre: "",
+    usuario_id: 0
+  }];
+
   constructor(
     private serviceBio: BiographyService,
+    private serviceExpe: ExperienceService,
     private comunicationService: WalkietalkieService
   ) {
       this.comunicationService.informarBio$.subscribe(
         (value: boolean) => { 
-          console.log('value: '+value);
+          // console.log('value: '+value);
           if (value){
-            console.log("dentro del if del servicio walkietalkie");
+            // console.log("dentro del if del servicio walkietalkie");
             this.UpdateEvent();
           }
         }
@@ -62,6 +77,7 @@ export class SectionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.LoadData();
+    this.LoadDataExperience();
   }
 
   LoadData() {
@@ -74,8 +90,24 @@ export class SectionsComponent implements OnInit {
     });
   }
 
+  LoadDataExperience() {
+    this.serviceExpe.getExperiences().subscribe((expe: any) => {
+      expe.forEach((element: any) => {
+        let esplitear: string[] = element.tarea.split(','); 
+        // console.log(esplitear);
+        element.tarea = esplitear;
+        element.logo = this.urlImageApi + element.logo;
+      });
+
+      this.expe = expe;
+
+      // console.log("expe: ");
+      // console.log(this.expe);
+    })
+  }
+
   UpdateEvent() {
-    console.log('update event');
+    // console.log('update event');
     this.LoadData();
     this.comunicationService.actualiceBio(false);
   }

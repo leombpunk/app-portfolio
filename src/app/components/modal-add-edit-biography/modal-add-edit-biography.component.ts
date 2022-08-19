@@ -16,7 +16,7 @@ export class ModalAddEditBiographyComponent implements OnInit {
   @Input() formBiography: FormGroup;
   @Input() bio: Biography1 = new Biography1();
 
-  @Output() onSubmitSuccess: EventEmitter<any> = new EventEmitter();
+  // @Output() onSubmitSuccess: EventEmitter<any> = new EventEmitter();
 
   mErrTitulo: string = "";
   mErrNombre: string = "";
