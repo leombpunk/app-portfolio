@@ -35,7 +35,7 @@ export class CardDefaultComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log("apuntar:"+this.apuntar);
-    console.log(this.dataEnter);
+    // console.log(this.dataEnter);
   }
 
 }
