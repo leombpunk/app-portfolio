@@ -95,12 +95,11 @@ export class ModalEditImageComponent implements OnInit {
     event.preventDefault();
     if(this.formBiographyImg.valid){
       //agregar el switch
-      if (this.whatEdit === "biograhy"){
-        let id: any;
+      if (this.whatEdit === "biography"){
         const formData: FormData = new FormData();
         formData.append('img', this.filecito);
         // console.log(this.filecito);
-        this.serviceBio.setBioImage(id.value, formData).subscribe({
+        this.serviceBio.setBioImage(this.id, formData).subscribe({
           next: (result: any) => {
             console.log("response: ");
             console.log(result);
@@ -116,11 +115,11 @@ export class ModalEditImageComponent implements OnInit {
         });
       }
       if (this.whatEdit === "experience"){
-        let id: any;
         const formData: FormData = new FormData();
         formData.append('img', this.filecito);
-        // console.log(this.filecito);
-        this.serviceExpe.setExpeImage(id.value, formData).subscribe({
+        console.log("id (expe): " + this.id);
+        console.log(this.filecito);
+        this.serviceExpe.setExpeImage(this.id, formData).subscribe({
           next: (result: any) => {
             console.log("response: ");
             console.log(result);
