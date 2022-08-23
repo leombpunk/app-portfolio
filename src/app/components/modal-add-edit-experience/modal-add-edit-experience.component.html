@@ -12,6 +12,7 @@
   <div class="modal-body">
     <div class="mb-3">
       <input type="text" id="id" formControlName="id" value="0" style="display: none;">
+      <input type="text" id="usuarios_id" formControlName="usuarios_id" value="0" style="display: none;">
       <label for="cargo" class="form-label">Cargo:</label>
       <input
         type="text"
@@ -69,14 +70,14 @@
       <label for="reftel" class="form-label">Contacto de Referencia:</label>
       <input
         type="text"
-        name="reftel"
-        id="reftel"
-        formControlName="reftel"
+        name="reftelef"
+        id="reftelef"
+        formControlName="reftelef"
         class="form-control shadow"
         placeholder="Telefono de referencia"
-        [class.border-danger]="ReftelValid"
+        [class.border-danger]="ReftelefValid"
       />
-      <span *ngIf="ReftelError" class="errorMessage">{{ mErrReftel }}</span>
+      <span *ngIf="ReftelefError" class="errorMessage">{{ mErrReftelef }}</span>
     </div>
     <div class="mb-3">
         <label for="refnombre" class="form-label">Nombre del Contacto de Referencia:</label>
@@ -94,16 +95,16 @@
     <div class="mb-3">
       <label for="tareas" class="form-label">Tareas realizadas:</label>
       <textarea
-        name="tareas"
-        id="tareas"
-        formControlName="tareas"
+        name="tarea"
+        id="tarea"
+        formControlName="tarea"
         class="form-control shadow"
         cols="30"
         rows="5"
         placeholder="Nombre las tareas entre comas (,) ¡es muy importante!"
-        [class.border-danger]="TareasValid"
+        [class.border-danger]="TareaValid"
       ></textarea>
-      <span *ngIf="TareasError" class="errorMessage">{{ mErrTareas }}</span>
+      <span *ngIf="TareaError" class="errorMessage">{{ mErrTarea }}</span>
     </div>
   </div>
   <div class="modal-footer">

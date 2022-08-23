@@ -27,6 +27,7 @@ import { WalkietalkieService } from '../../services/walkietalkie.service';
 })
 export class SectionsComponent implements OnInit {
   private urlImageApi: string = 'http://localhost:8080/images/';
+  // private usuario_id: number = 0;
   // biography: Biography[] = BIOGRAPHY;
   skills: Skills[] = SKILLS;
   projects: Projects[] = PROJECTS;
@@ -56,7 +57,7 @@ export class SectionsComponent implements OnInit {
     empresa: "",
     reftelef: "",
     refnombre: "",
-    usuario_id: 0
+    usuarios_id: 0
   }];
 
   constructor(
@@ -73,6 +74,14 @@ export class SectionsComponent implements OnInit {
           }
         }
       );
+
+      this.comunicationService.informarExpe$.subscribe(
+        (value: boolean) => {
+          if (value){ 
+            this.UpdateEventExpe();
+          }
+        }
+      )
   }
 
   ngOnInit(): void {
@@ -87,6 +96,10 @@ export class SectionsComponent implements OnInit {
       // console.log("bio: " + bio);
       this.bio.foto = this.urlImageApi + bio.foto;
       // console.log('bio git: ' + this.bio.github);
+      // this.usuario_id = this.bio.usuarios_id;
+      // console.log("seccion bio.usuarios_id: ");
+      // console.log(this.bio.usuarios_id);
+      this.comunicationService.setUsuarioId(this.bio.usuarios_id);
     });
   }
 
@@ -110,5 +123,10 @@ export class SectionsComponent implements OnInit {
     // console.log('update event');
     this.LoadData();
     this.comunicationService.actualiceBio(false);
+  }
+
+  UpdateEventExpe(){
+    this.LoadDataExperience();
+    this.comunicationService.actualiceExpe(false);
   }
 }

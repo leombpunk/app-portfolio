@@ -15,6 +15,7 @@
         <app-button-delete
           [type]="type2"
           [modalTarget]="apuntar"
+          [expeData] = "dataEnter"
         ></app-button-delete>
       </div>
     </div>
@@ -46,10 +47,12 @@
           <app-button-edit
             [type]="type1"
             [modalTarget]="apuntar"
+            [expeData]="dataEnter"
           ></app-button-edit>
           <app-button-delete
-            [type]="type2"
+            [type]="type1"
             [modalTarget]="apuntar"
+            [expeData]="dataEnter"
           ></app-button-delete>
         </div>
       </div>

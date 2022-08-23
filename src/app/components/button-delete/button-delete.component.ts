@@ -3,6 +3,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDeleteSomeComponent } from '../modal-delete-some/modal-delete-some.component';
 import { Biography1 } from '../../mocks/biography';
+import { Experience } from '../../mocks/experience';
 
 @Component({
   selector: 'app-button-delete',
@@ -15,8 +16,10 @@ export class ButtonDeleteComponent implements OnInit {
   @Input() modalTarget: string = '';
   @Input() type: string = "";
   @Input() bioData: Biography1 = new Biography1();
+  @Input() expeData: Experience = new Experience();
 
   constructor(private modalService: NgbModal) { }
+
   openModal() {
     //evaluar el parametro si es 1 o 2 por ejemplo
     //si es 1 cargar los modales de editar imagenes
@@ -73,7 +76,13 @@ export class ButtonDeleteComponent implements OnInit {
           centered: true
         });
         // .result.then(result => {}, reason => {});
+        // console.log("expeData: ");
+        // console.log(this.expeData);
         wea5.componentInstance.descpCard = this.type ==='2'?'la imagen de la Empresa':'los datos de la Empresa';
+        wea5.componentInstance.idUser = this.expeData.usuarios_id;
+        wea5.componentInstance.idItem = this.expeData.id;
+        wea5.componentInstance.idTarget = this.type;
+        wea5.componentInstance.idModule = this.modalTarget;
         break;
       default:
         console.log('que forro que sos');

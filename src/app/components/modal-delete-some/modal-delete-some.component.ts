@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BiographyService } from '../../services/biography.service';
+import { ExperienceService } from '../../services/experience.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,6 +22,7 @@ export class ModalDeleteSomeComponent implements OnInit {
   constructor(
     private modalActive: NgbActiveModal,
     private bioService: BiographyService,
+    private expeService: ExperienceService,
     private comunicationService: WalkietalkieService
   ) {}
 
@@ -28,6 +30,7 @@ export class ModalDeleteSomeComponent implements OnInit {
 
   deleteSome() {
     let response: any;
+    console.log("idModule: "+this.idModule);
     switch (this.idModule) {
       case 'biography':
         if (this.idTarget === '1') {
@@ -38,12 +41,12 @@ export class ModalDeleteSomeComponent implements OnInit {
         if (this.idTarget === '2') {
           //llamar al servicio para borrar el contenido especificado
           this.bioService.deleteBioImage(this.idItem).subscribe({
-            next: result => {
+            next: (result: any) => {
               response = result;
               console.log('response: ');
               console.log(response);
             },
-            error: e => {
+            error: (e: any) => {
               console.log('errorcito');
               console.log(e);
               console.log(e.ok);
@@ -60,8 +63,25 @@ export class ModalDeleteSomeComponent implements OnInit {
       case 'skill':
         break;
       case 'experience':
+      console.log("idTarget: "+this.idTarget);
         if (this.idTarget === '1'){
           //borrar datos
+          this.expeService.deleteExperience(this.idItem).subscribe({
+            next: (result: any) => {
+              response = result;
+              console.log('response (experiencia): ');
+              console.log(response);
+            },
+            error: (e:any) => {
+              console.log('errorcito (experiencia)');
+              console.log(e);
+              console.log(e.ok);
+            },
+            complete: () => {
+              this.comunicationService.actualizarExpe(true);
+              this.closeModal();
+            }
+          })
         }
         if (this.idTarget === '2'){
           //borrar imagen

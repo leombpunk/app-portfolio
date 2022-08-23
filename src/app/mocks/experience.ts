@@ -21,5 +21,5 @@ export class Experience {
     empresa: string = "";
     reftelef: string = "";
     refnombre: string = "";
-    usuario_id: number = 0;
+    usuarios_id: number = 0;
 }

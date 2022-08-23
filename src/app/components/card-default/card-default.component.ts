@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Experience } from '../../mocks/experience';
+import { Academics } from '../../mocks/academic';
 
 @Component({
   selector: 'app-card-default',
@@ -30,11 +31,13 @@ export class CardDefaultComponent implements OnInit {
   @Input() refe_tel: string = "";
 
   @Input() dataEnter: Experience = new Experience();
+  // @Input() dataEnter2: Academics = new Academics();
 
   constructor() { }
 
   ngOnInit(): void {
     // console.log("apuntar:"+this.apuntar);
+    // console.log("dataEnter: ");
     // console.log(this.dataEnter);
   }
 

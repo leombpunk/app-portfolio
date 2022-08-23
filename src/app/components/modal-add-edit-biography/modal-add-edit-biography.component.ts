@@ -195,12 +195,12 @@ export class ModalAddEditBiographyComponent implements OnInit {
     let response: any;
     if (this.formBiography.valid){
       this.service.putBiography(id.value, this.formBiography.value).subscribe({
-        next: (result) => {
+        next: (result: any) => {
           response = result;
           console.log("response: ");
           console.log(response);
         },
-        error: (e) => {
+        error: (e: any) => {
           console.log("errorcito");
           console.log(e);
           // console.error(e.ok);

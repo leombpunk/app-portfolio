@@ -12,6 +12,7 @@ import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.co
 
 import { Biography, Biography1 } from '../../mocks/biography';
 import { BiographyService } from 'src/app/services/biography.service';
+import { Experience } from 'src/app/mocks/experience';
 
 @Component({
   selector: 'app-button-edit',
@@ -28,6 +29,7 @@ export class ButtonEditComponent implements OnInit {
   //esta variable recibira un objeto de tipo Biography1 para
   //cargar los datos que contiene en el modal de editar perfil/biografia
   @Input() perfilData: Biography1 = new Biography1();
+  @Input() expeData: Experience = new Experience();
 
   constructor(
     private modalService: NgbModal,
@@ -127,6 +129,26 @@ export class ButtonEditComponent implements OnInit {
         });
         // .result.then(result => {}, reason => {});
         wea5.componentInstance.titleModal = 'Editar Experiencia Laboral';
+        if (this.type === '1'){
+          console.log("boton editar experiencia (datos)");
+          console.log(this.expeData);
+          wea5.componentInstance.expe = this.expeData;
+          wea5.componentInstance.formExperience.setValue({
+            id: this.expeData.id,
+            usuarios_id: this.expeData.usuarios_id,
+            cargo: this.expeData.cargo,
+            empresa: this.expeData.empresa,
+            desde: this.expeData.desde,
+            hasta: this.expeData.hasta,
+            reftelef: this.expeData.reftelef,
+            refnombre: this.expeData.refnombre,
+            tarea: this.expeData.tarea
+          });
+        }
+        else {
+          console.log("boton editar experiencia (folo/logo)");
+          console.log(this.expeData);
+        }
         break;
       default:
         console.log('que forro que sos');

@@ -8,6 +8,9 @@ import { ModalAddEditExperienceComponent } from '../modal-add-edit-experience/mo
 import { ModalAddEditProjectComponent } from '../modal-add-edit-project/modal-add-edit-project.component';
 import { ModalAddEditSkillComponent } from '../modal-add-edit-skill/modal-add-edit-skill.component';
 
+//prueba de servicio para pasarlo al modal (usuario_id)
+import { WalkietalkieService } from '../../services/walkietalkie.service';
+
 @Component({
   selector: 'app-button-add',
   templateUrl: './button-add.component.html',
@@ -18,7 +21,18 @@ export class ButtonAddComponent implements OnInit {
 
   @Input() modalTarget: string = '';
 
-  constructor(private modalService: NgbModal) { }
+  private usuario_id:number = 0;
+
+  constructor(private modalService: NgbModal, private walkie: WalkietalkieService) { }
+
+  ngOnInit(): void {
+    this.walkie.informarUsuId$.subscribe(
+      (result: any) => {
+        // console.log("result "+result);
+        this.usuario_id = result;
+      }
+    );
+  }
 
   openModal() {
     // console.log("modalTarget:"+this.modalTarget);
@@ -54,14 +68,12 @@ export class ButtonAddComponent implements OnInit {
         });
         // .result.then(result => {}, reason => {});
         wea5.componentInstance.titleModal = 'Agregar Experiencia Laboral';
+        wea5.componentInstance.usuario_id = this.usuario_id;
         break;
       default:
         console.log('que forro que sos');
         break;
     }
-  }
-
-  ngOnInit(): void {
   }
 
 }

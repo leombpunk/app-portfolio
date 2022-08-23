@@ -6,6 +6,10 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class WalkietalkieService {
+
+  private informarUsuId:Subject<number> = new Subject();
+  private usuario_id: number = 0;
+
   //informo cuando actualizar el componente sections 
   //especificamente la biografia/perfil
   private informarBio:Subject<boolean> = new Subject();
@@ -20,7 +24,15 @@ export class WalkietalkieService {
   informarBio$ = this.informarBio.asObservable();
   informarExpe$ = this.informarExpe.asObservable();
 
+  informarUsuId$ = this.informarUsuId.asObservable();
+
   //comandos del servicio
+  setUsuarioId(value:number){
+    this.usuario_id = value;
+    // console.log("walkie usuario_id: "+this.usuario_id);
+    this.informarUsuId.next(this.usuario_id);
+  }
+
   actualizarBio(value:boolean) {
     this.booleanBio = value;
     console.log("actualizarBio: "+this.booleanBio);
@@ -41,5 +53,4 @@ export class WalkietalkieService {
     console.log("actualiceExpe: "+value);
     this.informarExpe.next(value);
   }
-
 }
