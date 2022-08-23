@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BiographyService } from '../../services/biography.service';
+import { ExperienceService } from '../../services/experience.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 
 @Component({
@@ -18,11 +19,13 @@ export class ModalEditImageComponent implements OnInit {
   @Input() id: number = 0;
   @Input() usuario_id: string = "";
   filecito:any;
+  whatEdit: string = "";//para el switch, para saber que seccion va editar la foto/imagen/logo
 
   constructor(
     private modalActive: NgbActiveModal, 
     private form: FormBuilder, 
     private serviceBio: BiographyService, 
+    private serviceExpe: ExperienceService,
     private comunicationService: WalkietalkieService) {
       this.formBiographyImg = this.form.group({
         id:[this.id,[Validators.required]],
@@ -91,38 +94,54 @@ export class ModalEditImageComponent implements OnInit {
   onSubmit(event: Event){
     event.preventDefault();
     if(this.formBiographyImg.valid){
-      //darle los datos al servicio
-      //console.log(this.formBiographyImg.getRawValue());
-      // console.log(this.formBiographyImg.value);
-      console.log("el fomrulario es valido");
-      // const file: File = this.Image?.target.files[0]
-      let response: any;
-      let id: any = this.formBiographyImg.get('id');
-      const formData: FormData = new FormData();
-      formData.append('img', this.filecito);
-      // console.log(this.filecito);
-      this.serviceBio.setBioImage(id.value, formData).subscribe({
-        next: (result) => {
-          response = result;
-          console.log("response: ");
-          console.log(response);
-          if (result.status === "ok"){
-            //emitir un evento? que ejecute de nuevo el get de perfil
-            //para actualizar los datos
-
-            //cierro el modal
+      //agregar el switch
+      if (this.whatEdit === "biograhy"){
+        let id: any;
+        const formData: FormData = new FormData();
+        formData.append('img', this.filecito);
+        // console.log(this.filecito);
+        this.serviceBio.setBioImage(id.value, formData).subscribe({
+          next: (result: any) => {
+            console.log("response: ");
+            console.log(result);
+          },
+          error: (e: any) => {
+            console.log("errorcito");
+            console.log(e);
+          },
+          complete: () => {
+            this.comunicationService.actualizarBio(true);
             this.closeModal();
           }
-        },
-        error: (e) => {
-          console.log("errorcito");
-          console.log(e);
-        },
-        complete: () => {
-          this.comunicationService.actualizarBio(true);
-          this.closeModal();
-        }
-      });
+        });
+      }
+      if (this.whatEdit === "experience"){
+        let id: any;
+        const formData: FormData = new FormData();
+        formData.append('img', this.filecito);
+        // console.log(this.filecito);
+        this.serviceExpe.setExpeImage(id.value, formData).subscribe({
+          next: (result: any) => {
+            console.log("response: ");
+            console.log(result);
+          },
+          error: (e: any) => {
+            console.log("errorcito");
+            console.log(e);
+          },
+          complete: () => {
+            this.comunicationService.actualizarExpe(true);
+            this.closeModal();
+          }
+        });
+      }
+      if (this.whatEdit === "academic"){}
+      if (this.whatEdit === "skill"){}
+      if (this.whatEdit === "project"){}
+
+
+      console.log("el fomrulario es valido");
+
     }
     else {
       this.formBiographyImg.markAllAsTouched();

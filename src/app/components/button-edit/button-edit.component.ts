@@ -70,7 +70,6 @@ export class ButtonEditComponent implements OnInit {
           backdrop: 'static',
           centered: true
         });
-        //.result.then(result => {}, reason => {});
         wea.componentInstance.titleModal = 'Editar Perfil';
         if (this.type === '1'){
            //testeo de seteo en formulario
@@ -84,13 +83,13 @@ export class ButtonEditComponent implements OnInit {
             linkedin: this.perfilData.linkedin,
             github: this.perfilData.github,
           });
-          // modal.bio.formBiography.setValue({titulo: this.perfilData.titulo});
           wea.componentInstance.bio = this.perfilData;
         }
         else {
           //cargar modal con imagen
           console.log("perfildata: "+this.perfilData.id);
           wea.componentInstance.id = this.perfilData.id;
+          wea.componentInstance.whatEdit = this.modalTarget;
           wea.componentInstance.formBiographyImg.setValue({
             id: this.perfilData.id,
             img: '',
@@ -103,7 +102,6 @@ export class ButtonEditComponent implements OnInit {
           backdrop: 'static',
           centered: true
         });
-        // .result.then(result => {}, reason => {});
         wea2.componentInstance.titleModal = 'Editar Habilidad';
         break;
       case 'project':
@@ -111,7 +109,6 @@ export class ButtonEditComponent implements OnInit {
           backdrop: 'static',
           centered: true
         });
-        // .result.then(result => {}, reason => {});
         wea3.componentInstance.titleModal = 'Editar Proyecto';
         break;
       case 'academic':
@@ -119,7 +116,6 @@ export class ButtonEditComponent implements OnInit {
           backdrop: 'static',
           centered: true
         });
-        // .result.then(result => {}, reason => {});
         wea4.componentInstance.titleModal = 'Editar Educación';
         break;
       case 'experience':
@@ -127,7 +123,6 @@ export class ButtonEditComponent implements OnInit {
           backdrop: 'static',
           centered: true
         });
-        // .result.then(result => {}, reason => {});
         wea5.componentInstance.titleModal = 'Editar Experiencia Laboral';
         if (this.type === '1'){
           console.log("boton editar experiencia (datos)");
@@ -148,10 +143,17 @@ export class ButtonEditComponent implements OnInit {
         else {
           console.log("boton editar experiencia (folo/logo)");
           console.log(this.expeData);
+          wea5.componentInstance.id = this.expeData.id;
+          wea5.componentInstance.whatEdit = this.modalTarget;
+          wea5.componentInstance.formBiographyImg.setValue({
+            id: this.expeData.id,
+            img: '',
+          });
         }
         break;
+
       default:
-        console.log('que forro que sos');
+        console.log('que forro que sos!');
         break;
     }
   }

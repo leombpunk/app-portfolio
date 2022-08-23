@@ -58,6 +58,8 @@ export class ExperienceService {
   }
 
   //edit image
-
+  public setExpeImage(id:any, data:FormData): Observable<any> {
+    return this.http.put(this.apiUrl + `/agregarImg/${id}`, data);
+  }
   //delete image
 }

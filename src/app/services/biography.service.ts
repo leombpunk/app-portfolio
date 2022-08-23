@@ -51,11 +51,11 @@ export class BiographyService {
     );
   }
   
-  public setBioImage(id:any,data:FormData): Observable<any>{
+  public setBioImage(id: any, data: FormData): Observable<any>{
     return this.http.put(this.apiUrl + `/agregarImg/${id}`, data);
   }
 
-  public deleteBioImage(id:any){
+  public deleteBioImage(id: any){
     return this.http.delete(this.apiUrl + `/borrarImg/${id}`);
   }
 }
