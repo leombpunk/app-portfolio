@@ -22,7 +22,6 @@ export class ModalAddEditAcademicComponent implements OnInit {
   mErrHasta: string = "";
   
   formAcademic: FormGroup;
-  // date: Date = new Date();
 
   @Input() titleModal: string = "";
   @Input() usuario_id: number = 0;
@@ -171,13 +170,16 @@ export class ModalAddEditAcademicComponent implements OnInit {
   onSubmit(event: Event){
     event.preventDefault();
     if(this.formAcademic.valid){
-      //darle los datos al servicio
+      // console.log("form: ");
       // console.log(this.formAcademic.value);
       console.log("el fomrulario es valido");
       if (this.academ.titulo !== ''){
         //entra cuando edito el registro
       }
       else { 
+        this.formAcademic.patchValue({
+          usuarios_id: this.usuario_id,
+        });
         this.service.postAcademics(this.formAcademic.value).subscribe({
           next: (result: any) => {
             console.log("result: ");

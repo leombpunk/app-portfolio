@@ -23,6 +23,6 @@ export class AcademicService {
   }
 
   public postAcademics(datos: any): Observable<Academics> {
-    return this.http.post<Academics>(this.apiUrl + "crear", datos);
+    return this.http.post<Academics>(this.apiUrl + "/crear", datos);
   }
 }

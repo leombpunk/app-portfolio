@@ -236,7 +236,6 @@ export class ModalAddEditExperienceComponent implements OnInit {
             console.log(e);
           },
           complete: () => {
-            //avisar para actualizar la seccion de experiencia
             this.comunicationService.actualizarExpe(true);
             this.closeModal();
           }
