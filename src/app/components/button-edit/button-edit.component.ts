@@ -1,17 +1,13 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-
 import { ModalAddEditBiographyComponent } from '../modal-add-edit-biography/modal-add-edit-biography.component';
 import { ModalAddEditAcademicComponent } from '../modal-add-edit-academic/modal-add-edit-academic.component';
 import { ModalAddEditExperienceComponent } from '../modal-add-edit-experience/modal-add-edit-experience.component';
 import { ModalAddEditProjectComponent } from '../modal-add-edit-project/modal-add-edit-project.component';
 import { ModalAddEditSkillComponent } from '../modal-add-edit-skill/modal-add-edit-skill.component';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
-
-import { Biography, Biography1 } from '../../mocks/biography';
-import { BiographyService } from 'src/app/services/biography.service';
+import { Biography1 } from '../../mocks/biography';
 import { Experience } from 'src/app/mocks/experience';
 import { Academics } from '../../mocks/academic';
 
@@ -21,6 +17,7 @@ import { Academics } from '../../mocks/academic';
   styleUrls: ['./button-edit.component.css']
 })
 export class ButtonEditComponent implements OnInit {
+
   faPenToSquare = faPenToSquare;
 
   @Input() modalTarget: string = '';
@@ -34,8 +31,7 @@ export class ButtonEditComponent implements OnInit {
   @Input() academData: Academics = new Academics();
 
   constructor(
-    private modalService: NgbModal,
-    private serviceBio: BiographyService
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {}
@@ -97,7 +93,6 @@ export class ButtonEditComponent implements OnInit {
             img: '',
           });
         }
-       
         break;
       case 'skill':
         let wea2 = this.modalService.open(modal.skill, {
@@ -118,7 +113,38 @@ export class ButtonEditComponent implements OnInit {
           backdrop: 'static',
           centered: true
         });
+        
         wea4.componentInstance.titleModal = 'Editar Educación';
+        if (this.type === '1'){
+          // console.log("boton editar educacion: (datos-object)");
+          // console.log(this.academData);
+          let armoCadena: string = this.academData.habilidades.toString();
+          // this.academData.habilidades.forEach((element: any) => {
+          //   armoCadena += element;
+          // });
+          console.log("armoCadena: " + armoCadena);
+          wea4.componentInstance.academ = this.academData;
+          wea4.componentInstance.formAcademic.setValue({
+            id: this.academData.id,
+            titulo: this.academData.titulo,
+            institucion: this.academData.institucion,
+            locacion: this.academData.locacion,
+            habilidades: armoCadena,
+            desde: this.academData.desde,
+            hasta: this.academData.hasta,
+            usuarios_id: this.academData.usuarios_id
+          });
+        }
+        else {
+          console.log("boton editar educacion: (folo/logo)");
+          console.log(this.academData);
+          wea4.componentInstance.id = this.academData.id;
+          wea4.componentInstance.whatEdit = this.modalTarget;
+          wea4.componentInstance.formBiographyImg.setValue({
+            id: this.academData.id,
+            img: '',
+          });
+        }
         break;
       case 'experience':
         let wea5 = this.modalService.open(modal.experience, {
@@ -127,8 +153,9 @@ export class ButtonEditComponent implements OnInit {
         });
         wea5.componentInstance.titleModal = 'Editar Experiencia Laboral';
         if (this.type === '1'){
-          console.log("boton editar experiencia (datos)");
-          console.log(this.expeData);
+          let armoCadena: string = this.expeData.tarea.toString();
+          // console.log("boton editar experiencia (datos)");
+          // console.log(this.expeData);
           wea5.componentInstance.expe = this.expeData;
           wea5.componentInstance.formExperience.setValue({
             id: this.expeData.id,
@@ -139,7 +166,7 @@ export class ButtonEditComponent implements OnInit {
             hasta: this.expeData.hasta,
             reftelef: this.expeData.reftelef,
             refnombre: this.expeData.refnombre,
-            tarea: this.expeData.tarea
+            tarea: armoCadena
           });
         }
         else {

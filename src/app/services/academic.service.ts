@@ -25,4 +25,20 @@ export class AcademicService {
   public postAcademics(datos: any): Observable<Academics> {
     return this.http.post<Academics>(this.apiUrl + "/crear", datos);
   }
+
+  public putAcademics(id: any, datos: any): Observable<Academics> {
+    return this.http.put<Academics>(this.apiUrl + `/editar/${id}`,{}, {
+      params: {
+        titulo: datos.titulo,
+        institucion: datos.institucion,
+        locacion: datos.locacion,
+        habilidades: datos.habilidades,
+        desde: datos.desde,
+        hasta: datos.hasta,
+        usuarios_id: datos.usuarios_id
+      }
+    });
+  }
+
+  
 }

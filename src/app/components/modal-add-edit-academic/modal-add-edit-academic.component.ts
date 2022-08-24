@@ -34,7 +34,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
     private comunicationService: WalkietalkieService) 
   { 
     this.formAcademic = this.formBuilder.group({
-      id: ['0',[Validators.required, Validators.minLength(1), Validators.maxLength(10), Validators.pattern(/^\d{1,10}$/g)]],
+      id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]], //, Validators.pattern(/^\d{1,10}$/g)
       titulo: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       institucion: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       locacion: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -46,8 +46,8 @@ export class ModalAddEditAcademicComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-    console.log("init (usuarios_id): ");
-    console.log(this.usuario_id);
+    // console.log("init (usuarios_id): ");
+    // console.log(this.usuario_id);
   }
 
   //getters
@@ -129,7 +129,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
   }
   public get HabilidadesError(){
     if (this.Habilidades?.errors && this.Habilidades?.touched){
-      if(this.Habilidades?.hasError('required')){
+      if (this.Habilidades?.hasError('required')){
         this.mErrHabilidades = "El campo Habilidades es requerido";
         return true;
       }
@@ -169,12 +169,28 @@ export class ModalAddEditAcademicComponent implements OnInit {
 
   onSubmit(event: Event){
     event.preventDefault();
+    console.log(this.Habilidades);
     if(this.formAcademic.valid){
-      // console.log("form: ");
-      // console.log(this.formAcademic.value);
+      console.log("form: ");
+      console.log(this.formAcademic.value);
       console.log("el fomrulario es valido");
       if (this.academ.titulo !== ''){
         //entra cuando edito el registro
+        let id: any = this.formAcademic.get('id');
+        this.service.putAcademics(id.value, this.formAcademic.value).subscribe({
+          next: (result: any) => {
+            console.log("result: ");
+            console.log(result);
+          },
+          error: (e: any) => {
+            console.log("error: ");
+            console.log(e);
+          },
+          complete: () => {
+            this.comunicationService.actualizarAca(true);
+            this.closeModal();
+          }
+        });
       }
       else { 
         this.formAcademic.patchValue({
@@ -198,9 +214,9 @@ export class ModalAddEditAcademicComponent implements OnInit {
     }
     else {
       this.formAcademic.markAllAsTouched();
-      // alert("el formulario es invalido");
       console.log(this.formAcademic.value);
       console.log("el formulario es invalido");
+      console.log(this.formAcademic.errors);
     }
   }
 
