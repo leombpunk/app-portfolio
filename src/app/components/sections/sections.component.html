@@ -44,14 +44,16 @@
       <app-button-add modalTarget="academic"></app-button-add>
     </h3>
     <app-card-default
-      *ngFor="let academic of academics"
-      [imageCard]="academic.logo"
-      [titleCard]="academic.titulo"
-      [descripcionCard]="academic.institucion"
-      [desde]="academic.desde"
-      [hasta]="academic.hasta"
-      [tareas]="academic.habilidades"
+      *ngFor="let aca of academ"
+      [imageCard]="aca.logo"
+      [titleCard]="aca.titulo"
+      [descripcionCard]="aca.institucion"
+      [locacionCard]="aca.locacion"
+      [desde]="aca.desde"
+      [hasta]="aca.hasta"
+      [tareas]="aca.habilidades"
       [apuntar]="'academic'"
+      [dataEnter2]="aca"
     ></app-card-default>
   </div>
 </section>

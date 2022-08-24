@@ -72,7 +72,7 @@ export class ModalDeleteSomeComponent implements OnInit {
               console.log('response (experiencia): ');
               console.log(response);
             },
-            error: (e:any) => {
+            error: (e: any) => {
               console.log('errorcito (experiencia)');
               console.log(e);
               console.log(e.ok);
@@ -85,6 +85,22 @@ export class ModalDeleteSomeComponent implements OnInit {
         }
         if (this.idTarget === '2'){
           //borrar imagen
+          this.expeService.deleteExpeImage(this.idItem).subscribe({
+            next: (result: any) => {
+              response = result;
+              console.log('response (experiencia imagen): ');
+              console.log(response);
+            },
+            error: (e: any) => {
+              console.log('errorcito (experiencia)');
+              console.log(e);
+              console.log(e.ok);
+            },
+            complete: () => {
+              this.comunicationService.actualizarExpe(true);
+              this.closeModal();
+            }
+          });
         }
         break;
       case 'project':

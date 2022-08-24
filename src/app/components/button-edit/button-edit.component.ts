@@ -13,6 +13,7 @@ import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.co
 import { Biography, Biography1 } from '../../mocks/biography';
 import { BiographyService } from 'src/app/services/biography.service';
 import { Experience } from 'src/app/mocks/experience';
+import { Academics } from '../../mocks/academic';
 
 @Component({
   selector: 'app-button-edit',
@@ -30,6 +31,7 @@ export class ButtonEditComponent implements OnInit {
   //cargar los datos que contiene en el modal de editar perfil/biografia
   @Input() perfilData: Biography1 = new Biography1();
   @Input() expeData: Experience = new Experience();
+  @Input() academData: Academics = new Academics();
 
   constructor(
     private modalService: NgbModal,

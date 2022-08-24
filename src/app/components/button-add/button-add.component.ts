@@ -60,6 +60,7 @@ export class ButtonAddComponent implements OnInit {
         });
         // .result.then(result => {}, reason => {});
         wea4.componentInstance.titleModal = 'Agregar Educación';
+        wea4.componentInstance.usuario_id = this.usuario_id;
         break;
       case 'experience':
         let wea5 = this.modalService.open(ModalAddEditExperienceComponent, {

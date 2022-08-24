@@ -1,17 +1,5 @@
-export interface Academics {
-    id?: number;
-    usuarios_id: number;
-    institucion: string;
-    titulo: string;
-    // locacion: string;
-    habilidades: string[]; //agregar a la base de datos ¿sí o no?
-    desde: string;
-    hasta: string;
-    logo: string;
-}
-
-// export class Academics {
-//     id: number = 0;
+// export interface Academics {
+//     id?: number;
 //     usuarios_id: number;
 //     institucion: string;
 //     titulo: string;
@@ -20,5 +8,17 @@ export interface Academics {
 //     desde: string;
 //     hasta: string;
 //     logo: string;
-//     usuario_id: number = 0;
 // }
+
+export class Academics {
+    id: number = 0;
+    usuarios_id: number = 0;
+    institucion: string = "";
+    titulo: string = "";
+    locacion: string = "";
+    habilidades: string[] = []; //agregar a la base de datos ¿sí o no?
+    desde: string = "";
+    hasta: string = "";
+    logo: string = "";
+    usuario_id: number = 0;
+}

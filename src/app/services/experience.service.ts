@@ -62,7 +62,7 @@ export class ExperienceService {
     return this.http.put(this.apiUrl + `/agregarImg/${id}`, data);
   }
   //delete image
-  public deleteBioImage(id: any){
+  public deleteExpeImage(id: any){
     return this.http.delete(this.apiUrl + `/borrarImg/${id}`);
   }
 }

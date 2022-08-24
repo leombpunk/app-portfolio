@@ -14,9 +14,7 @@ export class ModalAddEditExperienceComponent implements OnInit {
 
   @Input() titleModal: string = '';
   @Input() formExperience: FormGroup;
-  @Input() expe: Experience = new Experience();//no lo estoy usando
-
-  // private usuario_id: number = 0;
+  @Input() expe: Experience = new Experience();
   @Input() usuario_id: number = 0;
 
   mErrCargo: string = "";
@@ -198,7 +196,7 @@ export class ModalAddEditExperienceComponent implements OnInit {
 
   onSubmit(event: Event) {
     event.preventDefault();
-    console.log("form: ");
+    // console.log("form: ");
     if (this.formExperience.valid){
       // pregunto si la varialbe 'expe' tiene datos
       //si los tiene, hice la llamada por el boton de editar

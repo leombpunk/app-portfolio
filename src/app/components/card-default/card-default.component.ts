@@ -22,6 +22,7 @@ export class CardDefaultComponent implements OnInit {
   // atributos en comun
   @Input() titleCard: string = "";
   @Input() descripcionCard: string = "";
+  @Input() locacionCard: string = ""; 
   @Input() desde: string = "";
   @Input() hasta: string = "";
   @Input() tareas: string[] = [];
@@ -31,7 +32,7 @@ export class CardDefaultComponent implements OnInit {
   @Input() refe_tel: string = "";
 
   @Input() dataEnter: Experience = new Experience();
-  // @Input() dataEnter2: Academics = new Academics();
+  @Input() dataEnter2: Academics = new Academics();
 
   constructor() { }
 
@@ -39,6 +40,8 @@ export class CardDefaultComponent implements OnInit {
     // console.log("apuntar:"+this.apuntar);
     // console.log("dataEnter: ");
     // console.log(this.dataEnter);
+    // console.log("dataEnter2: ");
+    // console.log(this.dataEnter2);
   }
 
 }

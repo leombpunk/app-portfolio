@@ -4,6 +4,7 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDeleteSomeComponent } from '../modal-delete-some/modal-delete-some.component';
 import { Biography1 } from '../../mocks/biography';
 import { Experience } from '../../mocks/experience';
+import { Academics } from '../../mocks/academic'; 
 
 @Component({
   selector: 'app-button-delete',
@@ -17,6 +18,7 @@ export class ButtonDeleteComponent implements OnInit {
   @Input() type: string = "";
   @Input() bioData: Biography1 = new Biography1();
   @Input() expeData: Experience = new Experience();
+  @Input() academData: Academics = new Academics();
 
   constructor(private modalService: NgbModal) { }
 

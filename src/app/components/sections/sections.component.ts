@@ -1,23 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Biography, Biography1 } from '../../mocks/biography';
-// import { BIOGRAPHY } from '../../mocks/biography-mock';
-
 import { Skills } from '../../mocks/skills';
 import { SKILLS } from '../../mocks/skills-mock';
 
 import { Projects } from '../../mocks/projects';
 import { PROJECTS } from '../../mocks/projects-mock';
 
+import { Biography1 } from '../../mocks/biography';
 import { Academics } from '../../mocks/academic';
-import { ACADEMICS } from '../../mocks/academic-mock';
-
-import { Experiences, Experience } from '../../mocks/experience';
-import { EXPERIENCES } from '../../mocks/experience-mock';
-
-// import { Biography1 } from '../../mocks/prueba';
+import { Experience } from '../../mocks/experience';
 import { BiographyService } from 'src/app/services/biography.service';
 import { ExperienceService } from 'src/app/services/experience.service';
+import { AcademicService } from '../../services/academic.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 
 @Component({
@@ -28,24 +22,24 @@ import { WalkietalkieService } from '../../services/walkietalkie.service';
 export class SectionsComponent implements OnInit {
   private urlImageApi: string = 'http://localhost:8080/images/';
   // private usuario_id: number = 0;
-  // biography: Biography[] = BIOGRAPHY;
   skills: Skills[] = SKILLS;
   projects: Projects[] = PROJECTS;
-  academics: Academics[] = ACADEMICS;
-  // experiences: Experiences[] = EXPERIENCES;
+  // academics: Academics[] = ACADEMICS;
 
-  bio: Biography1 = {
-    id: 0,
-    nombre: '',
-    apellido: '',
-    acercade: '',
-    correo: '',
-    titulo: '',
-    github: '',
-    linkedin: '',
-    foto: '',
-    usuarios_id: 0
-  };
+  // bio: Biography1 = {
+  //   id: 0,
+  //   nombre: '',
+  //   apellido: '',
+  //   acercade: '',
+  //   correo: '',
+  //   titulo: '',
+  //   github: '',
+  //   linkedin: '',
+  //   foto: '',
+  //   usuarios_id: 0
+  // };
+
+  bio: Biography1 = new Biography1();
 
   expe: Experience[] = [{
     id: 0,
@@ -60,16 +54,28 @@ export class SectionsComponent implements OnInit {
     usuarios_id: 0
   }];
 
+  academ: Academics[] = [{
+    id: 0,
+    usuarios_id: 0,
+    institucion: "",
+    titulo: "",
+    locacion: "",
+    habilidades: [],
+    desde: "",
+    hasta: "",
+    logo: "",
+    usuario_id: 0
+  }]
+
   constructor(
     private serviceBio: BiographyService,
     private serviceExpe: ExperienceService,
+    private serviceAcadm: AcademicService,
     private comunicationService: WalkietalkieService
   ) {
       this.comunicationService.informarBio$.subscribe(
         (value: boolean) => { 
-          // console.log('value: '+value);
           if (value){
-            // console.log("dentro del if del servicio walkietalkie");
             this.UpdateEvent();
           }
         }
@@ -81,24 +87,27 @@ export class SectionsComponent implements OnInit {
             this.UpdateEventExpe();
           }
         }
-      )
+      );
+
+      this.comunicationService.informarAca$.subscribe(
+        (value: boolean) => {
+          if (value){
+            this.UpdateEventAcadem();
+          }
+        }
+      );
   }
 
   ngOnInit(): void {
     this.LoadData();
     this.LoadDataExperience();
+    this.LoadDataAcademic();
   }
 
   LoadData() {
-    // console.log('bio.id1: ' + this.bio.id);
     this.serviceBio.getBiography().subscribe((bio: any) => {
       this.bio = bio;
-      // console.log("bio: " + bio);
       this.bio.foto = this.urlImageApi + bio.foto;
-      // console.log('bio git: ' + this.bio.github);
-      // this.usuario_id = this.bio.usuarios_id;
-      // console.log("seccion bio.usuarios_id: ");
-      // console.log(this.bio.usuarios_id);
       this.comunicationService.setUsuarioId(this.bio.usuarios_id);
     });
   }
@@ -111,12 +120,28 @@ export class SectionsComponent implements OnInit {
         element.tarea = esplitear;
         element.logo = this.urlImageApi + element.logo;
       });
-
       this.expe = expe;
-
-      // console.log("expe: ");
-      // console.log(this.expe);
     })
+  }
+
+  LoadDataAcademic(){
+    this.serviceAcadm.getAcademics().subscribe((academ: any) => {
+      academ.forEach((element: any) => {
+        let esplitear: string[] = element.habilidades.split(','); 
+        // console.log(esplitear);
+        element.habilidades = esplitear;
+        element.logo = this.urlImageApi + element.logo;
+      });
+      this.academ = academ;
+    });
+  }
+
+  LoadDataSkill(){
+
+  }
+
+  LoadDataProject(){
+
   }
 
   UpdateEvent() {
@@ -128,5 +153,10 @@ export class SectionsComponent implements OnInit {
   UpdateEventExpe(){
     this.LoadDataExperience();
     this.comunicationService.actualiceExpe(false);
+  }
+
+  UpdateEventAcadem(){
+    this.LoadDataAcademic();
+    this.comunicationService.actualiceAca(false);
   }
 }
