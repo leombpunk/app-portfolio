@@ -38,8 +38,8 @@ export class ButtonEditComponent implements OnInit {
 
   openModal() {
     //evaluar el parametro si es 1 o 2 por ejemplo
-    //si es 1 cargar los modales de editar imagenes
-    //si es 2 cargar los modales de editar los datos
+    //si es 1 cargar los modales de editar los datos
+    //si es 2 cargar los modales de editar imagenes
     const modal = {
       bio:
         this.type === '1'
@@ -60,8 +60,7 @@ export class ButtonEditComponent implements OnInit {
       skill:
         this.type === '1' ? ModalAddEditSkillComponent : ModalEditImageComponent
     };
-    // console.log('perfil_id(button): ' + this.perfil_id);
-    // console.log('modalTarget:' + this.modalTarget);
+    
     switch (this.modalTarget) {
       case 'biography':
         let wea = this.modalService.open(modal.bio, {

@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BiographyService } from '../../services/biography.service';
 import { ExperienceService } from '../../services/experience.service';
+import { AcademicService } from '../../services/academic.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 
 @Component({
@@ -26,6 +27,7 @@ export class ModalEditImageComponent implements OnInit {
     private form: FormBuilder, 
     private serviceBio: BiographyService, 
     private serviceExpe: ExperienceService,
+    private serviceAca: AcademicService,
     private comunicationService: WalkietalkieService) {
       this.formBiographyImg = this.form.group({
         id:[this.id,[Validators.required]],
@@ -134,17 +136,35 @@ export class ModalEditImageComponent implements OnInit {
           }
         });
       }
-      if (this.whatEdit === "academic"){}
+      if (this.whatEdit === "academic"){
+        const formData: FormData = new FormData();
+        formData.append('img', this.filecito);
+        console.log("id (expe): " + this.id);
+        console.log(this.filecito);
+        this.serviceAca.setAcademImage(this.id, formData).subscribe({
+          next: (result: any) => {
+            console.log("response: ");
+            console.log(result);
+          },
+          error: (e: any) => {
+            console.log("errorcito");
+            console.log(e);
+          },
+          complete: () => {
+            this.comunicationService.actualizarAca(true);
+            this.closeModal();
+          }
+        });
+      }
       if (this.whatEdit === "skill"){}
-      if (this.whatEdit === "project"){}
+      if (this.whatEdit === "project"){
 
-
+      }
       console.log("el fomrulario es valido");
-
     }
     else {
       this.formBiographyImg.markAllAsTouched();
-      // console.log(this.formBiographyImg.value);
+      console.log(this.formBiographyImg.value);
       console.log("el formulario es invalido");
     }
   }
