@@ -40,8 +40,19 @@ export class AcademicService {
     });
   }
 
+  public deleteAcademic(id: any): Observable<Academics> {
+    return this.http.delete<Academics>(
+      this.apiUrl + `/borrar/${id}`,
+      httpOptions
+    );
+  }
+
   public setAcademImage(id: any, data: FormData): Observable<any>{
     return this.http.put(this.apiUrl + `/agregarImg/${id}`, data);
+  }
+
+  public deleteAcademImage(id: any){
+    return this.http.delete(this.apiUrl + `/borrarImg/${id}`);
   }
 
 }

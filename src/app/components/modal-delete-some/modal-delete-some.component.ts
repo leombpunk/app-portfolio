@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BiographyService } from '../../services/biography.service';
 import { ExperienceService } from '../../services/experience.service';
+import { AcademicService } from '../../services/academic.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -23,6 +24,7 @@ export class ModalDeleteSomeComponent implements OnInit {
     private modalActive: NgbActiveModal,
     private bioService: BiographyService,
     private expeService: ExperienceService,
+    private acaService: AcademicService,
     private comunicationService: WalkietalkieService
   ) {}
 
@@ -59,6 +61,44 @@ export class ModalDeleteSomeComponent implements OnInit {
         }
         break;
       case 'academic':
+        if (this.idTarget === '1'){
+          //borrar datos
+          this.acaService.deleteAcademic(this.idItem).subscribe({
+            next: (result: any) => {
+              response = result;
+              console.log('response (educacion): ');
+              console.log(response);
+            },
+            error: (e: any) => {
+              console.log('errorcito (educacion)');
+              console.log(e);
+              console.log(e.ok);
+            },
+            complete: () => {
+              this.comunicationService.actualizarAca(true);
+              this.closeModal();
+            }
+          })
+        }
+        if (this.idTarget === '2'){
+          //borrar imagen
+          this.acaService.deleteAcademImage(this.idItem).subscribe({
+            next: (result: any) => {
+              response = result;
+              console.log('response (educacion imagen): ');
+              console.log(response);
+            },
+            error: (e: any) => {
+              console.log('errorcito (educacion)');
+              console.log(e);
+              console.log(e.ok);
+            },
+            complete: () => {
+              this.comunicationService.actualizarAca(true);
+              this.closeModal();
+            }
+          });
+        }
         break;
       case 'skill':
         break;

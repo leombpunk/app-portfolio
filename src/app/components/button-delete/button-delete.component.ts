@@ -71,6 +71,10 @@ export class ButtonDeleteComponent implements OnInit {
         });
         // .result.then(result => {}, reason => {});
         wea4.componentInstance.descpCard = this.type === '2'?'la imagen del Instituto Educativo':'los datos del Instituto Educativo';
+        wea4.componentInstance.idUser = this.academData.usuarios_id;
+        wea4.componentInstance.idItem = this.academData.id;
+        wea4.componentInstance.idTarget = this.type;
+        wea4.componentInstance.idModule = this.modalTarget;
         break;
       case 'experience':
         let wea5 = this.modalService.open(modal.experience, {
