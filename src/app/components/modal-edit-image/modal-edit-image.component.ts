@@ -5,6 +5,7 @@ import { BiographyService } from '../../services/biography.service';
 import { ExperienceService } from '../../services/experience.service';
 import { AcademicService } from '../../services/academic.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-modal-edit-image',
@@ -28,6 +29,7 @@ export class ModalEditImageComponent implements OnInit {
     private serviceBio: BiographyService, 
     private serviceExpe: ExperienceService,
     private serviceAca: AcademicService,
+    private servicePro: ProjectService,
     private comunicationService: WalkietalkieService) {
       this.formBiographyImg = this.form.group({
         id:[this.id,[Validators.required]],
@@ -156,9 +158,28 @@ export class ModalEditImageComponent implements OnInit {
           }
         });
       }
-      if (this.whatEdit === "skill"){}
-      if (this.whatEdit === "project"){
+      if (this.whatEdit === "skill"){
 
+      }
+      if (this.whatEdit === "project"){
+        const formData: FormData = new FormData();
+        formData.append('img', this.filecito);
+        console.log("id (expe): " + this.id);
+        console.log(this.filecito);
+        this.servicePro.setProjectImage(this.id, formData).subscribe({
+          next: (result: any) => {
+            console.log("response: ");
+            console.log(result);
+          },
+          error: (e: any) => {
+            console.log("errorcito");
+            console.log(e);
+          },
+          complete: () => {
+            this.comunicationService.actualizarProj(true);
+            this.closeModal();
+          }
+        });
       }
       console.log("el fomrulario es valido");
     }

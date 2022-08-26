@@ -4,6 +4,7 @@ import { ExperienceService } from '../../services/experience.service';
 import { AcademicService } from '../../services/academic.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-modal-delete-some',
@@ -25,6 +26,7 @@ export class ModalDeleteSomeComponent implements OnInit {
     private bioService: BiographyService,
     private expeService: ExperienceService,
     private acaService: AcademicService,
+    private proService: ProjectService,
     private comunicationService: WalkietalkieService
   ) {}
 
@@ -72,7 +74,6 @@ export class ModalDeleteSomeComponent implements OnInit {
             error: (e: any) => {
               console.log('errorcito (educacion)');
               console.log(e);
-              console.log(e.ok);
             },
             complete: () => {
               this.comunicationService.actualizarAca(true);
@@ -103,7 +104,7 @@ export class ModalDeleteSomeComponent implements OnInit {
       case 'skill':
         break;
       case 'experience':
-      console.log("idTarget: "+this.idTarget);
+        console.log("idTarget: "+this.idTarget);
         if (this.idTarget === '1'){
           //borrar datos
           this.expeService.deleteExperience(this.idItem).subscribe({
@@ -144,6 +145,44 @@ export class ModalDeleteSomeComponent implements OnInit {
         }
         break;
       case 'project':
+        if (this.idTarget === '1'){
+          //borrar datos
+          this.proService.deleteProject(this.idItem).subscribe({
+            next: (result: any) => {
+              response = result;
+              console.log('response (proyecto): ');
+              console.log(response);
+            },
+            error: (e: any) => {
+              console.log('errorcito (proyecto)');
+              console.log(e);
+              console.log(e.ok);
+            },
+            complete: () => {
+              this.comunicationService.actualizarProj(true);
+              this.closeModal();
+            }
+          })
+        }
+        if (this.idTarget === '2'){
+          //borrar imagen
+          this.proService.deleteProjectImage(this.idItem).subscribe({
+            next: (result: any) => {
+              response = result;
+              console.log('response (proyecto imagen): ');
+              console.log(response);
+            },
+            error: (e: any) => {
+              console.log('errorcito (proyecto)');
+              console.log(e);
+              console.log(e.ok);
+            },
+            complete: () => {
+              this.comunicationService.actualizarProj(true);
+              this.closeModal();
+            }
+          });
+        }
         break;
       default:
         console.log('forro');

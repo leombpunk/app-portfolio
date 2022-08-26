@@ -69,7 +69,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
   public get Hasta(){
     return this.formAcademic.get('hasta');
   }
-  //properties
+  //metodos
   public get TituloValid(){
     return this.Titulo?.touched && !this.Titulo?.valid;
   }
@@ -169,9 +169,9 @@ export class ModalAddEditAcademicComponent implements OnInit {
 
   onSubmit(event: Event){
     event.preventDefault();
-    console.log(this.Habilidades);
+    // console.log(this.Habilidades);
     if(this.formAcademic.valid){
-      console.log("form: ");
+      // console.log("form: ");
       console.log(this.formAcademic.value);
       console.log("el fomrulario es valido");
       if (this.academ.titulo !== ''){

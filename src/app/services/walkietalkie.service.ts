@@ -21,12 +21,20 @@ export class WalkietalkieService {
   private informarAca: Subject<boolean> = new Subject();
   private booleanAca: boolean = false;
 
+  private informarProj: Subject<boolean> = new Subject();
+  private booleanProj: boolean = false;
+
+  private informarSkill: Subject<boolean> = new Subject();
+  private booleanSkill: boolean = false;
+
   constructor() { }
 
   //aca es donde escucha? (donde hace es subscribe)
   informarBio$ = this.informarBio.asObservable();
   informarExpe$ = this.informarExpe.asObservable();
   informarAca$ = this.informarAca.asObservable();
+  informarProj$ = this.informarProj.asObservable();
+  informarSkill$ = this.informarSkill.asObservable();
 
   informarUsuId$ = this.informarUsuId.asObservable();
 
@@ -64,5 +72,23 @@ export class WalkietalkieService {
   actualiceAca(value: boolean){
     console.log("actualiceAca: "+value);
     this.informarAca.next(value);
+  }
+
+  actualizarProj(value: boolean){
+    console.log("actualizarProj: "+value);
+    this.informarProj.next(value);
+  }
+  actualiceProj(value: boolean){
+    console.log("actualiceProj: "+value);
+    this.informarProj.next(value);
+  }
+
+  actualizarSkill(value: boolean){
+    console.log("actualizarSkill: "+value);
+    this.informarSkill.next(value);
+  }
+  actualiceSkill(value: boolean){
+    console.log("actualiceSkill: "+value);
+    this.informarSkill.next(value);
   }
 }

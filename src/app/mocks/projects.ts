@@ -8,3 +8,15 @@ export interface Projects {
     enlaceDemo: string;
     foto: string;
 }
+
+export class Project {
+    id: number = 0;
+    usuarios_id: number = 0;
+    nombre: string = "";
+    descripcion: string = "";
+    desde: string = "";
+    hasta: string = "";
+    enlace: string = "";
+    sitio: string = "";
+    logo: string = "";
+}

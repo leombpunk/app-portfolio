@@ -44,6 +44,7 @@ export class ButtonAddComponent implements OnInit {
         });
         // .result.then(result => {}, reason => {});
         wea2.componentInstance.titleModal = 'Agregar Habilidad';
+        wea2.componentInstance.usuario_id = this.usuario_id;
         break;
       case 'project':
         let wea3 = this.modalService.open(ModalAddEditProjectComponent, {
@@ -52,6 +53,7 @@ export class ButtonAddComponent implements OnInit {
         });
         // .result.then(result => {}, reason => {});
         wea3.componentInstance.titleModal = 'Agregar Proyecto';
+        wea3.componentInstance.usuario_id = this.usuario_id;
         break;
       case 'academic':
         let wea4 = this.modalService.open(ModalAddEditAcademicComponent, {

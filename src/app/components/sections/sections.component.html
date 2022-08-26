@@ -9,6 +9,7 @@
       [titleBio]="bio.titulo"
       [descripcionBio]="bio.acercade"
       [perfil_id]="bio.id"
+      [email]="bio.correo"
       [pasero]="bio"
     >
     </app-card-biography>
@@ -84,9 +85,14 @@
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <app-card-projects
         *ngFor="let project of projects"
-        [imageProject]="project.foto"
+        [imageProject]="project.logo"
         [titleProject]="project.nombre"
         [descripcionProject]="project.descripcion"
+        [inicioProject]="project.desde"
+        [finProject]="project.hasta"
+        [enlaceProject]="project.enlace"
+        [sitioProject]="project.sitio"
+        [projectData]="project"
       ></app-card-projects>
     </div>
   </div>

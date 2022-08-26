@@ -9,9 +9,11 @@ import { PROJECTS } from '../../mocks/projects-mock';
 import { Biography1 } from '../../mocks/biography';
 import { Academics } from '../../mocks/academic';
 import { Experience } from '../../mocks/experience';
+import { Project } from '../../mocks/projects';
 import { BiographyService } from 'src/app/services/biography.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { AcademicService } from '../../services/academic.service';
+import { ProjectService } from '../../services/project.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 
 @Component({
@@ -20,24 +22,10 @@ import { WalkietalkieService } from '../../services/walkietalkie.service';
   styleUrls: ['./sections.component.css']
 })
 export class SectionsComponent implements OnInit {
-  private urlImageApi: string = 'http://localhost:8080/images/';
-  // private usuario_id: number = 0;
-  skills: Skills[] = SKILLS;
-  projects: Projects[] = PROJECTS;
-  // academics: Academics[] = ACADEMICS;
 
-  // bio: Biography1 = {
-  //   id: 0,
-  //   nombre: '',
-  //   apellido: '',
-  //   acercade: '',
-  //   correo: '',
-  //   titulo: '',
-  //   github: '',
-  //   linkedin: '',
-  //   foto: '',
-  //   usuarios_id: 0
-  // };
+  private urlImageApi: string = 'http://localhost:8080/images/';
+
+  skills: Skills[] = SKILLS;
 
   bio: Biography1 = new Biography1();
 
@@ -65,12 +53,16 @@ export class SectionsComponent implements OnInit {
     hasta: "",
     logo: "",
     usuario_id: 0
-  }]
+  }];
+
+  // testeando
+  projects: Project[] = new Array<Project>();
 
   constructor(
     private serviceBio: BiographyService,
     private serviceExpe: ExperienceService,
     private serviceAcadm: AcademicService,
+    private serviceProject: ProjectService,
     private comunicationService: WalkietalkieService
   ) {
       this.comunicationService.informarBio$.subscribe(
@@ -96,12 +88,22 @@ export class SectionsComponent implements OnInit {
           }
         }
       );
+
+      this.comunicationService.informarProj$.subscribe(
+        (value: boolean) => {
+          if (value){
+            this.UpdateEventProject();
+          }
+        }
+      );
   }
 
   ngOnInit(): void {
     this.LoadData();
     this.LoadDataExperience();
     this.LoadDataAcademic();
+    this.LoadDataProject();
+    this.LoadDataSkill();
   }
 
   LoadData() {
@@ -141,7 +143,14 @@ export class SectionsComponent implements OnInit {
   }
 
   LoadDataProject(){
-
+    this.serviceProject.getProjects().subscribe((project: any) => {
+      project.forEach((element: any) => {
+        element.logo = this.urlImageApi + element.logo;
+        // console.log("element: ");
+        // console.log(element);
+      });
+      this.projects = project;
+    });
   }
 
   UpdateEvent() {
@@ -158,5 +167,10 @@ export class SectionsComponent implements OnInit {
   UpdateEventAcadem(){
     this.LoadDataAcademic();
     this.comunicationService.actualiceAca(false);
+  }
+
+  UpdateEventProject(){
+    this.LoadDataProject();
+    this.comunicationService.actualiceProj(false);
   }
 }

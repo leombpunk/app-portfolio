@@ -13,12 +13,15 @@ export class CardBiographyComponent implements OnInit {
   faGithub = faGithub;
   faEnvelope = faEnvelope;
 
+  mailto: string = "mailto:";
+
   @Input() githubLink: string = "";
   @Input() linkedinLink: string = "";
   @Input() imageURL: string = "";
   @Input() titleBio: string = "";
   @Input() descripcionBio: string = "";
   @Input() perfil_id: number = 0;
+  @Input() email: string = "";
 
   //variable que pasa los datos del perfil al boton para cargar el modal correspodiente
   @Input() pasero: Biography1 = new Biography1();

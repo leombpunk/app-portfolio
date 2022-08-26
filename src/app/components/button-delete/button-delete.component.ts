@@ -5,6 +5,7 @@ import { ModalDeleteSomeComponent } from '../modal-delete-some/modal-delete-some
 import { Biography1 } from '../../mocks/biography';
 import { Experience } from '../../mocks/experience';
 import { Academics } from '../../mocks/academic'; 
+import { Project } from 'src/app/mocks/projects';
 
 @Component({
   selector: 'app-button-delete',
@@ -19,6 +20,7 @@ export class ButtonDeleteComponent implements OnInit {
   @Input() bioData: Biography1 = new Biography1();
   @Input() expeData: Experience = new Experience();
   @Input() academData: Academics = new Academics();
+  @Input() projectData: Project = new Project();
 
   constructor(private modalService: NgbModal) { }
 
@@ -63,6 +65,10 @@ export class ButtonDeleteComponent implements OnInit {
         });
         // .result.then(result => {}, reason => {});
         wea3.componentInstance.descpCard = this.type === '2'?'la imagen del Proyecto':'el Proyecto';
+        wea3.componentInstance.idUser = this.projectData.usuarios_id;
+        wea3.componentInstance.idItem = this.projectData.id;
+        wea3.componentInstance.idTarget = this.type;
+        wea3.componentInstance.idModule = this.modalTarget;
         break;
       case 'academic':
         let wea4 = this.modalService.open(modal.academic, {

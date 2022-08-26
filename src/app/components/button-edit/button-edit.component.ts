@@ -10,6 +10,7 @@ import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.co
 import { Biography1 } from '../../mocks/biography';
 import { Experience } from 'src/app/mocks/experience';
 import { Academics } from '../../mocks/academic';
+import { Project } from 'src/app/mocks/projects';
 
 @Component({
   selector: 'app-button-edit',
@@ -29,6 +30,7 @@ export class ButtonEditComponent implements OnInit {
   @Input() perfilData: Biography1 = new Biography1();
   @Input() expeData: Experience = new Experience();
   @Input() academData: Academics = new Academics();
+  @Input() projectData: Project = new Project();
 
   constructor(
     private modalService: NgbModal
@@ -106,6 +108,29 @@ export class ButtonEditComponent implements OnInit {
           centered: true
         });
         wea3.componentInstance.titleModal = 'Editar Proyecto';
+        if (this.type === '1'){
+          wea3.componentInstance.project = this.projectData;
+          wea3.componentInstance.formProject.setValue({
+            id: this.projectData.id,
+            nombre: this.projectData.nombre,
+            descripcion: this.projectData.descripcion,
+            desde: this.projectData.desde,
+            hasta: this.projectData.hasta,
+            sitio: this.projectData.sitio,
+            enlace: this.projectData.enlace,
+            usuarios_id: this.projectData.usuarios_id
+          });
+        }
+        else {
+          console.log("boton editar proyecto: (folo/logo)");
+          console.log(this.projectData);
+          wea3.componentInstance.id = this.projectData.id;
+          wea3.componentInstance.whatEdit = this.modalTarget;
+          wea3.componentInstance.formBiographyImg.setValue({
+            id: this.projectData.id,
+            img: '',
+          });
+        }
         break;
       case 'academic':
         let wea4 = this.modalService.open(modal.academic, {
