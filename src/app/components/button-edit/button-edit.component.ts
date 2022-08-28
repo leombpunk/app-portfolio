@@ -11,6 +11,7 @@ import { Biography1 } from '../../mocks/biography';
 import { Experience } from 'src/app/mocks/experience';
 import { Academics } from '../../mocks/academic';
 import { Project } from 'src/app/mocks/projects';
+import { Skill } from 'src/app/mocks/skills';
 
 @Component({
   selector: 'app-button-edit',
@@ -31,6 +32,7 @@ export class ButtonEditComponent implements OnInit {
   @Input() expeData: Experience = new Experience();
   @Input() academData: Academics = new Academics();
   @Input() projectData: Project = new Project();
+  @Input() skillData: Skill = new Skill();
 
   constructor(
     private modalService: NgbModal
@@ -101,6 +103,19 @@ export class ButtonEditComponent implements OnInit {
           centered: true
         });
         wea2.componentInstance.titleModal = 'Editar Habilidad';
+        if (this.type === '1'){
+          wea2.componentInstance.skill = this.skillData;
+          wea2.componentInstance.formSkill.setValue({
+            id: this.skillData.id,
+            descripcion: this.skillData.descripcion,
+            nivel: this.skillData.nivel,
+            tipo_habilidad_id: this.skillData.tipo_habilidad_id,
+            usuarios_id: this.skillData.usuarios_id
+          });
+        }
+        else {
+          console.log("no existe foto para editar");
+        }
         break;
       case 'project':
         let wea3 = this.modalService.open(modal.project, {

@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Skills } from '../../mocks/skills';
 import { SKILLS } from '../../mocks/skills-mock';
-
-import { Projects } from '../../mocks/projects';
-import { PROJECTS } from '../../mocks/projects-mock';
-
 import { Biography1 } from '../../mocks/biography';
 import { Academics } from '../../mocks/academic';
 import { Experience } from '../../mocks/experience';
 import { Project } from '../../mocks/projects';
+import { Skill } from '../../mocks/skills';
 import { BiographyService } from 'src/app/services/biography.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { AcademicService } from '../../services/academic.service';
 import { ProjectService } from '../../services/project.service';
+import { SkillService } from '../../services/skill.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 
 @Component({
@@ -25,7 +22,7 @@ export class SectionsComponent implements OnInit {
 
   private urlImageApi: string = 'http://localhost:8080/images/';
 
-  skills: Skills[] = SKILLS;
+  // skills: Skills[] = SKILLS;
 
   bio: Biography1 = new Biography1();
 
@@ -58,11 +55,14 @@ export class SectionsComponent implements OnInit {
   // testeando
   projects: Project[] = new Array<Project>();
 
+  skills: Skill[] = new Array<Skill>();
+
   constructor(
     private serviceBio: BiographyService,
     private serviceExpe: ExperienceService,
     private serviceAcadm: AcademicService,
     private serviceProject: ProjectService,
+    private serviceSkill: SkillService,
     private comunicationService: WalkietalkieService
   ) {
       this.comunicationService.informarBio$.subscribe(
@@ -93,6 +93,14 @@ export class SectionsComponent implements OnInit {
         (value: boolean) => {
           if (value){
             this.UpdateEventProject();
+          }
+        }
+      );
+
+      this.comunicationService.informarSkill$.subscribe(
+        (value: boolean) => {
+          if (value){
+            this.UpdateEventSkill();
           }
         }
       );
@@ -139,7 +147,9 @@ export class SectionsComponent implements OnInit {
   }
 
   LoadDataSkill(){
-
+    this.serviceSkill.getSkills().subscribe((skill: any) => {
+      this.skills = skill;
+    })
   }
 
   LoadDataProject(){
@@ -172,5 +182,10 @@ export class SectionsComponent implements OnInit {
   UpdateEventProject(){
     this.LoadDataProject();
     this.comunicationService.actualiceProj(false);
+  }
+
+  UpdateEventSkill(){
+    this.LoadDataSkill();
+    this.comunicationService.actualiceSkill(false);
   }
 }

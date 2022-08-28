@@ -3,10 +3,10 @@
     <div class="card-body">
       <h4 class="card-title">{{ titleSkill }}</h4>
       <meter id="disk_c" [value]="nivelSkill" min="0" max="10"></meter>
-      <p>{{ senioritySkill }}</p>
+      <p class="card-text text-center"><i><b><u>Nivel: {{ nivelSkill }} / 10</u></b></i></p>
       <div class="testeando">
-        <app-button-edit modalTarget="skill" type="1"></app-button-edit>
-        <app-button-delete modalTarget="project" type="1"></app-button-delete>
+        <app-button-edit modalTarget="skill" type="1" [skillData]="skillData"></app-button-edit>
+        <app-button-delete modalTarget="skill" type="1" [skillData]="skillData"></app-button-delete>
       </div>
     </div>
   </div>

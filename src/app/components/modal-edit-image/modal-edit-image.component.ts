@@ -159,7 +159,7 @@ export class ModalEditImageComponent implements OnInit {
         });
       }
       if (this.whatEdit === "skill"){
-
+        console.log("no hay imagen");
       }
       if (this.whatEdit === "project"){
         const formData: FormData = new FormData();

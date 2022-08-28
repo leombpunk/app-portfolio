@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Skill } from 'src/app/mocks/skills';
 
 @Component({
   selector: 'app-card-skills',
@@ -8,11 +9,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardSkillsComponent implements OnInit {
   @Input() titleSkill: string = "";
   @Input() nivelSkill: number = 0;
-  @Input() senioritySkill: string = "";
-  
+  @Input() tipoSkill: string = "";
+  @Input() skillData: Skill = new Skill();
+
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

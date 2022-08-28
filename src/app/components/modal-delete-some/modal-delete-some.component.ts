@@ -5,6 +5,7 @@ import { AcademicService } from '../../services/academic.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectService } from 'src/app/services/project.service';
+import { SkillService } from 'src/app/services/skill.service';
 
 @Component({
   selector: 'app-modal-delete-some',
@@ -27,6 +28,7 @@ export class ModalDeleteSomeComponent implements OnInit {
     private expeService: ExperienceService,
     private acaService: AcademicService,
     private proService: ProjectService,
+    private skillService: SkillService,
     private comunicationService: WalkietalkieService
   ) {}
 
@@ -102,6 +104,29 @@ export class ModalDeleteSomeComponent implements OnInit {
         }
         break;
       case 'skill':
+        console.log("idTarget: "+this.idTarget);
+        if (this.idTarget === '1'){
+          //borrar datos
+          this.skillService.deleteSkill(this.idItem).subscribe({
+            next: (result: any) => {
+              response = result;
+              console.log('response (experiencia): ');
+              console.log(response);
+            },
+            error: (e: any) => {
+              console.log('errorcito (experiencia)');
+              console.log(e);
+              console.log(e.ok);
+            },
+            complete: () => {
+              this.comunicationService.actualizarSkill(true);
+              this.closeModal();
+            }
+          })
+        }
+        if (this.idTarget === '2'){
+          console.log("no hay imagen para borrar");
+        }
         break;
       case 'experience':
         console.log("idTarget: "+this.idTarget);
