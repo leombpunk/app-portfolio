@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,10 +27,6 @@ import { ModalAddEditProjectComponent } from './components/modal-add-edit-projec
 import { AlertComponent } from './components/alert/alert.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { HomeComponent } from './components/home/home.component';
-
-const appRoutes: Routes = [
-  
-];
 
 @NgModule({
   declarations: [
