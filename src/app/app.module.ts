@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'
-
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SectionsComponent } from './components/sections/sections.component';
 import { CardBiographyComponent } from './components/card-biography/card-biography.component';
@@ -28,6 +27,11 @@ import { ModalAddEditSkillComponent } from './components/modal-add-edit-skill/mo
 import { ModalAddEditProjectComponent } from './components/modal-add-edit-project/modal-add-edit-project.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { HomeComponent } from './components/home/home.component';
+
+const appRoutes: Routes = [
+  
+];
 
 @NgModule({
   declarations: [
@@ -51,7 +55,8 @@ import { ToastComponent } from './components/toast/toast.component';
     ModalAddEditSkillComponent,
     ModalAddEditProjectComponent,
     AlertComponent,
-    ToastComponent
+    ToastComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
