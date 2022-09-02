@@ -45,32 +45,37 @@
         />
         <div class="card-body">
           <h4 class="card-title text-center">Inicio de sesión</h4>
-          <form autocomplete="off">
+          <form [formGroup]="formLogin" (ngSubmit)="onSubmit($event)" autocomplete="off">
             <div class="mb-3">
-              <label for="user_user" class="form-label">Usuario:</label>
+              <label for="user" class="form-label">Usuario:</label>
               <input
                 type="text"
-                id="user_user"
-                name="user_user"
+                id="user"
+                name="user"
+                formControlName="user"
                 class="form-control shadow"
                 placeholder="Usuario"
                 minlength="4"
                 maxlength="16"
+                [class.border-danger]="UserValid"
               />
+              <span *ngIf="UserError" class="errorMessage">{{ mErrUser }}</span>
             </div>
             <div class="mb-3">
-              <label for="user_password" class="form-label">Contraseña:</label>
+              <label for="pass" class="form-label">Contraseña:</label>
               <input
                 type="password"
-                id="user_password"
-                name="user_password"
+                id="pass"
+                name="pass"
+                formControlName="pass"
                 class="form-control shadow"
                 placeholder="Contraseña"
                 minlength="8"
                 maxlength="16"
+                [class.border-danger]="PassValid"
               />
+              <span *ngIf="PassError" class="errorMessage">{{ mErrPass }}</span>
             </div>
-
             <button type="submit" class="btn btn-primary shadow">
               Iniciar Sesion
             </button>
