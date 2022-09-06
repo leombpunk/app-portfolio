@@ -1,4 +1,4 @@
-import { Academics } from './academic';
+// import { Academics } from './academic';
 // export const ACADEMICS: Academics[] = [
 //     {
 //         id: 1,

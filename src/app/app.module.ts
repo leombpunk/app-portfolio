@@ -27,6 +27,7 @@ import { ModalAddEditProjectComponent } from './components/modal-add-edit-projec
 import { AlertComponent } from './components/alert/alert.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { HomeComponent } from './components/home/home.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { HomeComponent } from './components/home/home.component';
     ModalAddEditProjectComponent,
     AlertComponent,
     ToastComponent,
-    HomeComponent
+    HomeComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,

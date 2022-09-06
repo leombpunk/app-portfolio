@@ -1,4 +1,4 @@
-import { Biography } from './biography';
+// import { Biography } from './biography';
 // export const BIOGRAPHY: Biography[] = [
 //     {
 //         id: 1,
