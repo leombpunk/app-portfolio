@@ -223,14 +223,14 @@ export class SectionsComponent implements OnInit {
   }
 
   LoadDataProject() {
-    this.serviceProject.getProjects().subscribe((project: any) => {
-      project.forEach((element: any) => {
-        element.logo = this.urlImageApi + element.logo;
-        // console.log("element: ");
-        // console.log(element);
-      });
-      this.projects = project;
-    });
+    // this.serviceProject.getProjects().subscribe((project: any) => {
+    //   project.forEach((element: any) => {
+    //     element.logo = this.urlImageApi + element.logo;
+    //     // console.log("element: ");
+    //     // console.log(element);
+    //   });
+    //   this.projects = project;
+    // });
 
     this.serviceProject
       .getProjectsByUsuario(this.rutaUsuario)
