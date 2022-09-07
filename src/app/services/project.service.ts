@@ -22,6 +22,14 @@ export class ProjectService {
     return this.http.get<Project[]>(this.apiUrl + "/traer");
   }
 
+  //get
+  //get que trae los datos de perfil segun el nombre de usuario
+  public getProjectsByUsuario(usuario: any): Observable<Project[]> {
+    return this.http.get<Project[]>(
+      this.apiUrl + `/buscarByUsuario/${usuario.toString()}`
+    );
+  }
+
   public postProject(datos: any): Observable<Project> {
     return this.http.post<Project>(this.apiUrl + "/crear", datos);
   }

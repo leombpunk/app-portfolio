@@ -25,6 +25,7 @@ export class CardBiographyComponent implements OnInit {
 
   //variable que pasa los datos del perfil al boton para cargar el modal correspodiente
   @Input() pasero: Biography1 = new Biography1();
+  @Input() isLogged: boolean = false;
 
   constructor() { }
 

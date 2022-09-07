@@ -7,8 +7,8 @@
       alt="imagen del proyecto"
     />
     <div class="testeando">
-      <app-button-edit modalTarget="project" type="2" [projectData]="projectData"></app-button-edit>
-      <app-button-delete modalTarget="project" type="2" [projectData]="projectData"></app-button-delete>
+      <app-button-edit *ngIf="isLogged" modalTarget="project" type="2" [projectData]="projectData"></app-button-edit>
+      <app-button-delete *ngIf="isLogged" modalTarget="project" type="2" [projectData]="projectData"></app-button-delete>
     </div>
     <div class="col-btn">
       <div class="card-body">
@@ -19,8 +19,8 @@
         </p>
 
         <div class="testeando">
-          <app-button-edit modalTarget="project" type="1" [projectData]="projectData"></app-button-edit>
-          <app-button-delete modalTarget="project" type="1" [projectData]="projectData"></app-button-delete>
+          <app-button-edit *ngIf="isLogged" modalTarget="project" type="1" [projectData]="projectData"></app-button-edit>
+          <app-button-delete *ngIf="isLogged" modalTarget="project" type="1" [projectData]="projectData"></app-button-delete>
         </div>
       </div>
     </div>

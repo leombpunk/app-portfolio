@@ -11,6 +11,7 @@ export class CardSkillsComponent implements OnInit {
   @Input() nivelSkill: number = 0;
   @Input() tipoSkill: string = "";
   @Input() skillData: Skill = new Skill();
+  @Input() isLogged: boolean = false;
 
   constructor() { }
 

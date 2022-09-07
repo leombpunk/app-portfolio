@@ -20,6 +20,7 @@ export class CardProjectsComponent implements OnInit {
   @Input() sitioProject: string = "";
 
   @Input() projectData: Project = new Project();
+  @Input() isLogged: boolean = false;
   
   constructor() { }
 

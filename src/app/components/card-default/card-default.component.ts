@@ -29,6 +29,7 @@ export class CardDefaultComponent implements OnInit {
 
   @Input() dataEnter: Experience = new Experience();
   @Input() dataEnter2: Academics = new Academics();
+  @Input() isLogged: boolean = false;
 
   constructor() { }
 

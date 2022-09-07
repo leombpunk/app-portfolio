@@ -22,6 +22,14 @@ export class SkillService {
     return this.http.get<Skill[]>(this.apiUrl + "/traer"); 
   }
 
+  //get
+  //get que trae los datos de perfil segun el nombre de usuario
+  public getSkillsByUsuario(usuario: any): Observable<Skill[]> {
+    return this.http.get<Skill[]>(
+      this.apiUrl + `/buscarByUsuario/${usuario.toString()}`
+    );
+  }
+
   public postSkill(data: any): Observable<Skill> {
     return this.http.post<Skill>(this.apiUrl + "/crear", data);
   }

@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http'
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { interceptorProvider } from './services/interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SectionsComponent } from './components/sections/sections.component';
@@ -24,10 +29,9 @@ import { ModalAddEditExperienceComponent } from './components/modal-add-edit-exp
 import { ModalAddEditAcademicComponent } from './components/modal-add-edit-academic/modal-add-edit-academic.component';
 import { ModalAddEditSkillComponent } from './components/modal-add-edit-skill/modal-add-edit-skill.component';
 import { ModalAddEditProjectComponent } from './components/modal-add-edit-project/modal-add-edit-project.component';
-import { AlertComponent } from './components/alert/alert.component';
-import { ToastComponent } from './components/toast/toast.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegistroComponent } from './components/registro/registro.component';
+
 
 @NgModule({
   declarations: [
@@ -50,12 +54,11 @@ import { RegistroComponent } from './components/registro/registro.component';
     ModalAddEditAcademicComponent,
     ModalAddEditSkillComponent,
     ModalAddEditProjectComponent,
-    AlertComponent,
-    ToastComponent,
     HomeComponent,
     RegistroComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
@@ -63,8 +66,10 @@ import { RegistroComponent } from './components/registro/registro.component';
     HttpClientModule, 
     FontAwesomeModule,
     NgbModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [NgbActiveModal],
+  providers: [NgbActiveModal, interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

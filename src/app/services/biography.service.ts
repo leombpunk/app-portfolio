@@ -19,8 +19,13 @@ export class BiographyService {
   constructor(private http: HttpClient) {}
 
   //get
+  //este get debe recibir un parametro 'nombre de usuario'
   public getBiography(): Observable<Biography1> {
     return this.http.get<Biography1>(this.apiUrl + '/buscar/1');
+  }
+  //get que trae los datos de perfil segun el nombre de usuario
+  public getPerfilByUsuario(usuario: any): Observable<Biography1> {
+    return this.http.get<Biography1>(this.apiUrl + `/buscarByUsuario/${usuario.toString()}`);
   }
 
   //delete

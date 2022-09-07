@@ -22,6 +22,14 @@ export class AcademicService {
     return this.http.get<Academics[]>(this.apiUrl + "/traer");
   }
 
+  //get
+  //get que trae los datos de perfil segun el nombre de usuario
+  public getAcademicsByUsuario(usuario: any): Observable<Academics[]> {
+    return this.http.get<Academics[]>(
+      this.apiUrl + `/buscarByUsuario/${usuario.toString()}`
+    );
+  }
+
   public postAcademics(datos: any): Observable<Academics> {
     return this.http.post<Academics>(this.apiUrl + "/crear", datos);
   }

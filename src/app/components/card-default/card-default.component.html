@@ -9,12 +9,14 @@
       />
       <div class="testeando">
         <app-button-edit
+          *ngIf="isLogged"
           [type]="type2"
           [modalTarget]="apuntar"
           [expeData]="dataEnter"
           [academData]="dataEnter2"
         ></app-button-edit>
         <app-button-delete
+          *ngIf="isLogged"
           [type]="type2"
           [modalTarget]="apuntar"
           [expeData] = "dataEnter"
@@ -48,12 +50,14 @@
 
         <div class="testeando">
           <app-button-edit
+            *ngIf="isLogged"
             [type]="type1"
             [modalTarget]="apuntar"
             [expeData]="dataEnter"
             [academData]="dataEnter2"
           ></app-button-edit>
           <app-button-delete
+            *ngIf="isLogged"
             [type]="type1"
             [modalTarget]="apuntar"
             [expeData]="dataEnter"

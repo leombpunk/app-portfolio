@@ -23,7 +23,12 @@ export class ExperienceService {
   }
 
   //get
-
+  //get que trae los datos de perfil segun el nombre de usuario
+  public getExperiencesByUsuario(usuario: any): Observable<Experience[]> {
+    return this.http.get<Experience[]>(
+      this.apiUrl + `/buscarByUsuario/${usuario.toString()}`
+    );
+  }
   //post
   public postExperience(datos: any): Observable<Experience> {
     return this.http.post<Experience>(this.apiUrl + '/crear', datos);
@@ -62,7 +67,7 @@ export class ExperienceService {
     return this.http.put(this.apiUrl + `/agregarImg/${id}`, data);
   }
   //delete image
-  public deleteExpeImage(id: any){
+  public deleteExpeImage(id: any) {
     return this.http.delete(this.apiUrl + `/borrarImg/${id}`);
   }
 }

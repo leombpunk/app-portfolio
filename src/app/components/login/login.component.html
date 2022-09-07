@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow">
+  <nav class="navbar  navbar-expand-lg navbar-light bg-light mb-5 shadow">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="assets\images\favicon.png" alt="logo" width="30" /> SoftBoos
@@ -34,9 +34,8 @@
 <div *ngIf="isLogged; else loggedOut" class="container-fluid">
   <div
     class="row row-cols-1 row-cols-md-2 g-4 justify-content-center align-items-center"
-    style="margin-top: 150px;"
   >
-    <div class="card"> 
+    <div class="card">
       Sesion Iniciada
     </div>
   </div>
@@ -46,7 +45,6 @@
   <div class="container-fluid">
     <div
       class="row row-cols-1 row-cols-md-2 g-4 justify-content-center align-items-center"
-      style="margin-top: 150px;"
     >
       <div class="col">
         <div class="card h-100 shadow">
@@ -73,6 +71,14 @@
           />
           <div class="card-body">
             <h4 class="card-title text-center">Inicio de sesión</h4>
+            <div
+              *ngIf="isLogginFail"
+              class="alert alert-danger alert-dismissible"
+              role="alert"
+            >
+              {{ mErrTokenService }}
+              <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+            </div>
             <form
               [formGroup]="formLogin"
               (ngSubmit)="onSubmit($event)"
@@ -116,9 +122,6 @@
                 Iniciar Sesion
               </button>
             </form>
-            <div class="">
-
-            </div>
           </div>
         </div>
       </div>

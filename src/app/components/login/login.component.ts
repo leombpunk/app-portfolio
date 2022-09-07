@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
       this.isLogged = true;
       this.isLogginFail = false;
       this.roles = this.tokenService.getAuthorities();
+      this.router.navigate([`/home/${this.tokenService.getUserName()}`]);
     }
   }
 
@@ -106,8 +107,9 @@ export class LoginComponent implements OnInit {
           this.tokenService.setUserName(result.usuario);
           this.tokenService.setAuthorities(result.authorities);
           this.roles = result.authorities;
-          //redireccionar a la home, en un futuro me gustaria redireccionar a un usuario en particular
-          this.router.navigate(["/home"]);
+          // console.log(this.tokenService.getUserName());
+          //redireccionar a la home, en un futuro me gustaria redireccionar al perfil del usuario logeado
+          this.router.navigate([`/home/${this.tokenService.getUserName()}`]);
         },
         error: (e: any) => {
           console.log("error: ");
@@ -117,7 +119,7 @@ export class LoginComponent implements OnInit {
           this.isLogginFail = true;
 
           //asumo que esto no funcionara porque no tengo la clase mensaje en el backend
-          this.mErrTokenService = e.error.mensaje;
+          this.mErrTokenService = e.error.message;
           console.log(this.mErrTokenService);
         }, 
         complete: () => {
@@ -132,5 +134,4 @@ export class LoginComponent implements OnInit {
       console.log(this.formLogin.errors);
     }
   }
-
 }

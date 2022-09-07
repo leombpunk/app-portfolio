@@ -22,4 +22,8 @@ export class AuthService {
   public nuevoUsuario(usuario: UsuarioNuevo): Observable<any>{
     return this.http.post<any>(this.authURL + "nuevoUsuario", usuario);
   }
+
+  public buscarUsuario(usuario: any): Observable<any>{
+    return this.http.get(this.authURL + `buscarUsuario/${usuario}`);
+  }
 }
