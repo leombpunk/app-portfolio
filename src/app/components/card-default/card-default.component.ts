@@ -15,7 +15,7 @@ export class CardDefaultComponent implements OnInit {
   @Input() apuntar: string = "";
   @Input() type1: string = "1";
   @Input() type2: string = "2";
-  
+
   // atributos en comun
   @Input() titleCard: string = "";
   @Input() descripcionCard: string = "";
@@ -33,5 +33,6 @@ export class CardDefaultComponent implements OnInit {
   @Input() isLogged: boolean = false;
 
   constructor() { }
+  
   ngOnInit(): void { }
 }

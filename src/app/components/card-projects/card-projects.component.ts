@@ -23,5 +23,6 @@ export class CardProjectsComponent implements OnInit {
   @Input() isLogged: boolean = false;
   
   constructor() { }
+  
   ngOnInit(): void { }
 }

@@ -7,6 +7,7 @@ import { Skill } from 'src/app/model/skills';
   styleUrls: ['./card-skills.component.css']
 })
 export class CardSkillsComponent implements OnInit {
+  
   @Input() titleSkill: string = "";
   @Input() nivelSkill: number = 0;
   @Input() tipoSkill: string = "";
@@ -14,5 +15,6 @@ export class CardSkillsComponent implements OnInit {
   @Input() isLogged: boolean = false;
 
   constructor() { }
+
   ngOnInit(): void { }
 }

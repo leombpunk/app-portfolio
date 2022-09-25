@@ -76,7 +76,6 @@ export class SectionsComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log("ruta: "+this.rutaUsuario);
-    /*codigo nuevo*/
     this.authService.buscarUsuario(this.rutaUsuario).subscribe({
       next: (result: any) => {
         // console.log('result: (buscarUsuario)');
@@ -100,23 +99,9 @@ export class SectionsComponent implements OnInit {
         // console.log('complete');
       }
     });
-
-    /**************/
-
-    // this.LoadData();
-    // this.LoadDataExperience();
-    // this.LoadDataAcademic();
-    // this.LoadDataProject();
-    // this.LoadDataSkill();
   }
 
   LoadData() {
-    // this.serviceBio.getBiography().subscribe((bio: any) => {
-    //   this.bio = bio;
-    //   this.bio.foto = this.urlImageApi + bio.foto;
-    //   this.comunicationService.setUsuarioId(this.bio.usuarios_id);
-    // });
-
     this.serviceBio
       .getPerfilByUsuario(this.rutaUsuario)
       .subscribe((bio: any) => {
@@ -131,16 +116,6 @@ export class SectionsComponent implements OnInit {
   }
 
   LoadDataExperience() {
-    // this.serviceExpe.getExperiences().subscribe((expe: any) => {
-    //   expe.forEach((element: any) => {
-    //     let esplitear: string[] = element.tarea.split(',');
-    //     // console.log(esplitear);
-    //     element.tarea = esplitear;
-    //     element.logo = this.urlImageApi + element.logo;
-    //   });
-    //   this.expe = expe;
-    // });
-
     this.serviceExpe
       .getExperiencesByUsuario(this.rutaUsuario)
       .subscribe((expe: any) => {
@@ -155,16 +130,6 @@ export class SectionsComponent implements OnInit {
   }
 
   LoadDataAcademic() {
-    // this.serviceAcadm.getAcademics().subscribe((academ: any) => {
-    //   academ.forEach((element: any) => {
-    //     let esplitear: string[] = element.habilidades.split(',');
-    //     // console.log(esplitear);
-    //     element.habilidades = esplitear;
-    //     element.logo = this.urlImageApi + element.logo;
-    //   });
-    //   this.academ = academ;
-    // });
-
     this.serviceAcadm
       .getAcademicsByUsuario(this.rutaUsuario)
       .subscribe((academ: any) => {
@@ -179,10 +144,6 @@ export class SectionsComponent implements OnInit {
   }
 
   LoadDataSkill() {
-    // this.serviceSkill.getSkills().subscribe((skill: any) => {
-    //   this.skills = skill;
-    // });
-
     this.serviceSkill
       .getSkillsByUsuario(this.rutaUsuario)
       .subscribe((skill: any) => {
@@ -191,15 +152,6 @@ export class SectionsComponent implements OnInit {
   }
 
   LoadDataProject() {
-    // this.serviceProject.getProjects().subscribe((project: any) => {
-    //   project.forEach((element: any) => {
-    //     element.logo = this.urlImageApi + element.logo;
-    //     // console.log("element: ");
-    //     // console.log(element);
-    //   });
-    //   this.projects = project;
-    // });
-
     this.serviceProject
       .getProjectsByUsuario(this.rutaUsuario)
       .subscribe((project: any) => {

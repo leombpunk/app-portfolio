@@ -1,17 +1,20 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+
 import { ModalAddEditBiographyComponent } from '../modal-add-edit-biography/modal-add-edit-biography.component';
 import { ModalAddEditAcademicComponent } from '../modal-add-edit-academic/modal-add-edit-academic.component';
 import { ModalAddEditExperienceComponent } from '../modal-add-edit-experience/modal-add-edit-experience.component';
 import { ModalAddEditProjectComponent } from '../modal-add-edit-project/modal-add-edit-project.component';
 import { ModalAddEditSkillComponent } from '../modal-add-edit-skill/modal-add-edit-skill.component';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
+
 import { Biography } from '../../model/biography';
 import { Experience } from 'src/app/model/experience';
 import { Academics } from '../../model/academic';
 import { Project } from 'src/app/model/projects';
 import { Skill } from 'src/app/model/skills';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-button-edit',
@@ -19,7 +22,6 @@ import { Skill } from 'src/app/model/skills';
   styleUrls: ['./button-edit.component.css']
 })
 export class ButtonEditComponent implements OnInit {
-
   faPenToSquare = faPenToSquare;
 
   @Input() modalTarget: string = '';
@@ -34,9 +36,7 @@ export class ButtonEditComponent implements OnInit {
   @Input() projectData: Project = new Project();
   @Input() skillData: Skill = new Skill();
 
-  constructor(
-    private modalService: NgbModal
-  ) {}
+  constructor(private modalService: NgbModal, private toastr: ToastrService) {}
 
   ngOnInit(): void {}
 
@@ -64,7 +64,7 @@ export class ButtonEditComponent implements OnInit {
       skill:
         this.type === '1' ? ModalAddEditSkillComponent : ModalEditImageComponent
     };
-    
+
     switch (this.modalTarget) {
       case 'biography':
         let wea = this.modalService.open(modal.bio, {
@@ -72,8 +72,8 @@ export class ButtonEditComponent implements OnInit {
           centered: true
         });
         wea.componentInstance.titleModal = 'Editar Perfil';
-        if (this.type === '1'){
-           //testeo de seteo en formulario
+        if (this.type === '1') {
+          //testeo de seteo en formulario
           wea.componentInstance.formBiography.setValue({
             id: this.perfilData.id,
             titulo: this.perfilData.titulo,
@@ -82,18 +82,17 @@ export class ButtonEditComponent implements OnInit {
             acercade: this.perfilData.acercade,
             correo: this.perfilData.correo,
             linkedin: this.perfilData.linkedin,
-            github: this.perfilData.github,
+            github: this.perfilData.github
           });
           wea.componentInstance.bio = this.perfilData;
-        }
-        else {
+        } else {
           //cargar modal con imagen
-          console.log("perfildata: "+this.perfilData.id);
+          // console.log("perfildata: "+this.perfilData.id);
           wea.componentInstance.id = this.perfilData.id;
           wea.componentInstance.whatEdit = this.modalTarget;
           wea.componentInstance.formBiographyImg.setValue({
             id: this.perfilData.id,
-            img: '',
+            img: ''
           });
         }
         break;
@@ -103,7 +102,7 @@ export class ButtonEditComponent implements OnInit {
           centered: true
         });
         wea2.componentInstance.titleModal = 'Editar Habilidad';
-        if (this.type === '1'){
+        if (this.type === '1') {
           wea2.componentInstance.skill = this.skillData;
           wea2.componentInstance.formSkill.setValue({
             id: this.skillData.id,
@@ -112,9 +111,16 @@ export class ButtonEditComponent implements OnInit {
             tipo_habilidad_id: this.skillData.tipo_habilidad_id,
             usuarios_id: this.skillData.usuarios_id
           });
-        }
-        else {
-          console.log("no existe foto para editar");
+        } else {
+          // console.log("no existe foto para editar");
+          this.toastr.error(
+            'La seccion Habilidades no posee imagen que editar',
+            'Error!',
+            {
+              timeOut: 3000,
+              positionClass: 'toast-bottom-right'
+            }
+          );
         }
         break;
       case 'project':
@@ -123,7 +129,7 @@ export class ButtonEditComponent implements OnInit {
           centered: true
         });
         wea3.componentInstance.titleModal = 'Editar Proyecto';
-        if (this.type === '1'){
+        if (this.type === '1') {
           wea3.componentInstance.project = this.projectData;
           wea3.componentInstance.formProject.setValue({
             id: this.projectData.id,
@@ -135,15 +141,14 @@ export class ButtonEditComponent implements OnInit {
             enlace: this.projectData.enlace,
             usuarios_id: this.projectData.usuarios_id
           });
-        }
-        else {
-          console.log("boton editar proyecto: (folo/logo)");
-          console.log(this.projectData);
+        } else {
+          // console.log("boton editar proyecto: (folo/logo)");
+          // console.log(this.projectData);
           wea3.componentInstance.id = this.projectData.id;
           wea3.componentInstance.whatEdit = this.modalTarget;
           wea3.componentInstance.formBiographyImg.setValue({
             id: this.projectData.id,
-            img: '',
+            img: ''
           });
         }
         break;
@@ -152,16 +157,16 @@ export class ButtonEditComponent implements OnInit {
           backdrop: 'static',
           centered: true
         });
-        
+
         wea4.componentInstance.titleModal = 'Editar Educación';
-        if (this.type === '1'){
+        if (this.type === '1') {
           // console.log("boton editar educacion: (datos-object)");
           // console.log(this.academData);
           let armoCadena: string = this.academData.habilidades.toString();
           // this.academData.habilidades.forEach((element: any) => {
           //   armoCadena += element;
           // });
-          console.log("armoCadena: " + armoCadena);
+          // console.log("armoCadena: " + armoCadena);
           wea4.componentInstance.academ = this.academData;
           wea4.componentInstance.formAcademic.setValue({
             id: this.academData.id,
@@ -173,15 +178,14 @@ export class ButtonEditComponent implements OnInit {
             hasta: this.academData.hasta,
             usuarios_id: this.academData.usuarios_id
           });
-        }
-        else {
-          console.log("boton editar educacion: (folo/logo)");
-          console.log(this.academData);
+        } else {
+          // console.log("boton editar educacion: (folo/logo)");
+          // console.log(this.academData);
           wea4.componentInstance.id = this.academData.id;
           wea4.componentInstance.whatEdit = this.modalTarget;
           wea4.componentInstance.formBiographyImg.setValue({
             id: this.academData.id,
-            img: '',
+            img: ''
           });
         }
         break;
@@ -191,7 +195,7 @@ export class ButtonEditComponent implements OnInit {
           centered: true
         });
         wea5.componentInstance.titleModal = 'Editar Experiencia Laboral';
-        if (this.type === '1'){
+        if (this.type === '1') {
           let armoCadena: string = this.expeData.tarea.toString();
           // console.log("boton editar experiencia (datos)");
           // console.log(this.expeData);
@@ -207,21 +211,28 @@ export class ButtonEditComponent implements OnInit {
             refnombre: this.expeData.refnombre,
             tarea: armoCadena
           });
-        }
-        else {
-          console.log("boton editar experiencia (folo/logo)");
-          console.log(this.expeData);
+        } else {
+          // console.log("boton editar experiencia (folo/logo)");
+          // console.log(this.expeData);
           wea5.componentInstance.id = this.expeData.id;
           wea5.componentInstance.whatEdit = this.modalTarget;
           wea5.componentInstance.formBiographyImg.setValue({
             id: this.expeData.id,
-            img: '',
+            img: ''
           });
         }
         break;
 
       default:
-        console.log('que forro que sos!');
+        // console.log('que forro que sos!');
+        this.toastr.warning(
+          'Opción no valida!',
+          'Atención!',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-bottom-right'
+          }
+        );
         break;
     }
   }

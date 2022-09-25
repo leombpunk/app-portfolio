@@ -125,6 +125,14 @@ export class RegistroComponent implements OnInit {
       // console.log("el formulario es invalido");
       // console.log(this.formRegistro.value);
       // console.log(this.formRegistro.errors);
+      this.toastr.warning(
+        'Revisa los campos.',
+        'Ateención!',
+        {
+          timeOut: 3000,
+          positionClass: 'toastr-bottom-right'
+        }
+      );
     }
   }
 }

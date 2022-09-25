@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 import { Login } from 'src/app/model/login';
@@ -11,15 +12,14 @@ import { Login } from 'src/app/model/login';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   formLogin: FormGroup;
-  mErrUser: string = "";
-  mErrPass: string = "";
-  mErrTokenService: string = "";
+  mErrUser: string = '';
+  mErrPass: string = '';
+  mErrTokenService: string = '';
 
   isLogged: boolean = false;
   isLogginFail: boolean = false;
-  login: Login = new Login("","");
+  login: Login = new Login('', '');
 
   roles: string[] = [];
 
@@ -27,17 +27,24 @@ export class LoginComponent implements OnInit {
     private form: FormBuilder,
     private tokenService: TokenService,
     private authService: AuthService,
-    private router: Router
-    ) {
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.formLogin = this.form.group({
-      usuario: ['',[Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-      contrasena: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(16)]]
+      usuario: [
+        '',
+        [Validators.required, Validators.minLength(4), Validators.maxLength(16)]
+      ],
+      contrasena: [
+        '',
+        [Validators.required, Validators.minLength(8), Validators.maxLength(16)]
+      ]
     });
   }
 
   ngOnInit(): void {
     //comprobar si se esta loggeado
-    if (this.tokenService.getToken()){
+    if (this.tokenService.getToken()) {
       this.isLogged = true;
       this.isLogginFail = false;
       this.roles = this.tokenService.getAuthorities();
@@ -45,41 +52,41 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  public get User(){
+  public get User() {
     return this.formLogin.get('usuario');
   }
-  public get Pass(){
+  public get Pass() {
     return this.formLogin.get('contrasena');
   }
 
-  public get UserValid(){
+  public get UserValid() {
     return this.User!.touched && !this.User!.valid;
   }
-  public get UserError(){
+  public get UserError() {
     if (this.User!.touched && this.User!.errors) {
-      if (this.User!.hasError('required')){
-        this.mErrUser = "El usuario es requerido";
+      if (this.User!.hasError('required')) {
+        this.mErrUser = 'El usuario es requerido';
         return true;
       }
-      if (this.User!.errors!['minlength'] || this.User!.errors!['maxlength']){
-        this.mErrUser = "El usuario debe contener entre 4 y 16 caracteres";
+      if (this.User!.errors!['minlength'] || this.User!.errors!['maxlength']) {
+        this.mErrUser = 'El usuario debe contener entre 4 y 16 caracteres';
         return true;
       }
     }
     return false;
   }
 
-  public get PassValid(){
+  public get PassValid() {
     return this.Pass!.touched && !this.Pass!.valid;
   }
-  public get PassError(){
+  public get PassError() {
     if (this.Pass!.touched && this.Pass!.errors) {
-      if (this.Pass!.hasError('required')){
-        this.mErrPass = "La contraseña es requerida";
+      if (this.Pass!.hasError('required')) {
+        this.mErrPass = 'La contraseña es requerida';
         return true;
       }
-      if (this.Pass!.errors!['minlength'] || this.Pass!.errors!['maxlength']){
-        this.mErrPass = "La contraseña debe contener entre 8 y 16 caracteres";
+      if (this.Pass!.errors!['minlength'] || this.Pass!.errors!['maxlength']) {
+        this.mErrPass = 'La contraseña debe contener entre 8 y 16 caracteres';
         return true;
       }
     }
@@ -87,14 +94,14 @@ export class LoginComponent implements OnInit {
   }
 
   //onLogin
-  onSubmit(event: Event){ 
+  onSubmit(event: Event) {
     event.preventDefault();
-    if (this.formLogin.valid){
+    if (this.formLogin.valid) {
       // console.log("el formulario es valido");
       // console.log(this.formLogin.value);
       //instancio el la clase login
       this.login = new Login(this.User!.value, this.Pass!.value);
-      console.log(this.login);
+      // console.log(this.login);
       //enviamos al authService
       this.authService.login(this.login).subscribe({
         next: (result: any) => {
@@ -108,6 +115,14 @@ export class LoginComponent implements OnInit {
           this.tokenService.setAuthorities(result.authorities);
           this.roles = result.authorities;
           // console.log(this.tokenService.getUserName());
+          this.toastr.success(
+            'Exito al iniciar sesión!',
+            'Bien!',
+            {
+              timeOut: 3000,
+              positionClass: 'toastr-bottom-right'
+            }
+          );
           //redireccionar a la home, en un futuro me gustaria redireccionar al perfil del usuario logeado
           this.router.navigate([`/home/${this.tokenService.getUserName()}`]);
         },
@@ -121,17 +136,32 @@ export class LoginComponent implements OnInit {
           //asumo que esto no funcionara porque no tengo la clase mensaje en el backend
           this.mErrTokenService = e.error.message;
           // console.log(this.mErrTokenService);
-        }, 
+          this.toastr.error(
+            'Error al iniciar sesión. ' + this.mErrTokenService,
+            'Error!',
+            {
+              timeOut: 3000,
+              positionClass: 'toastr-bottom-right'
+            }
+          );
+        },
         complete: () => {
-          console.log("complete");
+          // console.log('complete');
         }
       });
-    }
-    else {
+    } else {
       this.formLogin.markAllAsTouched();
       // console.log("el formulario es invalido");
       // console.log(this.formLogin.value);
       // console.log(this.formLogin.errors);
+      this.toastr.warning(
+        'Revise los campos.',
+        'Atención!',
+        {
+          timeOut: 3000,
+          positionClass: 'toastr-bottom-right'
+        }
+      );
     }
   }
 }

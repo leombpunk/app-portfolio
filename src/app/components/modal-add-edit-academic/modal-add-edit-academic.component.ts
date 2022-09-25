@@ -6,6 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AcademicService } from '../../services/academic.service';
 import { Academics } from 'src/app/model/academic';
 import { WalkietalkieService } from 'src/app/services/walkietalkie.service';
+// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-add-edit-academic',
@@ -27,11 +28,15 @@ export class ModalAddEditAcademicComponent implements OnInit {
   @Input() usuario_id: number = 0;
   @Input() academ: Academics = new Academics();
 
+  mensaje: string = "";
+
   constructor(
     private modalActive: NgbActiveModal, 
     private formBuilder: FormBuilder, 
     private service: AcademicService,
-    private comunicationService: WalkietalkieService) 
+    private comunicationService: WalkietalkieService,
+    // private toastr: ToastrService
+  ) 
   { 
     this.formAcademic = this.formBuilder.group({
       id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]], //, Validators.pattern(/^\d{1,10}$/g)
@@ -178,10 +183,27 @@ export class ModalAddEditAcademicComponent implements OnInit {
           next: (result: any) => {
             // console.log("result: ");
             // console.log(result);
+            // this.toastr.success(
+            //   'Formación Academica actualizada correctamente.',
+            //   'Bien!',
+            //   {
+            //     timeOut: 3000,
+            //     positionClass: 'toastr-bottom-right'
+            //   }
+            // );
           },
           error: (e: any) => {
             // console.log("error: ");
             // console.log(e);
+            // this.toastr.error(
+            //   'Error al intentar actualiazr su Formación Academica.',
+            //   'Error!',
+            //   {
+            //     timeOut: 3000,
+            //     positionClass: 'toastr-bottom-right'
+            //   }
+            // );
+            this.mensaje = "Error al actualizar. " + e;
           },
           complete: () => {
             this.comunicationService.actualizarAca(true);
@@ -197,10 +219,28 @@ export class ModalAddEditAcademicComponent implements OnInit {
           next: (result: any) => {
             // console.log("result: ");
             // console.log(result);
+            // this.toastr.success(
+            //   'Formación Academica agregada correctamente.',
+            //   'Bien!',
+            //   {
+            //     timeOut: 3000,
+            //     positionClass: 'toastr-bottom-right'
+            //   }
+            // );
+            this.mensaje = "";
           },
           error: (e: any) => {
             // console.log("error: ");
             // console.log(e);
+            // this.toastr.error(
+            //   'Error al intentar agregar su Formación Academica.',
+            //   'Error!',
+            //   {
+            //     timeOut: 3000,
+            //     positionClass: 'toastr-bottom-right'
+            //   }
+            // );
+            this.mensaje = "Error al intentar agregar. " + e;
           },
           complete: () => {
             this.comunicationService.actualizarAca(true);
@@ -214,6 +254,15 @@ export class ModalAddEditAcademicComponent implements OnInit {
       // console.log(this.formAcademic.value);
       // console.log("el formulario es invalido");
       // console.log(this.formAcademic.errors);
+      // this.toastr.warning(
+      //   'Revise los campos.',
+      //   'Atención!',
+      //   {
+      //     timeOut: 3000,
+      //     positionClass: 'toastr-bottom-right'
+      //   }
+      // );
+      this.mensaje = "Revise los campos.";
     }
   }
 

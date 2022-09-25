@@ -31,6 +31,7 @@ import { ModalAddEditSkillComponent } from './components/modal-add-edit-skill/mo
 import { ModalAddEditProjectComponent } from './components/modal-add-edit-project/modal-add-edit-project.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { AlertDangerComponent } from './components/alert-danger/alert-danger.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { RegistroComponent } from './components/registro/registro.component';
     ModalAddEditSkillComponent,
     ModalAddEditProjectComponent,
     HomeComponent,
-    RegistroComponent
+    RegistroComponent,
+    AlertDangerComponent
   ],
   imports: [
     CommonModule,

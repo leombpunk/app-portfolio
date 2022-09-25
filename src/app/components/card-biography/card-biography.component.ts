@@ -9,6 +9,7 @@ import { Biography } from '../../model/biography';
   styleUrls: ['./card-biography.component.css']
 })
 export class CardBiographyComponent implements OnInit {
+  
   faLinkedin = faLinkedin;
   faGithub = faGithub;
   faEnvelope = faEnvelope;

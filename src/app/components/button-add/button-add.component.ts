@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 import { ModalAddEditAcademicComponent } from '../modal-add-edit-academic/modal-add-edit-academic.component';
 import { ModalAddEditExperienceComponent } from '../modal-add-edit-experience/modal-add-edit-experience.component';
@@ -11,27 +11,31 @@ import { ModalAddEditSkillComponent } from '../modal-add-edit-skill/modal-add-ed
 //prueba de servicio para pasarlo al modal (usuario_id)
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 
+
 @Component({
   selector: 'app-button-add',
   templateUrl: './button-add.component.html',
   styleUrls: ['./button-add.component.css']
 })
 export class ButtonAddComponent implements OnInit {
+  
   faPlus = faPlus;
 
   @Input() modalTarget: string = '';
 
-  private usuario_id:number = 0;
+  private usuario_id: number = 0;
 
-  constructor(private modalService: NgbModal, private walkie: WalkietalkieService) { }
+  constructor(
+    private modalService: NgbModal,
+    private walkie: WalkietalkieService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.walkie.informarUsuId$.subscribe(
-      (result: any) => {
-        // console.log("result "+result);
-        this.usuario_id = result;
-      }
-    );
+    this.walkie.informarUsuId$.subscribe((result: any) => {
+      // console.log("result "+result);
+      this.usuario_id = result;
+    });
   }
 
   openModal() {
@@ -74,9 +78,12 @@ export class ButtonAddComponent implements OnInit {
         wea5.componentInstance.usuario_id = this.usuario_id;
         break;
       default:
-        console.log('que forro que sos');
+        // console.log('que forro que sos');
+        this.toastr.warning('Opción no valida!', 'Atención!', {
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
+        });
         break;
     }
   }
-
 }
