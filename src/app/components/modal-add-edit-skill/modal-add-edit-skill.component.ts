@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Skill } from 'src/app/mocks/skills';
+import { Skill } from 'src/app/model/skills';
 import { SkillService } from 'src/app/services/skill.service';
 import { WalkietalkieService } from 'src/app/services/walkietalkie.service';
 
@@ -53,15 +53,15 @@ export class ModalAddEditSkillComponent implements OnInit {
 
   //metodos
   public get DescripcionValid(){
-    return this.Descripcion?.touched && !this.Descripcion?.valid;
+    return this.Descripcion!.touched && !this.Descripcion!.valid;
   }
   public get DescripcionError(){
-    if (this.Descripcion?.errors && this.Descripcion?.touched){
-      if (this.Descripcion?.hasError('required')){
+    if (this.Descripcion!.errors && this.Descripcion!.touched){
+      if (this.Descripcion!.hasError('required')){
         this.mErrDescripcion = "La descripcion es requerida";
         return true;
       }
-      if (this.Descripcion?.errors?.['minlength'] || this.Descripcion?.errors?.['maxlength']){
+      if (this.Descripcion!.errors!['minlength'] || this.Descripcion!.errors!['maxlength']){
         this.mErrDescripcion = "La descripcion debe contener entre 2 a 50 caracteres";
         return true;
       }
@@ -69,15 +69,15 @@ export class ModalAddEditSkillComponent implements OnInit {
     return false;
   }
   public get NivelValid(){
-    return this.Nivel?.touched && !this.Nivel?.valid;
+    return this.Nivel!.touched && !this.Nivel!.valid;
   }
   public get NivelError(){
-    if (this.Nivel?.errors && this.Nivel?.touched){
-      if (this.Nivel?.hasError('required')){
+    if (this.Nivel!.errors && this.Nivel!.touched){
+      if (this.Nivel!.hasError('required')){
         this.mErrNivel = "El nivel es requerido";
         return true;
       }
-      if (this.Nivel?.errors?.['minlength'] || this.Nivel?.errors?.['maxlength']){
+      if (this.Nivel!.errors!['minlength'] || this.Nivel!.errors!['maxlength']){
         this.mErrNivel = "El nivel debe contener entre 1 a 2 caracteres";
         return true;
       }
@@ -85,15 +85,15 @@ export class ModalAddEditSkillComponent implements OnInit {
     return false;
   }
   public get TipoHabilidadIdValid(){
-    return this.TipoHabilidadId?.touched && !this.TipoHabilidadId?.valid;
+    return this.TipoHabilidadId!.touched && !this.TipoHabilidadId!.valid;
   }
   public get TipoHabilidadIdError(){
-    if (this.TipoHabilidadId?.errors && this.TipoHabilidadId?.touched){
-      if (this.TipoHabilidadId?.hasError('required')){
+    if (this.TipoHabilidadId!.errors && this.TipoHabilidadId!.touched){
+      if (this.TipoHabilidadId!.hasError('required')){
         this.mErrTipoHabilidad = "El tipo de habilidad es requerido";
         return true;
       }
-      if (this.TipoHabilidadId?.errors?.['minlength'] || this.TipoHabilidadId?.errors?.['maxlength']){
+      if (this.TipoHabilidadId!.errors!['minlength'] || this.TipoHabilidadId!.errors!['maxlength']){
         this.mErrTipoHabilidad = "El tipo de habilidad debe ser alguno de la lista dada";
         return true;
       }
@@ -104,19 +104,19 @@ export class ModalAddEditSkillComponent implements OnInit {
   onSubmit(event: Event){
     event.preventDefault();
     if (this.formSkill.valid){
-      console.log("el formulario es valido");
-      console.log(this.formSkill.value);
+      // console.log("el formulario es valido");
+      // console.log(this.formSkill.value);
       if (this.skill.descripcion !== ''){
         //editar habilidad
         let id: any = this.formSkill.get('id');
         this.service.putSkill(id.value, this.formSkill.value).subscribe({
           next: (result: any) => {
-            console.log("result");
-            console.log(result);
+            // console.log("result");
+            // console.log(result);
           }, 
           error: (e: any) => {
-            console.log("error");
-            console.log(e);
+            // console.log("error");
+            // console.log(e);
           }, 
           complete: () => {
             this.comunicationService.actualizarSkill(true);
@@ -131,12 +131,12 @@ export class ModalAddEditSkillComponent implements OnInit {
         });
         this.service.postSkill(this.formSkill.value).subscribe({
           next: (result: any) => {
-            console.log("result");
-            console.log(result);
+            // console.log("result");
+            // console.log(result);
           }, 
           error: (e: any) => {
-            console.log("error");
-            console.log(e);
+            // console.log("error");
+            // console.log(e);
           }, 
           complete: () => {
             this.comunicationService.actualizarSkill(true);
@@ -147,9 +147,9 @@ export class ModalAddEditSkillComponent implements OnInit {
     }
     else {
       this.formSkill.markAllAsTouched();
-      console.log("el formulario no es valido");
-      console.log(this.formSkill.value);
-      console.log(this.formSkill.errors);
+      // console.log("el formulario no es valido");
+      // console.log(this.formSkill.value);
+      // console.log(this.formSkill.errors);
     }
   }
 

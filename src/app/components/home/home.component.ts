@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
   }
 
   logOut() {
-    console.log('recibiendo el eventemiter');
+    // console.log('recibiendo el eventemiter');
     this.tokenService.logout();
     this.isLogged = false;
   }

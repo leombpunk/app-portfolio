@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { UsuarioNuevo } from 'src/app/mocks/usuario-nuevo';
+import { UsuarioNuevo } from 'src/app/model/usuario-nuevo';
 import { TokenService } from 'src/app/services/token.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -57,7 +57,7 @@ export class RegistroComponent implements OnInit {
         this.mErrUser = "El usuario es requerido";
         return true;
       }
-      if (this.User!.errors?.['minlength'] || this.User!.errors?.['maxlength']){
+      if (this.User!.errors!['minlength'] || this.User!.errors!['maxlength']){
         this.mErrUser = "El usuario debe contener entre 4 y 16 caracteres";
         return true;
       }
@@ -74,7 +74,7 @@ export class RegistroComponent implements OnInit {
         this.mErrPass = "La contraseña es requerida";
         return true;
       }
-      if (this.Pass!.errors?.['minlength'] || this.Pass!.errors?.['maxlength']){
+      if (this.Pass!.errors!['minlength'] || this.Pass!.errors!['maxlength']){
         this.mErrPass = "La contraseña debe contener entre 8 y 16 caracteres";
         return true;
       }
@@ -85,16 +85,16 @@ export class RegistroComponent implements OnInit {
   onSubmit(event: Event) {
     event.preventDefault();
     if (this.formRegistro.valid){
-      console.log("el formulario es valido");
-      console.log(this.formRegistro.value);
+      // console.log("el formulario es valido");
+      // console.log(this.formRegistro.value);
       //instancio el la clase login
       this.usuarioNuevo = new UsuarioNuevo(this.User!.value, this.Pass!.value);
-      console.log(this.usuarioNuevo);
+      // console.log(this.usuarioNuevo);
       //enviamos al authService
       this.authService.nuevoUsuario(this.usuarioNuevo).subscribe({
         next: (result: any) => {
-          console.log("result: ");
-          console.log(result);
+          // console.log("result: ");
+          // console.log(result);
           this.isRegistred = true;
           this.isRegistredFail = false;
           this.toastr.success('Cuenta Creada', 'Bien', {
@@ -103,8 +103,8 @@ export class RegistroComponent implements OnInit {
           this.router.navigate(['/login']);
         },
         error: (e: any) => {
-          console.log("error: ");
-          console.log(e);
+          // console.log("error: ");
+          // console.log(e);
 
           this.isRegistred = false;
           this.isRegistredFail = true;
@@ -116,15 +116,15 @@ export class RegistroComponent implements OnInit {
           });
         }, 
         complete: () => {
-          console.log("complete");
+          // console.log("complete");
         }
       });
     }
     else {
       this.formRegistro.markAllAsTouched();
-      console.log("el formulario es invalido");
-      console.log(this.formRegistro.value);
-      console.log(this.formRegistro.errors);
+      // console.log("el formulario es invalido");
+      // console.log(this.formRegistro.value);
+      // console.log(this.formRegistro.errors);
     }
   }
 }

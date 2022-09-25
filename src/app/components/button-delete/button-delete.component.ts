@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDeleteSomeComponent } from '../modal-delete-some/modal-delete-some.component';
-import { Biography1 } from '../../mocks/biography';
-import { Experience } from '../../mocks/experience';
-import { Academics } from '../../mocks/academic'; 
-import { Project } from 'src/app/mocks/projects';
-import { Skill } from 'src/app/mocks/skills';
+import { Biography } from '../../model/biography';
+import { Experience } from '../../model/experience';
+import { Academics } from '../../model/academic'; 
+import { Project } from 'src/app/model/projects';
+import { Skill } from 'src/app/model/skills';
 
 @Component({
   selector: 'app-button-delete',
@@ -18,7 +18,7 @@ export class ButtonDeleteComponent implements OnInit {
 
   @Input() modalTarget: string = '';
   @Input() type: string = "";
-  @Input() bioData: Biography1 = new Biography1();
+  @Input() bioData: Biography = new Biography();
   @Input() expeData: Experience = new Experience();
   @Input() academData: Academics = new Academics();
   @Input() projectData: Project = new Project();

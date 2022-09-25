@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
-import { Login } from 'src/app/mocks/login';
+import { Login } from 'src/app/model/login';
 
 @Component({
   selector: 'app-login',
@@ -56,12 +56,12 @@ export class LoginComponent implements OnInit {
     return this.User!.touched && !this.User!.valid;
   }
   public get UserError(){
-    if (this.User?.touched && this.User?.errors) {
-      if (this.User?.hasError('required')){
+    if (this.User!.touched && this.User!.errors) {
+      if (this.User!.hasError('required')){
         this.mErrUser = "El usuario es requerido";
         return true;
       }
-      if (this.User?.errors?.['minlength'] || this.User?.errors?.['maxlength']){
+      if (this.User!.errors!['minlength'] || this.User!.errors!['maxlength']){
         this.mErrUser = "El usuario debe contener entre 4 y 16 caracteres";
         return true;
       }
@@ -70,15 +70,15 @@ export class LoginComponent implements OnInit {
   }
 
   public get PassValid(){
-    return this.Pass?.touched && !this.Pass?.valid;
+    return this.Pass!.touched && !this.Pass!.valid;
   }
   public get PassError(){
-    if (this.Pass?.touched && this.Pass?.errors) {
-      if (this.Pass?.hasError('required')){
+    if (this.Pass!.touched && this.Pass!.errors) {
+      if (this.Pass!.hasError('required')){
         this.mErrPass = "La contraseña es requerida";
         return true;
       }
-      if (this.Pass?.errors?.['minlength'] || this.Pass?.errors?.['maxlength']){
+      if (this.Pass!.errors!['minlength'] || this.Pass!.errors!['maxlength']){
         this.mErrPass = "La contraseña debe contener entre 8 y 16 caracteres";
         return true;
       }
@@ -90,16 +90,16 @@ export class LoginComponent implements OnInit {
   onSubmit(event: Event){ 
     event.preventDefault();
     if (this.formLogin.valid){
-      console.log("el formulario es valido");
-      console.log(this.formLogin.value);
+      // console.log("el formulario es valido");
+      // console.log(this.formLogin.value);
       //instancio el la clase login
       this.login = new Login(this.User!.value, this.Pass!.value);
       console.log(this.login);
       //enviamos al authService
       this.authService.login(this.login).subscribe({
         next: (result: any) => {
-          console.log("result: ");
-          console.log(result);
+          // console.log("result: ");
+          // console.log(result);
           this.isLogged = true;
           this.isLogginFail = false;
 
@@ -112,15 +112,15 @@ export class LoginComponent implements OnInit {
           this.router.navigate([`/home/${this.tokenService.getUserName()}`]);
         },
         error: (e: any) => {
-          console.log("error: ");
-          console.log(e);
+          // console.log("error: ");
+          // console.log(e);
 
           this.isLogged = false;
           this.isLogginFail = true;
 
           //asumo que esto no funcionara porque no tengo la clase mensaje en el backend
           this.mErrTokenService = e.error.message;
-          console.log(this.mErrTokenService);
+          // console.log(this.mErrTokenService);
         }, 
         complete: () => {
           console.log("complete");
@@ -129,9 +129,9 @@ export class LoginComponent implements OnInit {
     }
     else {
       this.formLogin.markAllAsTouched();
-      console.log("el formulario es invalido");
-      console.log(this.formLogin.value);
-      console.log(this.formLogin.errors);
+      // console.log("el formulario es invalido");
+      // console.log(this.formLogin.value);
+      // console.log(this.formLogin.errors);
     }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Experience } from '../../mocks/experience';
-import { Academics } from '../../mocks/academic';
+import { Experience } from '../../model/experience';
+import { Academics } from '../../model/academic';
 
 @Component({
   selector: 'app-card-default',
@@ -15,6 +15,7 @@ export class CardDefaultComponent implements OnInit {
   @Input() apuntar: string = "";
   @Input() type1: string = "1";
   @Input() type2: string = "2";
+  
   // atributos en comun
   @Input() titleCard: string = "";
   @Input() descripcionCard: string = "";
@@ -32,13 +33,5 @@ export class CardDefaultComponent implements OnInit {
   @Input() isLogged: boolean = false;
 
   constructor() { }
-
-  ngOnInit(): void {
-    // console.log("apuntar:"+this.apuntar);
-    // console.log("dataEnter: ");
-    // console.log(this.dataEnter);
-    // console.log("dataEnter2: ");
-    // console.log(this.dataEnter2);
-  }
-
+  ngOnInit(): void { }
 }

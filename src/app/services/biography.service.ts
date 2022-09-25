@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Biography } from '../mocks/biography';
-import { Biography1 } from '../mocks/prueba';
+import { Biography } from '../model/biography';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,26 +19,26 @@ export class BiographyService {
 
   //get
   //este get debe recibir un parametro 'nombre de usuario'
-  public getBiography(): Observable<Biography1> {
-    return this.http.get<Biography1>(this.apiUrl + '/buscar/1');
+  public getBiography(): Observable<Biography> {
+    return this.http.get<Biography>(this.apiUrl + '/buscar/1');
   }
   //get que trae los datos de perfil segun el nombre de usuario
-  public getPerfilByUsuario(usuario: any): Observable<Biography1> {
-    return this.http.get<Biography1>(this.apiUrl + `/buscarByUsuario/${usuario.toString()}`);
+  public getPerfilByUsuario(usuario: any): Observable<Biography> {
+    return this.http.get<Biography>(this.apiUrl + `/buscarByUsuario/${usuario.toString()}`);
   }
 
   //delete
-  public deleteBiography(id: any): Observable<Biography1> {
-    return this.http.delete<Biography1>(
+  public deleteBiography(id: any): Observable<Biography> {
+    return this.http.delete<Biography>(
       this.apiUrl + `/borrar/${id}`,
       httpOptions
     );
   }
 
   //put
-  public putBiography(id: any, data: any): Observable<Biography1> {
+  public putBiography(id: any, data: any): Observable<Biography> {
     // console.log('desde servicio<put>: ' + data.id + ' ' + data.nombre);
-    return this.http.put<Biography1>(
+    return this.http.put<Biography>(
       this.apiUrl + `/editar/${id}`,
       {},
       {

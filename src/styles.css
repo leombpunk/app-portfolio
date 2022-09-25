@@ -9,9 +9,9 @@ body {
     background-attachment: fixed;
     background-image: linear-gradient(
       to right bottom,
-      #0d1d3a,
-      #1a2f55 52%,
-      #365a83
+      #091731,
+      #1d3561 52%,
+      #3368a5
     );
   }
   .container-fluid {

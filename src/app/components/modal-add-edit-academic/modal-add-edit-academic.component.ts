@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AcademicService } from '../../services/academic.service';
-import { Academics } from 'src/app/mocks/academic';
+import { Academics } from 'src/app/model/academic';
 import { WalkietalkieService } from 'src/app/services/walkietalkie.service';
 
 @Component({
@@ -71,18 +71,15 @@ export class ModalAddEditAcademicComponent implements OnInit {
   }
   //metodos
   public get TituloValid(){
-    return this.Titulo?.touched && !this.Titulo?.valid;
+    return this.Titulo!.touched && !this.Titulo!.valid;
   }
   public get TituloError() {
-    // console.log("propiedad");
-    if (this.Titulo?.errors && this.Titulo?.touched) {
-      // console.log("primer if");
-      if(this.Titulo?.hasError('required')){
-        // console.log("segundo if");
+    if (this.Titulo!.errors && this.Titulo!.touched) {
+      if(this.Titulo!.hasError('required')){
         this.mErrTitulo = "El titulo es requerido";
         return true;
       }
-      if(this.Titulo?.errors?.['minlength'] || this.Titulo?.errors?.['maxlength']){
+      if(this.Titulo!.errors!['minlength'] || this.Titulo!.errors!['maxlength']){
         this.mErrTitulo = "El titulo debe contener de 3 a 50 carateres";
         return true;
       }
@@ -91,15 +88,15 @@ export class ModalAddEditAcademicComponent implements OnInit {
   }
 
   public get InstitucionValid(){
-    return this.Institucion?.touched && !this.Institucion?.valid;
+    return this.Institucion!.touched && !this.Institucion!.valid;
   }
   public get InstitucionError(){
-    if (this.Institucion?.errors && this.Institucion?.touched){
-      if(this.Institucion?.hasError('required')){
+    if (this.Institucion!.errors && this.Institucion!.touched){
+      if(this.Institucion!.hasError('required')){
         this.mErrInstituto = "El campo Institucion es requerido";
         return true;
       }
-      if(this.Institucion?.errors?.['minlength'] || this.Institucion?.errors?.['maxlength']){
+      if(this.Institucion!.errors!['minlength'] || this.Institucion!.errors!['maxlength']){
         this.mErrInstituto = "La Institucion debe contener de 3 a 50 carateres";
         return true;
       }
@@ -108,15 +105,15 @@ export class ModalAddEditAcademicComponent implements OnInit {
   }
 
   public get LocacionValid(){
-    return this.Locacion?.touched && !this.Locacion?.valid;
+    return this.Locacion!.touched && !this.Locacion!.valid;
   }
   public get LocacionError(){
-    if (this.Locacion?.errors && this.Locacion?.touched){
-      if(this.Locacion?.hasError('required')){
+    if (this.Locacion!.errors && this.Locacion!.touched){
+      if(this.Locacion!.hasError('required')){
         this.mErrLocacion = "El campo Locacion es requerido";
         return true;
       }
-      if(this.Locacion?.errors?.['minlength'] || this.Locacion?.errors?.['maxlength']){
+      if(this.Locacion!.errors!['minlength'] || this.Locacion!.errors!['maxlength']){
         this.mErrLocacion = "La Locacion debe contener de 3 a 50 carateres";
         return true;
       }
@@ -125,15 +122,15 @@ export class ModalAddEditAcademicComponent implements OnInit {
   }
 
   public get HabilidadesValid(){
-    return this.Habilidades?.touched && !this.Habilidades?.valid;
+    return this.Habilidades!.touched && !this.Habilidades!.valid;
   }
   public get HabilidadesError(){
-    if (this.Habilidades?.errors && this.Habilidades?.touched){
-      if (this.Habilidades?.hasError('required')){
+    if (this.Habilidades!.errors && this.Habilidades!.touched){
+      if (this.Habilidades!.hasError('required')){
         this.mErrHabilidades = "El campo Habilidades es requerido";
         return true;
       }
-      if(this.Habilidades?.errors?.['minlength'] || this.Habilidades?.errors?.['maxlength']){
+      if(this.Habilidades!.errors!['minlength'] || this.Habilidades!.errors!['maxlength']){
         this.mErrHabilidades = "El campo Habilidades debe contener de 5 a 500 carateres";
         return true;
       }
@@ -142,11 +139,11 @@ export class ModalAddEditAcademicComponent implements OnInit {
   }
 
   public get DesdeValid(){
-    return this.Desde?.touched && !this.Desde?.valid;
+    return this.Desde!.touched && !this.Desde!.valid;
   }
   public get DesdeError(){
-    if (this.Desde?.errors && this.Desde?.touched){
-      if(this.Desde?.hasError('required')){
+    if (this.Desde!.errors && this.Desde!.touched){
+      if(this.Desde!.hasError('required')){
         this.mErrDesde = "El campo Desde es requerido";
         return true;
       }
@@ -155,11 +152,11 @@ export class ModalAddEditAcademicComponent implements OnInit {
   }
 
   public get HastaValid(){
-    return this.Hasta?.touched && !this.Hasta?.valid;
+    return this.Hasta!.touched && !this.Hasta!.valid;
   }
   public get HastaError(){
-    if (this.Hasta?.errors && this.Hasta?.touched){
-      if(this.Hasta?.hasError('required')){
+    if (this.Hasta!.errors && this.Hasta!.touched){
+      if(this.Hasta!.hasError('required')){
         this.mErrHasta = "El campo Hasta es requerido";
         return true;
       }
@@ -172,19 +169,19 @@ export class ModalAddEditAcademicComponent implements OnInit {
     // console.log(this.Habilidades);
     if(this.formAcademic.valid){
       // console.log("form: ");
-      console.log(this.formAcademic.value);
-      console.log("el fomrulario es valido");
+      // console.log(this.formAcademic.value);
+      // console.log("el fomrulario es valido");
       if (this.academ.titulo !== ''){
         //entra cuando edito el registro
         let id: any = this.formAcademic.get('id');
         this.service.putAcademics(id.value, this.formAcademic.value).subscribe({
           next: (result: any) => {
-            console.log("result: ");
-            console.log(result);
+            // console.log("result: ");
+            // console.log(result);
           },
           error: (e: any) => {
-            console.log("error: ");
-            console.log(e);
+            // console.log("error: ");
+            // console.log(e);
           },
           complete: () => {
             this.comunicationService.actualizarAca(true);
@@ -198,12 +195,12 @@ export class ModalAddEditAcademicComponent implements OnInit {
         });
         this.service.postAcademics(this.formAcademic.value).subscribe({
           next: (result: any) => {
-            console.log("result: ");
-            console.log(result);
+            // console.log("result: ");
+            // console.log(result);
           },
           error: (e: any) => {
-            console.log("error: ");
-            console.log(e);
+            // console.log("error: ");
+            // console.log(e);
           },
           complete: () => {
             this.comunicationService.actualizarAca(true);
@@ -214,9 +211,9 @@ export class ModalAddEditAcademicComponent implements OnInit {
     }
     else {
       this.formAcademic.markAllAsTouched();
-      console.log(this.formAcademic.value);
-      console.log("el formulario es invalido");
-      console.log(this.formAcademic.errors);
+      // console.log(this.formAcademic.value);
+      // console.log("el formulario es invalido");
+      // console.log(this.formAcademic.errors);
     }
   }
 

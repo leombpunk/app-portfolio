@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faBook, faGlobe } from '@fortawesome/free-solid-svg-icons';
-import { Project } from '../../mocks/projects';
+import { Project } from '../../model/projects';
 @Component({
   selector: 'app-card-projects',
   templateUrl: './card-projects.component.html',
@@ -23,9 +23,5 @@ export class CardProjectsComponent implements OnInit {
   @Input() isLogged: boolean = false;
   
   constructor() { }
-
-  ngOnInit(): void {
-
-  }
-
+  ngOnInit(): void { }
 }

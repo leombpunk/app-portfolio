@@ -44,21 +44,21 @@ export class ModalEditImageComponent implements OnInit {
     return this.formBiographyImg.get("img");
   }
   public get ImageValid(){
-    return this.Image?.touched && !this.Image?.valid;
+    return this.Image!.touched && !this.Image!.valid;
   }
   public get ImageError(){
     // let id = this.formBiographyImg.get("id");
     // let img = this.Image ? this.Image.value : '';
     // console.log(this.Image);
-    // if (this.Image?.value === '' && this.Image?.touched){
+    // if (this.Image!.value === '' && this.Image!.touched){
     //   this.mErrImage = "La imagen es requerida (. )( .)";
     //   return true;
     // }
     if (this.imgBandera){
       return true;
     }
-    if (this.Image?.touched) {
-      if(this.Image?.hasError('required')){
+    if (this.Image!.touched) {
+      if(this.Image!.hasError('required')){
         this.mErrImage = "La imagen es requerida";
         return true;
       }
@@ -76,12 +76,12 @@ export class ModalEditImageComponent implements OnInit {
       if (imgFile.type !== "image/jpeg" && imgFile.type !== "image/png"){
         this.mErrImage = "El formato de imagen no es correcto";
         this.imgBandera = true;
-        this.Image?.setErrors({status: "INVALID"});
+        this.Image!.setErrors({status: "INVALID"});
       }
       if (imgFile.size >= 5000000){ // casi 5mb, esta expresado en bytes
         this.mErrImage = "El tamaño de la imagen es muy grande";
         this.imgBandera = true;
-        this.Image?.setErrors({status: "INVALID"});
+        this.Image!.setErrors({status: "INVALID"});
       }
       //si es el formato que espero recibir guardo el archivo en la variable
       if (imgFile.type === "image/jpeg" || imgFile.type === "image/png"){
@@ -92,7 +92,7 @@ export class ModalEditImageComponent implements OnInit {
     else {
       this.imgBandera = false;
     }
-    console.log(this.filecito);
+    // console.log(this.filecito);
   }
 
   onSubmit(event: Event){
@@ -105,12 +105,12 @@ export class ModalEditImageComponent implements OnInit {
         // console.log(this.filecito);
         this.serviceBio.setBioImage(this.id, formData).subscribe({
           next: (result: any) => {
-            console.log("response: ");
-            console.log(result);
+            // console.log("response: ");
+            // console.log(result);
           },
           error: (e: any) => {
-            console.log("errorcito");
-            console.log(e);
+            // console.log("errorcito");
+            // console.log(e);
           },
           complete: () => {
             this.comunicationService.actualizarBio(true);
@@ -121,16 +121,16 @@ export class ModalEditImageComponent implements OnInit {
       if (this.whatEdit === "experience"){
         const formData: FormData = new FormData();
         formData.append('img', this.filecito);
-        console.log("id (expe): " + this.id);
-        console.log(this.filecito);
+        // console.log("id (expe): " + this.id);
+        // console.log(this.filecito);
         this.serviceExpe.setExpeImage(this.id, formData).subscribe({
           next: (result: any) => {
-            console.log("response: ");
-            console.log(result);
+            // console.log("response: ");
+            // console.log(result);
           },
           error: (e: any) => {
-            console.log("errorcito");
-            console.log(e);
+            // console.log("errorcito");
+            // console.log(e);
           },
           complete: () => {
             this.comunicationService.actualizarExpe(true);
@@ -141,16 +141,16 @@ export class ModalEditImageComponent implements OnInit {
       if (this.whatEdit === "academic"){
         const formData: FormData = new FormData();
         formData.append('img', this.filecito);
-        console.log("id (expe): " + this.id);
-        console.log(this.filecito);
+        // console.log("id (expe): " + this.id);
+        // console.log(this.filecito);
         this.serviceAca.setAcademImage(this.id, formData).subscribe({
           next: (result: any) => {
-            console.log("response: ");
-            console.log(result);
+            // console.log("response: ");
+            // console.log(result);
           },
           error: (e: any) => {
-            console.log("errorcito");
-            console.log(e);
+            // console.log("errorcito");
+            // console.log(e);
           },
           complete: () => {
             this.comunicationService.actualizarAca(true);
@@ -159,21 +159,21 @@ export class ModalEditImageComponent implements OnInit {
         });
       }
       if (this.whatEdit === "skill"){
-        console.log("no hay imagen");
+        // console.log("no hay imagen");
       }
       if (this.whatEdit === "project"){
         const formData: FormData = new FormData();
         formData.append('img', this.filecito);
-        console.log("id (expe): " + this.id);
-        console.log(this.filecito);
+        // console.log("id (expe): " + this.id);
+        // console.log(this.filecito);
         this.servicePro.setProjectImage(this.id, formData).subscribe({
           next: (result: any) => {
-            console.log("response: ");
-            console.log(result);
+            // console.log("response: ");
+            // console.log(result);
           },
           error: (e: any) => {
-            console.log("errorcito");
-            console.log(e);
+            // console.log("errorcito");
+            // console.log(e);
           },
           complete: () => {
             this.comunicationService.actualizarProj(true);
@@ -181,12 +181,12 @@ export class ModalEditImageComponent implements OnInit {
           }
         });
       }
-      console.log("el fomrulario es valido");
+      // console.log("el fomrulario es valido");
     }
     else {
       this.formBiographyImg.markAllAsTouched();
-      console.log(this.formBiographyImg.value);
-      console.log("el formulario es invalido");
+      // console.log(this.formBiographyImg.value);
+      // console.log("el formulario es invalido");
     }
   }
 

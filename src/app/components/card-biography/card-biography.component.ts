@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { Biography, Biography1 } from '../../mocks/biography';
+import { Biography } from '../../model/biography';
 
 @Component({
   selector: 'app-card-biography',
@@ -24,7 +24,7 @@ export class CardBiographyComponent implements OnInit {
   @Input() email: string = "";
 
   //variable que pasa los datos del perfil al boton para cargar el modal correspodiente
-  @Input() pasero: Biography1 = new Biography1();
+  @Input() pasero: Biography = new Biography();
   @Input() isLogged: boolean = false;
 
   constructor() { }

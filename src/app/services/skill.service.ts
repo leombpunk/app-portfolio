@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Skill } from '../mocks/skills';
+import { Skill } from '../model/skills';
 import { Observable } from 'rxjs';
 
 const httpOptions = {

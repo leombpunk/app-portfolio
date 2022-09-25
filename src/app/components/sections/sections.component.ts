@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Biography1 } from '../../mocks/biography';
-import { Academics } from '../../mocks/academic';
-import { Experience } from '../../mocks/experience';
-import { Project } from '../../mocks/projects';
-import { Skill } from '../../mocks/skills';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Biography } from '../../model/biography';
+import { Academics } from '../../model/academic';
+import { Experience } from '../../model/experience';
+import { Project } from '../../model/projects';
+import { Skill } from '../../model/skills';
 import { BiographyService } from 'src/app/services/biography.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { AcademicService } from '../../services/academic.service';
@@ -20,48 +20,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./sections.component.css']
 })
 export class SectionsComponent implements OnInit {
-  private urlImageApi: string = 'http://localhost:8080/images/';
 
-  // skills: Skills[] = SKILLS;
+  private urlImageApi: string = 'http://localhost:8080/images/';
 
   @Input() isLogged: boolean = false;
   @Input() rutaUsuario: string = '';
 
-  bio: Biography1 = new Biography1();
-
-  expe: Experience[] = [
-    {
-      id: 0,
-      cargo: '',
-      tarea: [],
-      desde: '',
-      hasta: '',
-      logo: '',
-      empresa: '',
-      reftelef: '',
-      refnombre: '',
-      usuarios_id: 0
-    }
-  ];
-
-  academ: Academics[] = [
-    {
-      id: 0,
-      usuarios_id: 0,
-      institucion: '',
-      titulo: '',
-      locacion: '',
-      habilidades: [],
-      desde: '',
-      hasta: '',
-      logo: '',
-      usuario_id: 0
-    }
-  ];
-
-  // testeando
+  bio: Biography = new Biography();
+  expe: Experience[] = new Array<Experience>();
+  academ: Academics[] = new Array<Academics>();
   projects: Project[] = new Array<Project>();
-
   skills: Skill[] = new Array<Skill>();
 
   constructor(
@@ -108,13 +76,11 @@ export class SectionsComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log("ruta: "+this.rutaUsuario);
-
     /*codigo nuevo*/
     this.authService.buscarUsuario(this.rutaUsuario).subscribe({
       next: (result: any) => {
-        console.log('result: (buscarUsuario)');
-        console.log(result);
-
+        // console.log('result: (buscarUsuario)');
+        // console.log(result);
         this.LoadData();
         this.LoadDataExperience();
         this.LoadDataAcademic();
@@ -122,8 +88,8 @@ export class SectionsComponent implements OnInit {
         this.LoadDataSkill();
       },
       error: (err: any) => {
-        console.log('error: ');
-        console.log(err);
+        // console.log('error: ');
+        // console.log(err);
         this.toastr.error('Usuario vacio', 'Error', {
           timeOut: 3000,
           positionClass: 'toast-center-center'
@@ -131,7 +97,7 @@ export class SectionsComponent implements OnInit {
         this.router.navigate([`/login`]);
       },
       complete: () => {
-        console.log('complete');
+        // console.log('complete');
       }
     });
 
@@ -159,6 +125,8 @@ export class SectionsComponent implements OnInit {
         this.comunicationService.setUsuarioId(this.bio.usuarios_id);
         // console.log("bio (desde sections LoadData): ");
         // console.log(bio);
+        // this.onInit.emit(this.bio.nombre+" "+this.bio.apellido);
+        this.comunicationService.nombrePerfil(this.bio.nombre+" "+this.bio.apellido);
       });
   }
 

@@ -42,20 +42,20 @@ export class ModalDeleteSomeComponent implements OnInit {
         if (this.idTarget === '1') {
           //llamar al servicio para borrar el contenido especificado
           //en biografia no se borran los datos solo se actualizan
-          console.log('en biografia no se borran los datos solo se actualizan');
+          // console.log('en biografia no se borran los datos solo se actualizan');
         }
         if (this.idTarget === '2') {
           //llamar al servicio para borrar el contenido especificado
           this.bioService.deleteBioImage(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
-              console.log('response: ');
-              console.log(response);
+              // console.log('response: ');
+              // console.log(response);
             },
             error: (e: any) => {
-              console.log('errorcito');
-              console.log(e);
-              console.log(e.ok);
+              // console.log('errorcito');
+              // console.log(e);
+              // console.log(e.ok);
             },
             complete: () => {
               this.comunicationService.actualizarBio(true);
@@ -70,12 +70,12 @@ export class ModalDeleteSomeComponent implements OnInit {
           this.acaService.deleteAcademic(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
-              console.log('response (educacion): ');
-              console.log(response);
+              // console.log('response (educacion): ');
+              // console.log(response);
             },
             error: (e: any) => {
-              console.log('errorcito (educacion)');
-              console.log(e);
+              // console.log('errorcito (educacion)');
+              // console.log(e);
             },
             complete: () => {
               this.comunicationService.actualizarAca(true);
@@ -88,13 +88,13 @@ export class ModalDeleteSomeComponent implements OnInit {
           this.acaService.deleteAcademImage(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
-              console.log('response (educacion imagen): ');
-              console.log(response);
+              // console.log('response (educacion imagen): ');
+              // console.log(response);
             },
             error: (e: any) => {
-              console.log('errorcito (educacion)');
-              console.log(e);
-              console.log(e.ok);
+              // console.log('errorcito (educacion)');
+              // console.log(e);
+              // console.log(e.ok);
             },
             complete: () => {
               this.comunicationService.actualizarAca(true);
@@ -104,19 +104,19 @@ export class ModalDeleteSomeComponent implements OnInit {
         }
         break;
       case 'skill':
-        console.log("idTarget: "+this.idTarget);
+        // console.log("idTarget: "+this.idTarget);
         if (this.idTarget === '1'){
           //borrar datos
           this.skillService.deleteSkill(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
-              console.log('response (experiencia): ');
-              console.log(response);
+              // console.log('response (experiencia): ');
+              // console.log(response);
             },
             error: (e: any) => {
-              console.log('errorcito (experiencia)');
-              console.log(e);
-              console.log(e.ok);
+              // console.log('errorcito (experiencia)');
+              // console.log(e);
+              // console.log(e.ok);
             },
             complete: () => {
               this.comunicationService.actualizarSkill(true);
@@ -125,23 +125,23 @@ export class ModalDeleteSomeComponent implements OnInit {
           })
         }
         if (this.idTarget === '2'){
-          console.log("no hay imagen para borrar");
+          // console.log("no hay imagen para borrar");
         }
         break;
       case 'experience':
-        console.log("idTarget: "+this.idTarget);
+        // console.log("idTarget: "+this.idTarget);
         if (this.idTarget === '1'){
           //borrar datos
           this.expeService.deleteExperience(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
-              console.log('response (experiencia): ');
-              console.log(response);
+              // console.log('response (experiencia): ');
+              // console.log(response);
             },
             error: (e: any) => {
-              console.log('errorcito (experiencia)');
-              console.log(e);
-              console.log(e.ok);
+              // console.log('errorcito (experiencia)');
+              // console.log(e);
+              // console.log(e.ok);
             },
             complete: () => {
               this.comunicationService.actualizarExpe(true);
@@ -154,13 +154,13 @@ export class ModalDeleteSomeComponent implements OnInit {
           this.expeService.deleteExpeImage(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
-              console.log('response (experiencia imagen): ');
-              console.log(response);
+              // console.log('response (experiencia imagen): ');
+              // console.log(response);
             },
             error: (e: any) => {
-              console.log('errorcito (experiencia)');
-              console.log(e);
-              console.log(e.ok);
+              // console.log('errorcito (experiencia)');
+              // console.log(e);
+              // console.log(e.ok);
             },
             complete: () => {
               this.comunicationService.actualizarExpe(true);
@@ -175,13 +175,13 @@ export class ModalDeleteSomeComponent implements OnInit {
           this.proService.deleteProject(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
-              console.log('response (proyecto): ');
-              console.log(response);
+              // console.log('response (proyecto): ');
+              // console.log(response);
             },
             error: (e: any) => {
-              console.log('errorcito (proyecto)');
-              console.log(e);
-              console.log(e.ok);
+              // console.log('errorcito (proyecto)');
+              // console.log(e);
+              // console.log(e.ok);
             },
             complete: () => {
               this.comunicationService.actualizarProj(true);
@@ -194,13 +194,13 @@ export class ModalDeleteSomeComponent implements OnInit {
           this.proService.deleteProjectImage(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
-              console.log('response (proyecto imagen): ');
-              console.log(response);
+              // console.log('response (proyecto imagen): ');
+              // console.log(response);
             },
             error: (e: any) => {
-              console.log('errorcito (proyecto)');
-              console.log(e);
-              console.log(e.ok);
+              // console.log('errorcito (proyecto)');
+              // console.log(e);
+              // console.log(e.ok);
             },
             complete: () => {
               this.comunicationService.actualizarProj(true);
@@ -210,7 +210,7 @@ export class ModalDeleteSomeComponent implements OnInit {
         }
         break;
       default:
-        console.log('forro');
+        // console.log('forro');
         break;
     }
   }

@@ -27,6 +27,10 @@ export class WalkietalkieService {
   private informarSkill: Subject<boolean> = new Subject();
   private booleanSkill: boolean = false;
 
+  //nuevo comunica el nombre
+  private informarNombre: Subject<string> = new Subject();
+  private nombre: string = '';
+
   constructor() { }
 
   //aca es donde escucha? (donde hace es subscribe)
@@ -37,6 +41,9 @@ export class WalkietalkieService {
   informarSkill$ = this.informarSkill.asObservable();
 
   informarUsuId$ = this.informarUsuId.asObservable();
+
+  //nuevo
+  informarNombre$ = this.informarNombre.asObservable();
 
   //comandos del servicio
   setUsuarioId(value: number){
@@ -90,5 +97,11 @@ export class WalkietalkieService {
   actualiceSkill(value: boolean){
     console.log("actualiceSkill: "+value);
     this.informarSkill.next(value);
+  }
+
+  //nuevo
+  nombrePerfil(value: string){
+    this.nombre = value;
+    this.informarNombre.next(this.nombre);
   }
 }

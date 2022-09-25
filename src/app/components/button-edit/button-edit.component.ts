@@ -7,11 +7,11 @@ import { ModalAddEditExperienceComponent } from '../modal-add-edit-experience/mo
 import { ModalAddEditProjectComponent } from '../modal-add-edit-project/modal-add-edit-project.component';
 import { ModalAddEditSkillComponent } from '../modal-add-edit-skill/modal-add-edit-skill.component';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
-import { Biography1 } from '../../mocks/biography';
-import { Experience } from 'src/app/mocks/experience';
-import { Academics } from '../../mocks/academic';
-import { Project } from 'src/app/mocks/projects';
-import { Skill } from 'src/app/mocks/skills';
+import { Biography } from '../../model/biography';
+import { Experience } from 'src/app/model/experience';
+import { Academics } from '../../model/academic';
+import { Project } from 'src/app/model/projects';
+import { Skill } from 'src/app/model/skills';
 
 @Component({
   selector: 'app-button-edit',
@@ -26,9 +26,9 @@ export class ButtonEditComponent implements OnInit {
   @Input() type: string = '';
   @Input() perfil_id: number = 0;
 
-  //esta variable recibira un objeto de tipo Biography1 para
+  //esta variable recibira un objeto de tipo Biography para
   //cargar los datos que contiene en el modal de editar perfil/biografia
-  @Input() perfilData: Biography1 = new Biography1();
+  @Input() perfilData: Biography = new Biography();
   @Input() expeData: Experience = new Experience();
   @Input() academData: Academics = new Academics();
   @Input() projectData: Project = new Project();

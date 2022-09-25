@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Skill } from 'src/app/mocks/skills';
+import { Skill } from 'src/app/model/skills';
 
 @Component({
   selector: 'app-card-skills',
@@ -14,7 +14,5 @@ export class CardSkillsComponent implements OnInit {
   @Input() isLogged: boolean = false;
 
   constructor() { }
-
   ngOnInit(): void { }
-
 }
