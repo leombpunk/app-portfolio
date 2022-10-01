@@ -22,6 +22,8 @@ export class ModalDeleteSomeComponent implements OnInit {
 
   @Output() onDeleteSome: EventEmitter<string> = new EventEmitter(); //mandar el numero o el nombre para saber que seccion recargar
 
+  mensaje: string = "";
+
   constructor(
     private modalActive: NgbActiveModal,
     private bioService: BiographyService,

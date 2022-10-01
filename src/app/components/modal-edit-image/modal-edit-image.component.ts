@@ -23,6 +23,8 @@ export class ModalEditImageComponent implements OnInit {
   filecito:any;
   whatEdit: string = "";//para el switch, para saber que seccion va editar la foto/imagen/logo
 
+  mensaje: string = "";
+
   constructor(
     private modalActive: NgbActiveModal, 
     private form: FormBuilder, 
@@ -107,10 +109,12 @@ export class ModalEditImageComponent implements OnInit {
           next: (result: any) => {
             // console.log("response: ");
             // console.log(result);
+            this.mensaje = "";
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
+            this.mensaje = "Error al actualizar. " + e;
           },
           complete: () => {
             this.comunicationService.actualizarBio(true);

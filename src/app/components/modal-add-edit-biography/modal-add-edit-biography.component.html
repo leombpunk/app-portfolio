@@ -8,6 +8,7 @@
 </div>
 <form [formGroup]="formBiography" (ngSubmit)="onSubmit($event)">
   <div class="modal-body">
+    <app-alert-danger *ngIf="mensaje" [mensajeAlert]="mensaje"></app-alert-danger>
     <!-- tabs inicio -->
     <ul class="nav nav-tabs" role="tablist" id="pestañas">
       <li class="nav-item" role="presentation">

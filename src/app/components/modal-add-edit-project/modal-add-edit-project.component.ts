@@ -25,6 +25,8 @@ export class ModalAddEditProjectComponent implements OnInit {
   mErrSitio: string = "";
   mErrEnlace: string = "";
 
+  mensaje: string = "";
+
   @Input() project: Project = new Project();
   
   constructor(
@@ -171,10 +173,12 @@ export class ModalAddEditProjectComponent implements OnInit {
           next: (result: any) => {
             // console.log("result");
             // console.log(result);
+            this.mensaje = "";
           }, 
           error: (e: any) => {
             // console.log("error");
             // console.log(e);
+            this.mensaje = "Error al actualizar. " +e;
           }, 
           complete: () => {
             this.comunicationService.actualizarProj(true);
@@ -191,10 +195,12 @@ export class ModalAddEditProjectComponent implements OnInit {
           next: (result: any) => {
             // console.log("result");
             // console.log(result);
+            this.mensaje = "";
           }, 
           error: (e: any) => {
             // console.log("error");
             // console.log(e);
+            this.mensaje = "Error al intentar agregar.";
           }, 
           complete: () => {
             this.comunicationService.actualizarProj(true);
@@ -208,6 +214,7 @@ export class ModalAddEditProjectComponent implements OnInit {
       // console.log("el formulario es invalido");
       // console.log(this.formProject.value);
       // console.log(this.formProject.errors);
+      this.mensaje = "Revise los campos.";
     }
   }
 

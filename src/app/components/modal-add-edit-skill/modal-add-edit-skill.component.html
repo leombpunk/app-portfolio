@@ -10,6 +10,7 @@
 </div>
 <form [formGroup]="formSkill" (ngSubmit)="onSubmit($event)">
   <div class="modal-body">
+    <app-alert-danger *ngIf="mensaje" [mensajeAlert]="mensaje"></app-alert-danger>
     <input type="text" id="id" formControlName="id" value="0" style="display: none;">
     <input type="text" id="usuarios_id" formControlName="usuarios_id" value="0" style="display: none;">
     <div class="mb-3">

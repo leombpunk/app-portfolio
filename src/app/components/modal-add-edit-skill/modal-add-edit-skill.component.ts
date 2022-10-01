@@ -21,6 +21,8 @@ export class ModalAddEditSkillComponent implements OnInit {
   mErrTipoHabilidad: string = "";
   mErrNivel: string = "";
 
+  mensaje: string = "";
+
   constructor(
     private modalActive: NgbActiveModal,
     private form: FormBuilder,
@@ -36,9 +38,7 @@ export class ModalAddEditSkillComponent implements OnInit {
       });
     }
     
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   //getters
   public get Descripcion(){
@@ -113,10 +113,12 @@ export class ModalAddEditSkillComponent implements OnInit {
           next: (result: any) => {
             // console.log("result");
             // console.log(result);
+            this.mensaje = "";
           }, 
           error: (e: any) => {
             // console.log("error");
             // console.log(e);
+            this.mensaje = "Error al actualizar. " + e;
           }, 
           complete: () => {
             this.comunicationService.actualizarSkill(true);
@@ -133,10 +135,12 @@ export class ModalAddEditSkillComponent implements OnInit {
           next: (result: any) => {
             // console.log("result");
             // console.log(result);
+            this.mensaje = "";
           }, 
           error: (e: any) => {
             // console.log("error");
             // console.log(e);
+            this.mensaje = "Error al intentar agregar.";
           }, 
           complete: () => {
             this.comunicationService.actualizarSkill(true);
@@ -150,6 +154,7 @@ export class ModalAddEditSkillComponent implements OnInit {
       // console.log("el formulario no es valido");
       // console.log(this.formSkill.value);
       // console.log(this.formSkill.errors);
+      this.mensaje = "Revise los campos";
     }
   }
 

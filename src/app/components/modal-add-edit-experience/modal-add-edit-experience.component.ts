@@ -25,6 +25,8 @@ export class ModalAddEditExperienceComponent implements OnInit {
   mErrRefnombre: string = "";
   mErrTarea: string = "";
 
+  mensaje: string = "";
+
   constructor(
     private modalActive: NgbActiveModal,
     private form: FormBuilder,
@@ -132,7 +134,7 @@ export class ModalAddEditExperienceComponent implements OnInit {
   }
   public get HastaError(){
     //console.log(this.Hasta!.value);//muestra el dato cuando esta completa la entrada dia mes año
-    if (this.Hasta!.value){
+    if (this.Hasta!.errors && this.Hasta!.touched){
       if (this.Hasta!.errors!['minlength'] || this.Hasta!.errors!['maxlength']){
         this.mErrHasta = "El campo Hasta debe contener 8 carateres de longitud.";
         return true;
@@ -204,11 +206,13 @@ export class ModalAddEditExperienceComponent implements OnInit {
           next: (result: any) => {
             // console.log("result: ");
             // console.log(result);
+            this.mensaje = "";
           }, 
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
             // console.log(e.ok);
+            this.mensaje = "Error al actualizar. " + e;
           },
           complete: () => {
             this.comunicationService.actualizarExpe(true);
@@ -227,10 +231,12 @@ export class ModalAddEditExperienceComponent implements OnInit {
           next: (result: any) => {
             // console.log("result: ");
             // console.log(result);
+            this.mensaje = "";
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
+            this.mensaje = "Error al intentar agregar. " + e;
           },
           complete: () => {
             this.comunicationService.actualizarExpe(true);
@@ -243,6 +249,7 @@ export class ModalAddEditExperienceComponent implements OnInit {
       this.formExperience.markAllAsTouched();
       // console.log(this.formExperience.value);
       // console.log("el formulario es invalido");
+      this.mensaje = "Revise los campos.";
     }
   }
   

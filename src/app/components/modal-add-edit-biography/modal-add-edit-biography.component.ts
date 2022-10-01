@@ -26,6 +26,8 @@ export class ModalAddEditBiographyComponent implements OnInit {
   mErrGithub: string = "";
   mErrLinkedin: string = "";
 
+  mensaje: string = "";
+
   constructor(
     private modalActive: NgbActiveModal, 
     private formBuilder: FormBuilder, 
@@ -192,18 +194,20 @@ export class ModalAddEditBiographyComponent implements OnInit {
     // console.log("var bio.id: "+this.bio.id);
     // console.log("id submit: "+this.formBiography.get('id'));
     let id: any = this.formBiography.get('id');
-    let response: any;
+    // let response: any;
     if (this.formBiography.valid){
       this.service.putBiography(id.value, this.formBiography.value).subscribe({
         next: (result: any) => {
-          response = result;
+          // response = result;
           // console.log("response: ");
           // console.log(response);
+          this.mensaje = "";
         },
         error: (e: any) => {
           // console.log("errorcito");
           // console.log(e);
           // console.log(e.ok);
+          this.mensaje = "Error al actualizar. " + e;
         },
         complete: () => {
           this.comunicationService.actualizarBio(true);
@@ -215,6 +219,7 @@ export class ModalAddEditBiographyComponent implements OnInit {
       this.formBiography.markAllAsTouched();
       // console.log(this.formBiography.value);
       // console.log("el formulario es invalido");
+      this.mensaje = "Revise los campos.";
     }
     
   }
