@@ -21,5 +21,7 @@ export class Biography {
     github: string = "";
     linkedin: string = "";
     foto: string = "";
+    foto_url: string = "";
+    foto_public_id: string = ""; 
     usuarios_id: number = 0;
 }

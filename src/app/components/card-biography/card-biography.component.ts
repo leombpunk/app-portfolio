@@ -23,6 +23,7 @@ export class CardBiographyComponent implements OnInit {
   @Input() descripcionBio: string = "";
   @Input() perfil_id: number = 0;
   @Input() email: string = "";
+  @Input() altImagen: string = "";
 
   //variable que pasa los datos del perfil al boton para cargar el modal correspodiente
   @Input() pasero: Biography = new Biography();
