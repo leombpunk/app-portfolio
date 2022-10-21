@@ -53,11 +53,13 @@ export class ModalDeleteSomeComponent implements OnInit {
               response = result;
               // console.log('response: ');
               // console.log(response);
+              this.mensaje = "";
             },
             error: (e: any) => {
               // console.log('errorcito');
               // console.log(e);
               // console.log(e.ok);
+              this.mensaje = "Error al borrar! " + e;
             },
             complete: () => {
               this.comunicationService.actualizarBio(true);
@@ -74,10 +76,12 @@ export class ModalDeleteSomeComponent implements OnInit {
               response = result;
               // console.log('response (educacion): ');
               // console.log(response);
+              this.mensaje = "";
             },
             error: (e: any) => {
               // console.log('errorcito (educacion)');
               // console.log(e);
+              this.mensaje = "Error al borrar! " + e;
             },
             complete: () => {
               this.comunicationService.actualizarAca(true);
@@ -92,11 +96,13 @@ export class ModalDeleteSomeComponent implements OnInit {
               response = result;
               // console.log('response (educacion imagen): ');
               // console.log(response);
+              this.mensaje = "";
             },
             error: (e: any) => {
               // console.log('errorcito (educacion)');
               // console.log(e);
               // console.log(e.ok);
+              this.mensaje = "Error al borrar! " + e;
             },
             complete: () => {
               this.comunicationService.actualizarAca(true);
@@ -114,11 +120,13 @@ export class ModalDeleteSomeComponent implements OnInit {
               response = result;
               // console.log('response (experiencia): ');
               // console.log(response);
+              this.mensaje = "";
             },
             error: (e: any) => {
               // console.log('errorcito (experiencia)');
               // console.log(e);
               // console.log(e.ok);
+              this.mensaje = "Error al borrar! " + e;
             },
             complete: () => {
               this.comunicationService.actualizarSkill(true);
@@ -139,11 +147,13 @@ export class ModalDeleteSomeComponent implements OnInit {
               response = result;
               // console.log('response (experiencia): ');
               // console.log(response);
+              this.mensaje = "";
             },
             error: (e: any) => {
               // console.log('errorcito (experiencia)');
               // console.log(e);
               // console.log(e.ok);
+              this.mensaje = "Error al borrar! " + e;
             },
             complete: () => {
               this.comunicationService.actualizarExpe(true);
@@ -158,11 +168,13 @@ export class ModalDeleteSomeComponent implements OnInit {
               response = result;
               // console.log('response (experiencia imagen): ');
               // console.log(response);
+              this.mensaje = "";
             },
             error: (e: any) => {
               // console.log('errorcito (experiencia)');
               // console.log(e);
               // console.log(e.ok);
+              this.mensaje = "Error al borrar! " + e;
             },
             complete: () => {
               this.comunicationService.actualizarExpe(true);
@@ -179,11 +191,13 @@ export class ModalDeleteSomeComponent implements OnInit {
               response = result;
               // console.log('response (proyecto): ');
               // console.log(response);
+              this.mensaje = "";
             },
             error: (e: any) => {
               // console.log('errorcito (proyecto)');
               // console.log(e);
               // console.log(e.ok);
+              this.mensaje = "Error al borrar! " + e;
             },
             complete: () => {
               this.comunicationService.actualizarProj(true);
@@ -198,11 +212,13 @@ export class ModalDeleteSomeComponent implements OnInit {
               response = result;
               // console.log('response (proyecto imagen): ');
               // console.log(response);
+              this.mensaje = "";
             },
             error: (e: any) => {
               // console.log('errorcito (proyecto)');
               // console.log(e);
               // console.log(e.ok);
+              this.mensaje = "Error al borrar! " + e;
             },
             complete: () => {
               this.comunicationService.actualizarProj(true);

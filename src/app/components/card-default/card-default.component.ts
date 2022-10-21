@@ -9,8 +9,9 @@ import { Academics } from '../../model/academic';
 })
 export class CardDefaultComponent implements OnInit {
 
-  @Input() imageCard: string = "";
-  @Input() altCard: string = "imagen ilustrativa";
+  @Input() imageURL: string = "";
+  @Input() altImagen: string = "";
+  // @Input() altCard: string = "";//eliminar y cambiar por altImagen donde haa falta
 
   @Input() apuntar: string = "";
   @Input() type1: string = "1";

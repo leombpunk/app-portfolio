@@ -26,7 +26,8 @@
     </h3>
     <app-card-default
       *ngFor="let experience of expe"
-      [imageCard]="experience.logo"
+      [imageURL]="experience.logo_url"
+      [altImagen]="experience.logo"
       [titleCard]="experience.cargo"
       [descripcionCard]="experience.empresa"
       [desde]="experience.desde"
@@ -49,7 +50,8 @@
     </h3>
     <app-card-default
       *ngFor="let aca of academ"
-      [imageCard]="aca.logo"
+      [imageURL]="aca.logo_url"
+      [altImagen]="aca.logo"
       [titleCard]="aca.titulo"
       [descripcionCard]="aca.institucion"
       [locacionCard]="aca.locacion"
@@ -90,7 +92,8 @@
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <app-card-projects
         *ngFor="let project of projects"
-        [imageProject]="project.logo"
+        [imageURL]="project.logo_url"
+        [altImagen]="project.logo"
         [titleProject]="project.nombre"
         [descripcionProject]="project.descripcion"
         [inicioProject]="project.desde"

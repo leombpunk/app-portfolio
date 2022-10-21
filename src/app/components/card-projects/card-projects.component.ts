@@ -11,13 +11,14 @@ export class CardProjectsComponent implements OnInit {
   faBook = faBook;
   faGlobe = faGlobe;
 
-  @Input() imageProject: string = "";
+  @Input() imageURL: string = "";
   @Input() titleProject: string = "";
   @Input() descripcionProject: string = "";
   @Input() inicioProject: string = "";
   @Input() finProject: string = "";
   @Input() enlaceProject: string = "";
   @Input() sitioProject: string = "";
+  @Input() altImagen: string = "";
 
   @Input() projectData: Project = new Project();
   @Input() isLogged: boolean = false;

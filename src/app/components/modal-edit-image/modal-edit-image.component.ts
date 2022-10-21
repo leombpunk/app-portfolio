@@ -131,10 +131,12 @@ export class ModalEditImageComponent implements OnInit {
           next: (result: any) => {
             // console.log("response: ");
             // console.log(result);
+            this.mensaje = "";
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
+            this.mensaje = "Error al actualizar. " + e;
           },
           complete: () => {
             this.comunicationService.actualizarExpe(true);
@@ -151,10 +153,12 @@ export class ModalEditImageComponent implements OnInit {
           next: (result: any) => {
             // console.log("response: ");
             // console.log(result);
+            this.mensaje = "";
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
+            this.mensaje = "Error al actualizar. " + e;
           },
           complete: () => {
             this.comunicationService.actualizarAca(true);
@@ -174,10 +178,12 @@ export class ModalEditImageComponent implements OnInit {
           next: (result: any) => {
             // console.log("response: ");
             // console.log(result);
+            this.mensaje = "";
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
+            this.mensaje = "Error al actualizar. " + e;
           },
           complete: () => {
             this.comunicationService.actualizarProj(true);

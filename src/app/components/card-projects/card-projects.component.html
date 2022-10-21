@@ -1,10 +1,10 @@
 <div class="col">
   <div class="card h-100 shadow col-btn">
     <img
-      [src]="imageProject"
+      [src]="imageURL"
       class="card-img-top img-fluid rounded-start academic"
       style="width: auto; height: 300px; align-self: center;"
-      alt="imagen del proyecto"
+      [alt]="altImagen"
     />
     <div class="testeando">
       <app-button-edit *ngIf="isLogged" modalTarget="project" type="2" [projectData]="projectData"></app-button-edit>

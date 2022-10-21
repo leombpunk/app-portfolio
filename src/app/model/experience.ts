@@ -1,16 +1,3 @@
-export interface Experiences {
-    id?: number;
-    idUser: number;
-    cargo: string;
-    empresa: string;
-    tareas: string[];
-    desde: string;
-    hasta: string;
-    refe_per: string;
-    refe_tel: string;
-    foto: string;
-}
-
 export class Experience {
     id: number = 0;
     cargo: string = "";
@@ -18,6 +5,8 @@ export class Experience {
     desde: string = "";
     hasta: string = "";
     logo: string = "";
+    logo_url: string = "";
+    logo_public_id: string = ""; 
     empresa: string = "";
     reftelef: string = "";
     refnombre: string = "";
