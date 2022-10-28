@@ -32,6 +32,7 @@ import { ModalAddEditProjectComponent } from './components/modal-add-edit-projec
 import { HomeComponent } from './components/home/home.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { AlertDangerComponent } from './components/alert-danger/alert-danger.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { AlertDangerComponent } from './components/alert-danger/alert-danger.com
     ModalAddEditProjectComponent,
     HomeComponent,
     RegistroComponent,
-    AlertDangerComponent
+    AlertDangerComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +71,10 @@ import { AlertDangerComponent } from './components/alert-danger/alert-danger.com
     FontAwesomeModule,
     NgbModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+      closeButton: true
+    }),
   ],
   providers: [NgbActiveModal, interceptorProvider],
   bootstrap: [AppComponent]

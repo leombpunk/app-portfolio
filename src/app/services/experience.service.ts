@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Experience } from '../model/experience';
+import { environment } from '../../environments/environment.prod';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ExperienceService {
-  private apiUrl: string = 'http://localhost:8080/experiencia';
+  private apiUrl: string = environment.apiURL + '/experiencia';
 
   constructor(private http: HttpClient) {}
 

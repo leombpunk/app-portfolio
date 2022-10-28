@@ -12,6 +12,7 @@ import { Login } from 'src/app/model/login';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   formLogin: FormGroup;
   mErrUser: string = '';
   mErrPass: string = '';
@@ -22,6 +23,8 @@ export class LoginComponent implements OnInit {
   login: Login = new Login('', '');
 
   roles: string[] = [];
+
+  spinner: boolean = false;
 
   constructor(
     private form: FormBuilder,
@@ -44,6 +47,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     //comprobar si se esta loggeado
+    this.toastr.info(
+      'El web service de Render.com es lento, puede demorar hasta 5 minutos hasta arrancar el contenedor',
+      'Aguarde por favor!',
+      {
+        
+        timeOut: 0,
+        extendedTimeOut: 0,
+        positionClass: 'toast-center-center'
+      }
+    );
     if (this.tokenService.getToken()) {
       this.isLogged = true;
       this.isLogginFail = false;
@@ -103,8 +116,11 @@ export class LoginComponent implements OnInit {
       this.login = new Login(this.User!.value, this.Pass!.value);
       // console.log(this.login);
       //enviamos al authService
+      this.spinner = true;
       this.authService.login(this.login).subscribe({
         next: (result: any) => {
+          //manejar desde aqui el spinner?
+          
           // console.log("result: ");
           // console.log(result);
           this.isLogged = true;
@@ -120,7 +136,7 @@ export class LoginComponent implements OnInit {
             'Bien!',
             {
               timeOut: 3000,
-              positionClass: 'toastr-bottom-right'
+              positionClass: 'toast-bottom-right'
             }
           );
           //redireccionar a la home, en un futuro me gustaria redireccionar al perfil del usuario logeado
@@ -129,7 +145,7 @@ export class LoginComponent implements OnInit {
         error: (e: any) => {
           // console.log("error: ");
           // console.log(e);
-
+          this.spinner = false;
           this.isLogged = false;
           this.isLogginFail = true;
 
@@ -141,12 +157,13 @@ export class LoginComponent implements OnInit {
             'Error!',
             {
               timeOut: 3000,
-              positionClass: 'toastr-bottom-right'
+              positionClass: 'toast-bottom-right'
             }
           );
         },
         complete: () => {
           // console.log('complete');
+          this.spinner = false;
         }
       });
     } else {
@@ -154,12 +171,13 @@ export class LoginComponent implements OnInit {
       // console.log("el formulario es invalido");
       // console.log(this.formLogin.value);
       // console.log(this.formLogin.errors);
+      this.spinner = false;
       this.toastr.warning(
         'Revise los campos.',
         'Atención!',
         {
           timeOut: 3000,
-          positionClass: 'toastr-bottom-right'
+          positionClass: 'toast-bottom-right'
         }
       );
     }

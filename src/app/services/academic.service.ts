@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Academics } from '../model/academic';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 const httpOptions = {
   headers: new HttpHeaders({
     "Content-Type":"application/json"
@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class AcademicService {
 
-  private apiUrl: string = "http://localhost:8080/educacion";
+  private apiUrl: string = environment.apiURL + "/educacion";
 
   constructor(private http: HttpClient) { }
 

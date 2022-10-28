@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 })
 export class SectionsComponent implements OnInit {
 
-  private urlImageApi: string = 'http://localhost:8080/images/';
+  //private urlImageApi: string = 'http://localhost:8080/images/';
 
   @Input() isLogged: boolean = false;
   @Input() rutaUsuario: string = '';
@@ -106,7 +106,7 @@ export class SectionsComponent implements OnInit {
       .getPerfilByUsuario(this.rutaUsuario)
       .subscribe((bio: any) => {
         this.bio = bio;
-        this.bio.foto = this.urlImageApi + bio.foto;
+        this.bio.foto = /*this.urlImageApi +*/ bio.foto;
         this.comunicationService.setUsuarioId(this.bio.usuarios_id);
         // console.log("bio (desde sections LoadData): ");
         // console.log(bio);
@@ -123,7 +123,7 @@ export class SectionsComponent implements OnInit {
           let esplitear: string[] = element.tarea.split(',');
           // console.log(esplitear);
           element.tarea = esplitear;
-          element.logo = this.urlImageApi + element.logo;
+          element.logo = /*this.urlImageApi +*/ element.logo;
         });
         this.expe = expe;
       });
@@ -137,7 +137,7 @@ export class SectionsComponent implements OnInit {
           let esplitear: string[] = element.habilidades.split(',');
           // console.log(esplitear);
           element.habilidades = esplitear;
-          element.logo = this.urlImageApi + element.logo;
+          element.logo = /*this.urlImageApi +*/ element.logo;
         });
         this.academ = academ;
       });
@@ -156,7 +156,7 @@ export class SectionsComponent implements OnInit {
       .getProjectsByUsuario(this.rutaUsuario)
       .subscribe((project: any) => {
         project.forEach((element: any) => {
-          element.logo = this.urlImageApi + element.logo;
+          element.logo = /*this.urlImageApi +*/ element.logo;
           // console.log("element: ");
           // console.log(element);
         });

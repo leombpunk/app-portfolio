@@ -188,7 +188,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
             //   'Bien!',
             //   {
             //     timeOut: 3000,
-            //     positionClass: 'toastr-bottom-right'
+            //     positionClass: 'toast-bottom-right'
             //   }
             // );
           },
@@ -200,7 +200,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
             //   'Error!',
             //   {
             //     timeOut: 3000,
-            //     positionClass: 'toastr-bottom-right'
+            //     positionClass: 'toast-bottom-right'
             //   }
             // );
             this.mensaje = "Error al actualizar. " + e;
@@ -224,7 +224,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
             //   'Bien!',
             //   {
             //     timeOut: 3000,
-            //     positionClass: 'toastr-bottom-right'
+            //     positionClass: 'toast-bottom-right'
             //   }
             // );
             this.mensaje = "";
@@ -237,7 +237,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
             //   'Error!',
             //   {
             //     timeOut: 3000,
-            //     positionClass: 'toastr-bottom-right'
+            //     positionClass: 'toast-bottom-right'
             //   }
             // );
             this.mensaje = "Error al intentar agregar. " + e;
@@ -259,7 +259,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
       //   'Atención!',
       //   {
       //     timeOut: 3000,
-      //     positionClass: 'toastr-bottom-right'
+      //     positionClass: 'toast-bottom-right'
       //   }
       // );
       this.mensaje = "Revise los campos.";

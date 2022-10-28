@@ -21,6 +21,7 @@ export class RegistroComponent implements OnInit {
   isRegistredFail: boolean = false;
   formRegistro: FormGroup;
   usuarioNuevo: UsuarioNuevo = new UsuarioNuevo("","");
+  spinner: boolean = false;
 
   constructor(
     private form: FormBuilder,
@@ -36,6 +37,15 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.toastr.info(
+      'El web service de Render.com es lento, puede demorar hasta 5 minutos hasta arrancar el contenedor',
+      'Aguarde por favor!',
+      {
+        timeOut: 0,
+        extendedTimeOut: 0,
+        positionClass: 'toast-center-center'
+      }
+    );
     if (this.tokenService.getToken()){
       this.isLogged = true;
     }
@@ -91,6 +101,7 @@ export class RegistroComponent implements OnInit {
       this.usuarioNuevo = new UsuarioNuevo(this.User!.value, this.Pass!.value);
       // console.log(this.usuarioNuevo);
       //enviamos al authService
+      this.spinner = true;
       this.authService.nuevoUsuario(this.usuarioNuevo).subscribe({
         next: (result: any) => {
           // console.log("result: ");
@@ -105,7 +116,7 @@ export class RegistroComponent implements OnInit {
         error: (e: any) => {
           // console.log("error: ");
           // console.log(e);
-
+          this.spinner = false;
           this.isRegistred = false;
           this.isRegistredFail = true;
           //asumo que esto no funcionara porque no tengo la clase mensaje en el backend
@@ -117,6 +128,7 @@ export class RegistroComponent implements OnInit {
         }, 
         complete: () => {
           // console.log("complete");
+          this.spinner = false;
         }
       });
     }
@@ -130,7 +142,7 @@ export class RegistroComponent implements OnInit {
         'Ateención!',
         {
           timeOut: 3000,
-          positionClass: 'toastr-bottom-right'
+          positionClass: 'toast-bottom-right'
         }
       );
     }
