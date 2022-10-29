@@ -31,6 +31,10 @@ export class WalkietalkieService {
   private informarNombre: Subject<string> = new Subject();
   private nombre: string = '';
 
+  //toogle para cualquier boton submit
+  // private buttonSubmit: Subject<boolean> = new Subject();
+  // private button: boolean = false;
+
   constructor() { }
 
   //aca es donde escucha? (donde hace es subscribe)

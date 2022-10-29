@@ -1,12 +1,10 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { AcademicService } from '../../services/academic.service';
 import { Academics } from 'src/app/model/academic';
 import { WalkietalkieService } from 'src/app/services/walkietalkie.service';
-// import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-add-edit-academic',
@@ -29,13 +27,14 @@ export class ModalAddEditAcademicComponent implements OnInit {
   @Input() academ: Academics = new Academics();
 
   mensaje: string = "";
+  spinner: boolean = false;
 
   constructor(
     private modalActive: NgbActiveModal, 
     private formBuilder: FormBuilder, 
     private service: AcademicService,
     private comunicationService: WalkietalkieService,
-    // private toastr: ToastrService
+    private toastr: ToastrService
   ) 
   { 
     this.formAcademic = this.formBuilder.group({
@@ -50,10 +49,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { 
-    // console.log("init (usuarios_id): ");
-    // console.log(this.usuario_id);
-  }
+  ngOnInit(): void { }
 
   //getters
   public get Titulo(){
@@ -176,6 +172,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
       // console.log("form: ");
       // console.log(this.formAcademic.value);
       // console.log("el fomrulario es valido");
+      this.spinner = true;
       if (this.academ.titulo !== ''){
         //entra cuando edito el registro
         let id: any = this.formAcademic.get('id');
@@ -183,30 +180,32 @@ export class ModalAddEditAcademicComponent implements OnInit {
           next: (result: any) => {
             // console.log("result: ");
             // console.log(result);
-            // this.toastr.success(
-            //   'Formación Academica actualizada correctamente.',
-            //   'Bien!',
-            //   {
-            //     timeOut: 3000,
-            //     positionClass: 'toast-bottom-right'
-            //   }
-            // );
+            this.toastr.success(
+              'Formación Academica actualizada correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
           },
           error: (e: any) => {
             // console.log("error: ");
             // console.log(e);
-            // this.toastr.error(
-            //   'Error al intentar actualiazr su Formación Academica.',
-            //   'Error!',
-            //   {
-            //     timeOut: 3000,
-            //     positionClass: 'toast-bottom-right'
-            //   }
-            // );
+            this.toastr.error(
+              'Error al intentar actualizar su Formación Academica.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
+            this.spinner = false;
             this.mensaje = "Error al actualizar. " + e;
           },
           complete: () => {
             this.comunicationService.actualizarAca(true);
+            this.spinner = false;
             this.closeModal();
           }
         });
@@ -219,31 +218,33 @@ export class ModalAddEditAcademicComponent implements OnInit {
           next: (result: any) => {
             // console.log("result: ");
             // console.log(result);
-            // this.toastr.success(
-            //   'Formación Academica agregada correctamente.',
-            //   'Bien!',
-            //   {
-            //     timeOut: 3000,
-            //     positionClass: 'toast-bottom-right'
-            //   }
-            // );
+            this.toastr.success(
+              'Formación Academica agregada correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
             this.mensaje = "";
           },
           error: (e: any) => {
             // console.log("error: ");
             // console.log(e);
-            // this.toastr.error(
-            //   'Error al intentar agregar su Formación Academica.',
-            //   'Error!',
-            //   {
-            //     timeOut: 3000,
-            //     positionClass: 'toast-bottom-right'
-            //   }
-            // );
+            this.toastr.error(
+              'Error al intentar agregar su Formación Academica.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
             this.mensaje = "Error al intentar agregar. " + e;
+            this.spinner = false;
           },
           complete: () => {
             this.comunicationService.actualizarAca(true);
+            this.spinner = false;
             this.closeModal();
           }
         });
@@ -254,15 +255,16 @@ export class ModalAddEditAcademicComponent implements OnInit {
       // console.log(this.formAcademic.value);
       // console.log("el formulario es invalido");
       // console.log(this.formAcademic.errors);
-      // this.toastr.warning(
-      //   'Revise los campos.',
-      //   'Atención!',
-      //   {
-      //     timeOut: 3000,
-      //     positionClass: 'toast-bottom-right'
-      //   }
-      // );
+      this.toastr.warning(
+        'Revise los campos.',
+        'Atención!',
+        {
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
+        }
+      );
       this.mensaje = "Revise los campos.";
+      this.spinner = false;
     }
   }
 

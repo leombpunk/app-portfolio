@@ -6,6 +6,7 @@ import { ExperienceService } from '../../services/experience.service';
 import { AcademicService } from '../../services/academic.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-edit-image',
@@ -24,6 +25,7 @@ export class ModalEditImageComponent implements OnInit {
   whatEdit: string = "";//para el switch, para saber que seccion va editar la foto/imagen/logo
 
   mensaje: string = "";
+  spinner: boolean = false;
 
   constructor(
     private modalActive: NgbActiveModal, 
@@ -32,7 +34,8 @@ export class ModalEditImageComponent implements OnInit {
     private serviceExpe: ExperienceService,
     private serviceAca: AcademicService,
     private servicePro: ProjectService,
-    private comunicationService: WalkietalkieService) {
+    private comunicationService: WalkietalkieService,
+    private toastr: ToastrService) {
       this.formBiographyImg = this.form.group({
         id:[this.id,[Validators.required]],
         img:['',[Validators.required]],
@@ -100,6 +103,7 @@ export class ModalEditImageComponent implements OnInit {
   onSubmit(event: Event){
     event.preventDefault();
     if(this.formBiographyImg.valid){
+      this.spinner = true;
       //agregar el switch
       if (this.whatEdit === "biography"){
         const formData: FormData = new FormData();
@@ -110,11 +114,28 @@ export class ModalEditImageComponent implements OnInit {
             // console.log("response: ");
             // console.log(result);
             this.mensaje = "";
+            this.toastr.success(
+              'Foto modificada correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
             this.mensaje = "Error al actualizar. " + e;
+            this.toastr.error(
+              'Error al intentar actualizar la foto.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
+            this.spinner = false;
           },
           complete: () => {
             this.comunicationService.actualizarBio(true);
@@ -132,11 +153,28 @@ export class ModalEditImageComponent implements OnInit {
             // console.log("response: ");
             // console.log(result);
             this.mensaje = "";
+            this.toastr.success(
+              'Logotipo modificado correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
             this.mensaje = "Error al actualizar. " + e;
+            this.toastr.error(
+              'Error al intentar actualizar el logotipo.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
+            this.spinner = false;
           },
           complete: () => {
             this.comunicationService.actualizarExpe(true);
@@ -154,11 +192,28 @@ export class ModalEditImageComponent implements OnInit {
             // console.log("response: ");
             // console.log(result);
             this.mensaje = "";
+            this.toastr.success(
+              'Logo modificado correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
             this.mensaje = "Error al actualizar. " + e;
+            this.toastr.error(
+              'Error al intentar actualizar su Formación Academica.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
+            this.spinner = false;
           },
           complete: () => {
             this.comunicationService.actualizarAca(true);
@@ -179,11 +234,28 @@ export class ModalEditImageComponent implements OnInit {
             // console.log("response: ");
             // console.log(result);
             this.mensaje = "";
+            this.toastr.success(
+              'Logo modificado correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
             this.mensaje = "Error al actualizar. " + e;
+            this.toastr.error(
+              'Error al intentar actualizar el logotipo.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
+            this.spinner = false;
           },
           complete: () => {
             this.comunicationService.actualizarProj(true);
@@ -197,6 +269,15 @@ export class ModalEditImageComponent implements OnInit {
       this.formBiographyImg.markAllAsTouched();
       // console.log(this.formBiographyImg.value);
       // console.log("el formulario es invalido");
+      this.toastr.error(
+        'Revise los campos.',
+        'Error!',
+        {
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
+        }
+      );
+      this.spinner = false;
     }
   }
 

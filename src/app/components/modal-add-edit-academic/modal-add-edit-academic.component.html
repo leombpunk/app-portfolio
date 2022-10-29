@@ -121,6 +121,9 @@
     >
       Cerrar
     </button>
-    <button type="submit" class="btn btn-primary shadow">Aceptar</button>
+    <button [disabled]="spinner" type="submit" class="btn btn-primary shadow">
+      <app-spinner *ngIf="spinner"></app-spinner>
+      Aceptar
+    </button>
   </div>
 </form>

@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Biography } from '../../model/biography';
 import { BiographyService } from '../../services/biography.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-add-edit-biography',
@@ -16,8 +17,6 @@ export class ModalAddEditBiographyComponent implements OnInit {
   @Input() formBiography: FormGroup;
   @Input() bio: Biography = new Biography();
 
-  // @Output() onSubmitSuccess: EventEmitter<any> = new EventEmitter();
-
   mErrTitulo: string = "";
   mErrNombre: string = "";
   mErrApellido: string = "";
@@ -27,12 +26,14 @@ export class ModalAddEditBiographyComponent implements OnInit {
   mErrLinkedin: string = "";
 
   mensaje: string = "";
+  spinner: boolean = false;
 
   constructor(
     private modalActive: NgbActiveModal, 
     private formBuilder: FormBuilder, 
     private service: BiographyService, 
-    private comunicationService: WalkietalkieService) {
+    private comunicationService: WalkietalkieService,
+    private toastr: ToastrService) {
     //podria mandar la foto con el dato de foto
     this.formBiography = this.formBuilder.group({
       id: [0,[Validators.minLength(1),Validators.maxLength(10)]],
@@ -196,21 +197,40 @@ export class ModalAddEditBiographyComponent implements OnInit {
     let id: any = this.formBiography.get('id');
     // let response: any;
     if (this.formBiography.valid){
+      this.spinner = true;
       this.service.putBiography(id.value, this.formBiography.value).subscribe({
         next: (result: any) => {
           // response = result;
           // console.log("response: ");
           // console.log(response);
           this.mensaje = "";
+          this.toastr.success(
+            'Información personal actualizada correctamente.',
+            'Bien!',
+            {
+              timeOut: 3000,
+              positionClass: 'toast-bottom-right'
+            }
+          );
         },
         error: (e: any) => {
           // console.log("errorcito");
           // console.log(e);
           // console.log(e.ok);
           this.mensaje = "Error al actualizar. " + e;
+          this.toastr.error(
+            'Error al intentar actualizar su perfil.',
+            'Error!',
+            {
+              timeOut: 3000,
+              positionClass: 'toast-bottom-right'
+            }
+          );
+          this.spinner = false;
         },
         complete: () => {
           this.comunicationService.actualizarBio(true);
+          this.spinner = false;
           this.closeModal();
         }
       });
@@ -220,6 +240,15 @@ export class ModalAddEditBiographyComponent implements OnInit {
       // console.log(this.formBiography.value);
       // console.log("el formulario es invalido");
       this.mensaje = "Revise los campos.";
+      this.toastr.error(
+        'Por favor revise los campos.',
+        'Error!',
+        {
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
+        }
+      );
+      this.spinner = false;
     }
     
   }

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Skill } from 'src/app/model/skills';
 import { SkillService } from 'src/app/services/skill.service';
 import { WalkietalkieService } from 'src/app/services/walkietalkie.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-add-edit-skill',
@@ -22,12 +23,14 @@ export class ModalAddEditSkillComponent implements OnInit {
   mErrNivel: string = "";
 
   mensaje: string = "";
+  spinner: boolean = false;
 
   constructor(
     private modalActive: NgbActiveModal,
     private form: FormBuilder,
     private service: SkillService,
-    private comunicationService: WalkietalkieService
+    private comunicationService: WalkietalkieService,
+    private toastr: ToastrService
     ) {
       this.formSkill = this.form.group({
         id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
@@ -106,6 +109,7 @@ export class ModalAddEditSkillComponent implements OnInit {
     if (this.formSkill.valid){
       // console.log("el formulario es valido");
       // console.log(this.formSkill.value);
+      this.spinner = true;
       if (this.skill.descripcion !== ''){
         //editar habilidad
         let id: any = this.formSkill.get('id');
@@ -114,11 +118,28 @@ export class ModalAddEditSkillComponent implements OnInit {
             // console.log("result");
             // console.log(result);
             this.mensaje = "";
+            this.toastr.success(
+              'Habilidad actualizada correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
           }, 
           error: (e: any) => {
             // console.log("error");
             // console.log(e);
             this.mensaje = "Error al actualizar. " + e;
+            this.toastr.error(
+              'Error al intentar actualizar la habilidad.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
+            this.spinner = false;
           }, 
           complete: () => {
             this.comunicationService.actualizarSkill(true);
@@ -136,11 +157,28 @@ export class ModalAddEditSkillComponent implements OnInit {
             // console.log("result");
             // console.log(result);
             this.mensaje = "";
+            this.toastr.success(
+              'Habilidad agregada correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
           }, 
           error: (e: any) => {
             // console.log("error");
             // console.log(e);
             this.mensaje = "Error al intentar agregar.";
+            this.toastr.error(
+              'Error al intentar agregar la habilidad.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
+            this.spinner = false;
           }, 
           complete: () => {
             this.comunicationService.actualizarSkill(true);
@@ -154,6 +192,15 @@ export class ModalAddEditSkillComponent implements OnInit {
       // console.log("el formulario no es valido");
       // console.log(this.formSkill.value);
       // console.log(this.formSkill.errors);
+      this.toastr.error(
+        'Revise por favor los campos resaltados.',
+        'Error!',
+        {
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
+        }
+      );
+      this.spinner = false;
       this.mensaje = "Revise los campos";
     }
   }

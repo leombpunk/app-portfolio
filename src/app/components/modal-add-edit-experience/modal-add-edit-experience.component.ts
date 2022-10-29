@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExperienceService } from '../../services/experience.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 import { Experience } from '../../model/experience';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-add-edit-experience',
@@ -26,12 +27,14 @@ export class ModalAddEditExperienceComponent implements OnInit {
   mErrTarea: string = "";
 
   mensaje: string = "";
+  spinner: boolean = false;
 
   constructor(
     private modalActive: NgbActiveModal,
     private form: FormBuilder,
     private service: ExperienceService,
-    private comunicationService: WalkietalkieService
+    private comunicationService: WalkietalkieService,
+    private toastr: ToastrService
   ) {
     this.formExperience = this.form.group({
       id: [0,[Validators.minLength(1), Validators.maxLength(10)]],
@@ -46,10 +49,7 @@ export class ModalAddEditExperienceComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    // console.log("init -> expe: ");
-    // console.log(this.expe);
-  }
+  ngOnInit(): void { }
 
   //getters
   public get Id(){
@@ -76,7 +76,6 @@ export class ModalAddEditExperienceComponent implements OnInit {
   public get Tarea(){
     return this.formExperience.get('tarea');
   }
-  //temita de errores de los validators
   //propiedades
   public get CargoValid(){ 
     return this.Cargo!.touched && !this.Cargo!.valid;
@@ -198,6 +197,7 @@ export class ModalAddEditExperienceComponent implements OnInit {
     event.preventDefault();
     // console.log("form: ");
     if (this.formExperience.valid){
+      this.spinner = true;
       // pregunto si la varialbe 'expe' tiene datos
       //si los tiene, hice la llamada por el boton de editar
       if (this.expe.cargo !== ''){
@@ -207,12 +207,29 @@ export class ModalAddEditExperienceComponent implements OnInit {
             // console.log("result: ");
             // console.log(result);
             this.mensaje = "";
+            this.toastr.success(
+              'Experiencia laboral actualizada correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
           }, 
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
             // console.log(e.ok);
             this.mensaje = "Error al actualizar. " + e;
+            this.toastr.error(
+              'Error al intentar actualizar su Experiencia laboral.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
+            this.spinner = false;
           },
           complete: () => {
             this.comunicationService.actualizarExpe(true);
@@ -232,11 +249,28 @@ export class ModalAddEditExperienceComponent implements OnInit {
             // console.log("result: ");
             // console.log(result);
             this.mensaje = "";
+            this.toastr.success(
+              'Experiencia labolral agregada correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
             this.mensaje = "Error al intentar agregar. " + e;
+            this.toastr.error(
+              'Error al intentar agregar su Experiencia laboral.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
+            this.spinner = false;
           },
           complete: () => {
             this.comunicationService.actualizarExpe(true);

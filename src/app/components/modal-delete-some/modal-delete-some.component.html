@@ -21,5 +21,8 @@
   >
     Cerrar
   </button>
-  <button type="button" class="btn btn-danger" (click)="deleteSome()">Aceptar</button>
+  <button [disabled]="spinner" type="button" class="btn btn-danger" (click)="deleteSome()">
+    <app-spinner *ngIf="spinner"></app-spinner>
+    Aceptar
+  </button>
 </div>

@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Project } from 'src/app/model/projects';
 import { ProjectService } from 'src/app/services/project.service';
 import { WalkietalkieService } from 'src/app/services/walkietalkie.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-add-edit-project',
@@ -26,6 +27,7 @@ export class ModalAddEditProjectComponent implements OnInit {
   mErrEnlace: string = "";
 
   mensaje: string = "";
+  spinner: boolean = false;
 
   @Input() project: Project = new Project();
   
@@ -33,7 +35,8 @@ export class ModalAddEditProjectComponent implements OnInit {
     private modalActive: NgbActiveModal, 
     private form: FormBuilder, 
     private service: ProjectService, 
-    private comunicationService: WalkietalkieService) { 
+    private comunicationService: WalkietalkieService,
+    private toastr: ToastrService) { 
     this.formProject = this.form.group({
       id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
       usuarios_id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
@@ -164,6 +167,7 @@ export class ModalAddEditProjectComponent implements OnInit {
   onSubmit(event: Event){
     event.preventDefault();
     if (this.formProject.valid){
+      this.spinner = true;
       // console.log(this.formProject.value);
       // console.log("el formulario es valido");
       if (this.project.nombre !== ''){
@@ -174,10 +178,27 @@ export class ModalAddEditProjectComponent implements OnInit {
             // console.log("result");
             // console.log(result);
             this.mensaje = "";
+            this.toastr.success(
+              'Proyecto actualizado correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
           }, 
           error: (e: any) => {
             // console.log("error");
             // console.log(e);
+            this.toastr.error(
+              'Error al intentar actualizar su Formación Academica.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
+            this.spinner = false;
             this.mensaje = "Error al actualizar. " +e;
           }, 
           complete: () => {
@@ -196,10 +217,27 @@ export class ModalAddEditProjectComponent implements OnInit {
             // console.log("result");
             // console.log(result);
             this.mensaje = "";
+            this.toastr.success(
+              'Proyecto agregado correctamente.',
+              'Bien!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
           }, 
           error: (e: any) => {
             // console.log("error");
             // console.log(e);
+            this.toastr.error(
+              'Error al intentar agregar un proyecto.',
+              'Error!',
+              {
+                timeOut: 3000,
+                positionClass: 'toast-bottom-right'
+              }
+            );
+            this.spinner = false;
             this.mensaje = "Error al intentar agregar.";
           }, 
           complete: () => {
@@ -214,6 +252,15 @@ export class ModalAddEditProjectComponent implements OnInit {
       // console.log("el formulario es invalido");
       // console.log(this.formProject.value);
       // console.log(this.formProject.errors);
+      this.toastr.error(
+        'Revise los campos resaltados.',
+        'Error!',
+        {
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
+        }
+      );
+      this.spinner = false;
       this.mensaje = "Revise los campos.";
     }
   }
