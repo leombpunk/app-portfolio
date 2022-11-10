@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 import { AcademicService } from '../../services/academic.service';
 import { Academics } from 'src/app/model/academic';
 import { WalkietalkieService } from 'src/app/services/walkietalkie.service';
 import { ToastrService } from 'ngx-toastr';
+import { customRegExp } from "../../utils/customRegExp";
 
 @Component({
   selector: 'app-modal-add-edit-academic',
@@ -12,6 +14,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./modal-add-edit-academic.component.css']
 })
 export class ModalAddEditAcademicComponent implements OnInit {
+
+  faCircleQuestion = faCircleQuestion;
 
   mErrTitulo: string = "";
   mErrInstituto: String = "";
@@ -38,13 +42,13 @@ export class ModalAddEditAcademicComponent implements OnInit {
   ) 
   { 
     this.formAcademic = this.formBuilder.group({
-      id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]], //, Validators.pattern(/^\d{1,10}$/g)
-      titulo: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      institucion: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      locacion: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      habilidades: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(500)]],
-      desde: ['',[Validators.required]],
-      hasta: ['',[Validators.required]],
+      id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
+      titulo: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(customRegExp.stringPattern)]],
+      institucion: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(customRegExp.stringIntegerPattern)]],
+      locacion: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(customRegExp.locationPattern)]],
+      habilidades: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(500), Validators.pattern(customRegExp.stringIntegerPhrasePattern)]],
+      desde: ['',[Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(customRegExp.datePattern)]],
+      hasta: ['',[]],
       usuarios_id: [0,[Validators.minLength(1), Validators.maxLength(10)]]
     });
   }
@@ -75,6 +79,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
     return this.Titulo!.touched && !this.Titulo!.valid;
   }
   public get TituloError() {
+    // console.log(this.Titulo!.errors);
     if (this.Titulo!.errors && this.Titulo!.touched) {
       if(this.Titulo!.hasError('required')){
         this.mErrTitulo = "El titulo es requerido";
@@ -82,6 +87,10 @@ export class ModalAddEditAcademicComponent implements OnInit {
       }
       if(this.Titulo!.errors!['minlength'] || this.Titulo!.errors!['maxlength']){
         this.mErrTitulo = "El titulo debe contener de 3 a 50 carateres";
+        return true;
+      }
+      if (this.Titulo!.errors!['pattern']){
+        this.mErrTitulo = "El titulo contiene carecteres no soportados";
         return true;
       }
     }
@@ -101,6 +110,10 @@ export class ModalAddEditAcademicComponent implements OnInit {
         this.mErrInstituto = "La Institucion debe contener de 3 a 50 carateres";
         return true;
       }
+      if (this.Institucion!.errors!['pattern']){
+        this.mErrInstituto = "El nombre de la Institución contiene carecteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -111,11 +124,15 @@ export class ModalAddEditAcademicComponent implements OnInit {
   public get LocacionError(){
     if (this.Locacion!.errors && this.Locacion!.touched){
       if(this.Locacion!.hasError('required')){
-        this.mErrLocacion = "El campo Locacion es requerido";
+        this.mErrLocacion = "El campo Lugar es requerido";
         return true;
       }
       if(this.Locacion!.errors!['minlength'] || this.Locacion!.errors!['maxlength']){
-        this.mErrLocacion = "La Locacion debe contener de 3 a 50 carateres";
+        this.mErrLocacion = "El campo Lugar debe contener de 3 a 50 carateres";
+        return true;
+      }
+      if (this.Locacion!.errors!['pattern']){
+        this.mErrLocacion = "El campo Lugar contiene carecteres no soportados";
         return true;
       }
     }
@@ -135,6 +152,10 @@ export class ModalAddEditAcademicComponent implements OnInit {
         this.mErrHabilidades = "El campo Habilidades debe contener de 5 a 500 carateres";
         return true;
       }
+      if (this.Habilidades!.errors!['pattern']){
+        this.mErrHabilidades = "El campo Habilidades contiene carecteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -148,6 +169,10 @@ export class ModalAddEditAcademicComponent implements OnInit {
         this.mErrDesde = "El campo Desde es requerido";
         return true;
       }
+      if (this.Desde!.errors!['pattern']){
+        this.mErrDesde = "El campo Desde contiene carecteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -156,10 +181,18 @@ export class ModalAddEditAcademicComponent implements OnInit {
     return this.Hasta!.touched && !this.Hasta!.valid;
   }
   public get HastaError(){
-    if (this.Hasta!.errors && this.Hasta!.touched){
-      if(this.Hasta!.hasError('required')){
-        this.mErrHasta = "El campo Hasta es requerido";
-        return true;
+    // if (this.Hasta!.errors && this.Hasta!.touched){
+    //   if(this.Hasta!.hasError('required')){
+    //     this.mErrHasta = "El campo Hasta es requerido";
+    //     return true;
+    //   }
+    // }
+    if (this.Hasta!.touched){
+      console.log(this.Hasta);
+      if (this.Hasta!.value !== ""){ // si es distinto que vacio procedo a validar
+        //comprobar longitud = 10
+        //comprobar que sea mayor que el campo Desde
+        //comprobar con el pattern datePatter
       }
     }
     return false;

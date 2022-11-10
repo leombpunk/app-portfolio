@@ -10,7 +10,10 @@
 </div>
 <form [formGroup]="formAcademic" (ngSubmit)="onSubmit($event)">
   <div class="modal-body">
-    <app-alert-danger *ngIf="mensaje" [mensajeAlert]="mensaje"></app-alert-danger>
+    <app-alert-danger
+      *ngIf="mensaje"
+      [mensajeAlert]="mensaje"
+    ></app-alert-danger>
     <input
       type="text"
       id="id"
@@ -26,7 +29,7 @@
       style="display: none;"
     />
     <div class="mb-3">
-      <label for="titulo" class="form-label">Titulo:</label>
+      <label for="titulo" class="form-label">Titulo: </label>
       <input
         type="text"
         id="titulo"
@@ -54,7 +57,16 @@
       </span>
     </div>
     <div class="mb-3">
-      <label for="locacion" class="form-label">Lugar:</label>
+      <label for="locacion" class="form-label"
+        >Lugar:
+        <span
+          placement="end"
+          ngbTooltip="Siga el siguiente formato: Ciudad - Provincia - Pais"
+          class="customTooltip"
+        >
+          <fa-icon [icon]="faCircleQuestion"></fa-icon
+        ></span>
+      </label>
       <input
         type="text"
         id="locacion"
@@ -69,8 +81,14 @@
     </div>
     <div class="mb-3">
       <label for="habilidades" class="form-label"
-        >Habilidades adquiridas:</label
-      >
+        >Habilidades adquiridas:
+        <span
+          placement="end"
+          ngbTooltip="Asegurese de usar comas (,) para citar sus habilidades para armar una lista ¡es muy importante!"
+          class="customTooltip"
+        >
+          <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+      ></label>
       <textarea
         name="habilidades"
         id="habilidades"

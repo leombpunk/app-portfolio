@@ -41,7 +41,7 @@ export class ModalAddEditExperienceComponent implements OnInit {
       cargo: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       empresa: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       desde: ['',[Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      hasta: ['',[Validators.minLength(10), Validators.maxLength(10)]],
+      hasta: ['',[Validators.maxLength(10)]],
       reftelef: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
       refnombre: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
       tarea: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(500)]],
