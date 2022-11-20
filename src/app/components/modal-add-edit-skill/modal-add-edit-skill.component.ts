@@ -5,6 +5,7 @@ import { Skill } from 'src/app/model/skills';
 import { SkillService } from 'src/app/services/skill.service';
 import { WalkietalkieService } from 'src/app/services/walkietalkie.service';
 import { ToastrService } from 'ngx-toastr';
+import { customRegExp } from 'src/app/utils/customRegExp';
 
 @Component({
   selector: 'app-modal-add-edit-skill',
@@ -33,11 +34,11 @@ export class ModalAddEditSkillComponent implements OnInit {
     private toastr: ToastrService
     ) {
       this.formSkill = this.form.group({
-        id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
-        usuarios_id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
-        descripcion: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-        nivel: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(2)]],
-        tipo_habilidad_id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]]
+        id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]],
+        usuarios_id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]],
+        descripcion: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(customRegExp.stringIntegerPattern)]],
+        nivel: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(2)], Validators.pattern(customRegExp.integerPattern)],
+        tipo_habilidad_id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]]
       });
     }
     

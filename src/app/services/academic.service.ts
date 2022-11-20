@@ -34,7 +34,7 @@ export class AcademicService {
     return this.http.post<Academics>(this.apiUrl + "/crear", datos);
   }
 
-  public putAcademics(id: any, datos: any): Observable<Academics> {
+  /*public putAcademics(id: any, datos: any): Observable<Academics> {
     return this.http.put<Academics>(this.apiUrl + `/editar/${id}`,{}, {
       params: {
         titulo: datos.titulo,
@@ -46,6 +46,10 @@ export class AcademicService {
         usuarios_id: datos.usuarios_id
       }
     });
+  }*/
+
+  public putAcademics(id: any, datos: any): Observable<Academics> {
+    return this.http.put<Academics>(this.apiUrl + `/editar/${id}`, datos);
   }
 
   public deleteAcademic(id: any): Observable<Academics> {

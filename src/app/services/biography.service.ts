@@ -37,7 +37,7 @@ export class BiographyService {
   }
 
   //put
-  public putBiography(id: any, data: any): Observable<Biography> {
+  /*public putBiography(id: any, data: any): Observable<Biography> {
     // console.log('desde servicio<put>: ' + data.id + ' ' + data.nombre);
     return this.http.put<Biography>(
       this.apiUrl + `/editar/${id}`,
@@ -54,6 +54,13 @@ export class BiographyService {
         }
       }
     );
+  }*/
+
+  //put
+  public putBiography(id: any, data: any): Observable<Biography> {
+    // console.log('desde servicio<put>: ' + data.id + ' ' + data.nombre);
+    return this.http.put<Biography>(
+      this.apiUrl + `/editar/${id}`, data);
   }
   
   public setBioImage(id: any, data: FormData): Observable<any>{

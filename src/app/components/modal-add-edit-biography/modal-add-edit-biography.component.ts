@@ -5,6 +5,8 @@ import { Biography } from '../../model/biography';
 import { BiographyService } from '../../services/biography.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 import { ToastrService } from 'ngx-toastr';
+import { customRegExp } from "../../utils/customRegExp";
+import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-modal-add-edit-biography',
@@ -12,7 +14,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./modal-add-edit-biography.component.css']
 })
 export class ModalAddEditBiographyComponent implements OnInit {
-  
+
+  faCircleQuestion = faCircleQuestion;
+
   @Input() titleModal: string = "";
   @Input() formBiography: FormGroup;
   @Input() bio: Biography = new Biography();
@@ -36,14 +40,15 @@ export class ModalAddEditBiographyComponent implements OnInit {
     private toastr: ToastrService) {
     //podria mandar la foto con el dato de foto
     this.formBiography = this.formBuilder.group({
-      id: [0,[Validators.minLength(1),Validators.maxLength(10)]],
-      titulo: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
-      nombre: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      apellido: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      acercade: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(500)]],
+      id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]],
+      titulo: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(customRegExp.stringPattern)]],
+      nombre: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(customRegExp.stringPattern)]],
+      apellido: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(customRegExp.stringPattern)]],
+      acercade: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(500), Validators.pattern(customRegExp.stringIntegerPhrasePattern)]],
       correo: ['',[Validators.required, Validators.maxLength(100), Validators.email]],
-      linkedin: ['',[Validators.minLength(3), Validators.maxLength(100)]],
-      github: ['',[Validators.minLength(3), Validators.maxLength(100)]],
+      linkedin: ['',[Validators.minLength(3), Validators.maxLength(100), Validators.pattern(customRegExp.urlPattern)]],
+      github: ['',[Validators.minLength(3), Validators.maxLength(100), Validators.pattern(customRegExp.urlPattern)]],
+      usuarios_id: [0,[Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]]
     });
   }
   ngOnInit(): void { }
@@ -76,16 +81,17 @@ export class ModalAddEditBiographyComponent implements OnInit {
     return this.Titulo!.touched && !this.Titulo!.valid;
   }
   public get TituloError() {
-    // console.log("propiedad");
     if (this.Titulo!.errors && this.Titulo!.touched) {
-      // console.log("primer if");
       if(this.Titulo!.hasError('required')){
-        // console.log("segundo if");
         this.mErrTitulo = "El titulo es requerido";
         return true;
       }
       if(this.Titulo!.errors!['minlength'] || this.Titulo!.errors!['maxlength']){
         this.mErrTitulo = "El titulo debe contener de 3 a 50 carateres";
+        return true;
+      }
+      if (this.Titulo!.errors!['pattern']){
+        this.mErrTitulo = "El titulo contiene carecteres no soportados";
         return true;
       }
     }
@@ -105,6 +111,10 @@ export class ModalAddEditBiographyComponent implements OnInit {
         this.mErrNombre = "El nombre debe contener de 3 a 100 carateres";
         return true;
       }
+      if (this.Nombre!.errors!['pattern']){
+        this.mErrNombre = "El nombre contiene carecteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -122,6 +132,10 @@ export class ModalAddEditBiographyComponent implements OnInit {
         this.mErrApellido = "El apellido debe contener de 3 a 100 carateres";
         return true;
       }
+      if (this.Apellido!.errors!['pattern']){
+        this.mErrApellido = "El apellido contiene carecteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -137,6 +151,10 @@ export class ModalAddEditBiographyComponent implements OnInit {
       }
       if(this.Acercade!.errors!['minlength'] || this.Acercade!.errors!['maxlength']){
         this.mErrAcercade = "La seccion acerca de tí debe contener de 3 a 500 carateres";
+        return true;
+      }
+      if (this.Acercade!.errors!['pattern']){
+        this.mErrAcercade = "La seccion acerca de tí contiene carecteres no soportados";
         return true;
       }
     }
@@ -173,6 +191,10 @@ export class ModalAddEditBiographyComponent implements OnInit {
         this.mErrGithub = "La url de github debe contener de 3 a 100 carateres";
         return true;
       }
+      if (this.Github!.errors!['pattern']){
+        this.mErrGithub = "La url de github contiene carecteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -184,6 +206,10 @@ export class ModalAddEditBiographyComponent implements OnInit {
     if (this.Linkedin!.errors && this.Linkedin!.touched) {
       if(this.Linkedin!.errors!['minlength'] || this.Github!.errors!['maxlength']){
         this.mErrLinkedin = "La url de Linkedin debe contener de 3 a 100 carateres";
+        return true;
+      }
+      if (this.Linkedin!.errors!['pattern']){
+        this.mErrLinkedin = "La url de Linkedin contiene carecteres no soportados";
         return true;
       }
     }
@@ -250,7 +276,6 @@ export class ModalAddEditBiographyComponent implements OnInit {
       );
       this.spinner = false;
     }
-    
   }
 
   closeModal() {

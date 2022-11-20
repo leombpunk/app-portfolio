@@ -35,15 +35,19 @@ export class SkillService {
     return this.http.post<Skill>(this.apiUrl + "/crear", data);
   }
 
+  // public putSkill(id: any, data: any): Observable<Skill> {
+  //   return this.http.put<Skill>(this.apiUrl + `/editar/${id}`, {},{
+  //     params: {
+  //       descripcion: data.descripcion,
+  //       nivel: data.nivel,
+  //       tipo_habilidad_id: data.tipo_habilidad_id,
+  //       usuarios_id: data.usuarios_id
+  //     }
+  //   });
+  // }
+
   public putSkill(id: any, data: any): Observable<Skill> {
-    return this.http.put<Skill>(this.apiUrl + `/editar/${id}`, {},{
-      params: {
-        descripcion: data.descripcion,
-        nivel: data.nivel,
-        tipo_habilidad_id: data.tipo_habilidad_id,
-        usuarios_id: data.usuarios_id
-      }
-    });
+    return this.http.put<Skill>(this.apiUrl + `/editar/${id}`, data);
   }
 
   public deleteSkill(id: any): Observable<Skill> {

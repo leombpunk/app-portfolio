@@ -82,7 +82,8 @@ export class ButtonEditComponent implements OnInit {
             acercade: this.perfilData.acercade,
             correo: this.perfilData.correo,
             linkedin: this.perfilData.linkedin,
-            github: this.perfilData.github
+            github: this.perfilData.github,
+            usuarios_id: this.perfilData.usuarios_id,
           });
           wea.componentInstance.bio = this.perfilData;
         } else {
