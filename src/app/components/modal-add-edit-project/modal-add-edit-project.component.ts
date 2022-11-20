@@ -6,6 +6,7 @@ import { Project } from 'src/app/model/projects';
 import { ProjectService } from 'src/app/services/project.service';
 import { WalkietalkieService } from 'src/app/services/walkietalkie.service';
 import { ToastrService } from 'ngx-toastr';
+import { customRegExp } from 'src/app/utils/customRegExp';
 
 @Component({
   selector: 'app-modal-add-edit-project',
@@ -38,14 +39,14 @@ export class ModalAddEditProjectComponent implements OnInit {
     private comunicationService: WalkietalkieService,
     private toastr: ToastrService) { 
     this.formProject = this.form.group({
-      id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
-      usuarios_id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
-      nombre: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-      descripcion: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(500)]],
-      desde: ['',[Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      hasta: ['',[Validators.maxLength(10)]],
-      sitio: ['',[Validators.maxLength(100)]],
-      enlace: ['',[Validators.maxLength(100)]]
+      id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]],
+      usuarios_id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]],
+      nombre: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(customRegExp.stringIntegerPattern)]],
+      descripcion: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(500), Validators.pattern(customRegExp.stringIntegerPhrasePattern)]],
+      desde: ['',[Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(customRegExp.datePattern)]],
+      hasta: ['',[]],
+      sitio: ['',[Validators.maxLength(100), Validators.pattern(customRegExp.urlPattern)]],
+      enlace: ['',[Validators.maxLength(100), Validators.pattern(customRegExp.urlPattern)]]
     });
   }
 
@@ -87,6 +88,10 @@ export class ModalAddEditProjectComponent implements OnInit {
         this.mErrNombre = "El Nombre debe contener de 5 a 50 carateres";
         return true;
       }
+      if (this.Nombre!.errors!['pattern']){
+        this.mErrNombre = "El nombre contiene caracteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -104,6 +109,10 @@ export class ModalAddEditProjectComponent implements OnInit {
         this.mErrDescripcion = "La descripcion debe contener de 5 a 500 carateres";
         return true;
       }
+      if (this.Descripcion!.errors!['pattern']){
+        this.mErrDescripcion = "La Descripcion contiene caracteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -117,6 +126,10 @@ export class ModalAddEditProjectComponent implements OnInit {
         this.mErrEnlace = "El enlace/repositorio debe contener un maximo de 100 carateres";
         return true;
       }
+      if (this.Enlace!.errors!['pattern']){
+        this.mErrEnlace = "El campo enlace/repositorio contiene caracteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -128,6 +141,10 @@ export class ModalAddEditProjectComponent implements OnInit {
     if (this.Sitio!.errors && this.Sitio!.touched){
       if(this.Sitio!.errors!['maxlength']){
         this.mErrSitio = "El sitio/demo debe contener un maximo de 100 carateres";
+        return true;
+      }
+      if (this.Sitio!.errors!['pattern']){
+        this.mErrSitio = "El campo sitio/demo contiene caracteres no soportados";
         return true;
       }
     }
@@ -147,6 +164,10 @@ export class ModalAddEditProjectComponent implements OnInit {
         this.mErrDesde = "El campo inicio debe contener un minimo y maximo de 10 carateres";
         return true;
       }
+      if (this.Desde!.errors!['pattern']){
+        this.mErrDesde = "El campo Desde contiene caracteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -155,10 +176,53 @@ export class ModalAddEditProjectComponent implements OnInit {
     return this.Hasta!.touched && !this.Hasta!.valid;
   }
   public get HastaError(){
-    if (this.Hasta!.errors && this.Hasta!.touched){
-      if(this.Hasta!.errors!['maxlength']){
-        this.mErrHasta = "El campo fin debe contener un maximo de 10 carateres";
-        return true;
+    // if (this.Hasta!.errors && this.Hasta!.touched){
+    //   if(this.Hasta!.errors!['maxlength']){
+    //     this.mErrHasta = "El campo fin debe contener un maximo de 10 carateres";
+    //     return true;
+    //   }
+    // }
+    // return false;
+    if (this.Hasta!.touched){
+      this.Hasta!.setErrors(null);
+      // console.log(this.Hasta!.errors);
+      if (this.Hasta!.value !== ""){ // si es distinto que vacio procedo a validar
+        const value: string = this.Hasta!.value;
+        //comprobar longitud = 10
+        if (value.length < 10 || value.length > 10){
+          this.Hasta!.setErrors({ 'minlength': true });
+          this.mErrHasta = "El campo Hasta debe contener 10 carateres";
+          return true;
+        }
+        const desde: string = this.Desde!.value;
+        const hasta: string = this.Hasta!.value;
+        const fechaDesde = new Date(desde);
+        const fechahasta = new Date(hasta);
+        const fechaHoy = new Date();
+        //comprobar que sea mayor que el campo Desde
+        if (fechaDesde.getTime() > fechahasta.getTime()){
+          this.Hasta!.setErrors({ 'minor': true });
+          this.mErrHasta = "El campo Hasta no puede contener una fecha anterior al campo desde";
+          return true;
+        }
+        // console.log("yo introduje: 2022-12-10 (año/mes/dia)"); //rompe los huevos con el utc o gtm
+        // console.log("new date: "+fechaDesde);
+        // console.log("getDate: "+fechaDesde.getDate());
+        // console.log("getUTCDate: "+fechaDesde.getUTCDate());
+        // console.log("getMonth: "+fechaDesde.getMonth());
+
+        //comprobar que no se ponga una fecha mayor a la del dia
+        if (fechahasta.getTime() > fechaHoy.getTime()){
+          this.Hasta!.setErrors({ 'manor': true });
+          this.mErrHasta = "El campo Hasta no puede contener una fecha mayor a la actual";
+          return true;
+        }
+        //comprobar con el pattern datePatter
+        if (!value.match(customRegExp.datePattern)){
+          this.Hasta!.setErrors({ 'pattern': true });
+          this.mErrHasta = "El campo Desde contiene carecteres no soportados";
+          return true;
+        }
       }
     }
     return false;
@@ -189,7 +253,7 @@ export class ModalAddEditProjectComponent implements OnInit {
           }, 
           error: (e: any) => {
             // console.log("error");
-            // console.log(e);
+            console.log(e);
             this.toastr.error(
               'Error al intentar actualizar su Formación Academica.',
               'Error!',
@@ -228,7 +292,7 @@ export class ModalAddEditProjectComponent implements OnInit {
           }, 
           error: (e: any) => {
             // console.log("error");
-            // console.log(e);
+            console.log(e);
             this.toastr.error(
               'Error al intentar agregar un proyecto.',
               'Error!',

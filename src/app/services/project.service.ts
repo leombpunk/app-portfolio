@@ -35,18 +35,22 @@ export class ProjectService {
     return this.http.post<Project>(this.apiUrl + "/crear", datos);
   }
 
+  // public putProject(id: any, datos: any): Observable<Project> {
+  //   return this.http.put<Project>(this.apiUrl + `/editar/${id}`,{}, {
+  //     params: {
+  //       nombre: datos.nombre,
+  //       descripcion: datos.descripcion,
+  //       sitio: datos.sitio,
+  //       enlace: datos.enlace,
+  //       desde: datos.desde,
+  //       hasta: datos.hasta,
+  //       usuarios_id: datos.usuarios_id
+  //     }
+  //   });
+  // }
+
   public putProject(id: any, datos: any): Observable<Project> {
-    return this.http.put<Project>(this.apiUrl + `/editar/${id}`,{}, {
-      params: {
-        nombre: datos.nombre,
-        descripcion: datos.descripcion,
-        sitio: datos.sitio,
-        enlace: datos.enlace,
-        desde: datos.desde,
-        hasta: datos.hasta,
-        usuarios_id: datos.usuarios_id
-      }
-    });
+    return this.http.put<Project>(this.apiUrl + `/editar/${id}`, datos);
   }
 
   public deleteProject(id: any): Observable<Project> {

@@ -35,24 +35,30 @@ export class ExperienceService {
     return this.http.post<Experience>(this.apiUrl + '/crear', datos);
   }
 
+  // //put
+  // public putExperience(id: any, datos: any): Observable<Experience> {
+  //   return this.http.put<Experience>(
+  //     this.apiUrl + `/editar/${id}`,
+  //     {},
+  //     {
+  //       params: {
+  //         cargo: datos.cargo,
+  //         empresa: datos.empresa,
+  //         desde: datos.desde,
+  //         hasta: datos.hasta,
+  //         usuarios_id: datos.usuarios_id,
+  //         tarea: datos.tarea,
+  //         reftelef: datos.reftelef,
+  //         refnombre: datos.refnombre
+  //       }
+  //     }
+  //   );
+  // }
+
   //put
   public putExperience(id: any, datos: any): Observable<Experience> {
     return this.http.put<Experience>(
-      this.apiUrl + `/editar/${id}`,
-      {},
-      {
-        params: {
-          cargo: datos.cargo,
-          empresa: datos.empresa,
-          desde: datos.desde,
-          hasta: datos.hasta,
-          usuarios_id: datos.usuarios_id,
-          tarea: datos.tarea,
-          reftelef: datos.reftelef,
-          refnombre: datos.refnombre
-        }
-      }
-    );
+      this.apiUrl + `/editar/${id}`, datos);
   }
 
   //delete

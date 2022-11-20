@@ -5,6 +5,7 @@ import { ExperienceService } from '../../services/experience.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 import { Experience } from '../../model/experience';
 import { ToastrService } from 'ngx-toastr';
+import { customRegExp } from 'src/app/utils/customRegExp';
 
 @Component({
   selector: 'app-modal-add-edit-experience',
@@ -37,15 +38,15 @@ export class ModalAddEditExperienceComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.formExperience = this.form.group({
-      id: [0,[Validators.minLength(1), Validators.maxLength(10)]],
-      cargo: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      empresa: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      desde: ['',[Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      hasta: ['',[Validators.maxLength(10)]],
-      reftelef: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-      refnombre: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
-      tarea: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(500)]],
-      usuarios_id: [0,[Validators.minLength(1), Validators.maxLength(10)]]
+      id: [0,[Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]],
+      cargo: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(customRegExp.stringPattern)]],
+      empresa: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(customRegExp.stringIntegerPattern)]],
+      desde: ['',[Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(customRegExp.datePattern)]],
+      hasta: ['',[]],
+      reftelef: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(customRegExp.phonePattern)]],
+      refnombre: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(customRegExp.stringPattern)]],
+      tarea: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(500), Validators.pattern(customRegExp.stringIntegerPhrasePattern)]],
+      usuarios_id: [0,[Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]]
     });
   }
 
@@ -90,6 +91,10 @@ export class ModalAddEditExperienceComponent implements OnInit {
         this.mErrCargo = "El Cargo debe contener de 3 a 50 carateres de longitud.";
         return true;
       }
+      if (this.Cargo!.errors!['pattern']){
+        this.mErrCargo = "El Cargo contiene carecteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -104,7 +109,11 @@ export class ModalAddEditExperienceComponent implements OnInit {
         return true;
       }
       if (this.Empresa!.errors!['minlength'] || this.Empresa!.errors!['maxlength']){
-        this.mErrEmpresa = "La Empresa debe contener de 3 a 50 carateres de longitud.";
+        this.mErrEmpresa = "El campo Empresa debe contener de 3 a 50 carateres de longitud.";
+        return true;
+      }
+      if (this.Empresa!.errors!['pattern']){
+        this.mErrEmpresa = "El campo Empresa contiene carecteres no soportados";
         return true;
       }
     }
@@ -124,6 +133,10 @@ export class ModalAddEditExperienceComponent implements OnInit {
         this.mErrDesde = "El campo Desde debe contener 8 carateres de longitud.";
         return true;
       }
+      if (this.Desde!.errors!['pattern']){
+        this.mErrDesde = "El campo Desde contiene carecteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -133,10 +146,53 @@ export class ModalAddEditExperienceComponent implements OnInit {
   }
   public get HastaError(){
     //console.log(this.Hasta!.value);//muestra el dato cuando esta completa la entrada dia mes año
-    if (this.Hasta!.errors && this.Hasta!.touched){
-      if (this.Hasta!.errors!['minlength'] || this.Hasta!.errors!['maxlength']){
-        this.mErrHasta = "El campo Hasta debe contener 8 carateres de longitud.";
-        return true;
+    // if (this.Hasta!.errors && this.Hasta!.touched){
+    //   if (this.Hasta!.errors!['minlength'] || this.Hasta!.errors!['maxlength']){
+    //     this.mErrHasta = "El campo Hasta debe contener 8 carateres de longitud.";
+    //     return true;
+    //   }
+    // }
+    // return false;
+    if (this.Hasta!.touched){
+      this.Hasta!.setErrors(null);
+      // console.log(this.Hasta!.errors);
+      if (this.Hasta!.value !== ""){ // si es distinto que vacio procedo a validar
+        const value: string = this.Hasta!.value;
+        //comprobar longitud = 10
+        if (value.length < 10 || value.length > 10){
+          this.Hasta!.setErrors({ 'minlength': true });
+          this.mErrHasta = "El campo Hasta debe contener 10 carateres";
+          return true;
+        }
+        const desde: string = this.Desde!.value;
+        const hasta: string = this.Hasta!.value;
+        const fechaDesde = new Date(desde);
+        const fechahasta = new Date(hasta);
+        const fechaHoy = new Date();
+        //comprobar que sea mayor que el campo Desde
+        if (fechaDesde.getTime() > fechahasta.getTime()){
+          this.Hasta!.setErrors({ 'minor': true });
+          this.mErrHasta = "El campo Hasta no puede contener una fecha anterior al campo desde";
+          return true;
+        }
+        // console.log("yo introduje: 2022-12-10 (año/mes/dia)"); //rompe los huevos con el utc o gtm
+        // console.log("new date: "+fechaDesde);
+        // console.log("getDate: "+fechaDesde.getDate());
+        // console.log("getUTCDate: "+fechaDesde.getUTCDate());
+        // console.log("getMonth: "+fechaDesde.getMonth());
+
+        //comprobar que no se ponga una fecha mayor a la del dia
+        if (fechahasta.getTime() > fechaHoy.getTime()){
+          this.Hasta!.setErrors({ 'manor': true });
+          this.mErrHasta = "El campo Hasta no puede contener una fecha mayor a la actual";
+          return true;
+        }
+        //comprobar con el pattern datePatter
+        if (!value.match(customRegExp.datePattern)){
+          this.Hasta!.setErrors({ 'pattern': true });
+          this.mErrHasta = "El campo Desde contiene carecteres no soportados";
+          return true;
+        }
       }
     }
     return false;
@@ -153,6 +209,10 @@ export class ModalAddEditExperienceComponent implements OnInit {
       }
       if (this.Reftelef!.errors!['minlength'] || this.Reftelef!.errors!['maxlength']){
         this.mErrReftelef = "El campo Contacto de Referencia debe contener entre 5 a 50 carateres.";
+        return true;
+      }
+      if (this.Reftelef!.errors!['pattern']){
+        this.mErrReftelef = "El campo Contacto contiene carecteres no soportados";
         return true;
       }
     }
@@ -172,6 +232,10 @@ export class ModalAddEditExperienceComponent implements OnInit {
         this.mErrRefnombre = "El campo Nombre Contacto de Referencia debe contener entre 5 a 50 carateres.";
         return true;
       }
+      if (this.Refnombre!.errors!['pattern']){
+        this.mErrRefnombre = "El campo Nombre Contacto de Referencia contiene carecteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -187,6 +251,10 @@ export class ModalAddEditExperienceComponent implements OnInit {
       }
       if (this.Tarea!.errors!['minlength'] || this.Tarea!.errors!['maxlength']){
         this.mErrTarea = "El campo tarea debe contener entre 5 a 500 carateres.";
+        return true;
+      }
+      if (this.Tarea!.errors!['pattern']){
+        this.mErrTarea = "El campo Tarea contiene carecteres no soportados";
         return true;
       }
     }

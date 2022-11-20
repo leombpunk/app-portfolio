@@ -37,7 +37,7 @@ export class ModalAddEditSkillComponent implements OnInit {
         id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]],
         usuarios_id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]],
         descripcion: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(customRegExp.stringIntegerPattern)]],
-        nivel: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(2)], Validators.pattern(customRegExp.integerPattern)],
+        nivel: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern(customRegExp.integerPattern)]],
         tipo_habilidad_id: [0,[Validators.required, Validators.minLength(1), Validators.maxLength(10), Validators.pattern(customRegExp.integerPattern)]]
       });
     }
@@ -69,6 +69,10 @@ export class ModalAddEditSkillComponent implements OnInit {
         this.mErrDescripcion = "La descripcion debe contener entre 2 a 50 caracteres";
         return true;
       }
+      if (this.Descripcion!.errors!['pattern']){
+        this.mErrDescripcion = "La Descripcion contiene carecteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -85,6 +89,10 @@ export class ModalAddEditSkillComponent implements OnInit {
         this.mErrNivel = "El nivel debe contener entre 1 a 2 caracteres";
         return true;
       }
+      if (this.Nivel!.errors!['pattern']){
+        this.mErrNivel = "El nivel contiene carecteres no soportados";
+        return true;
+      }
     }
     return false;
   }
@@ -99,6 +107,10 @@ export class ModalAddEditSkillComponent implements OnInit {
       }
       if (this.TipoHabilidadId!.errors!['minlength'] || this.TipoHabilidadId!.errors!['maxlength']){
         this.mErrTipoHabilidad = "El tipo de habilidad debe ser alguno de la lista dada";
+        return true;
+      }
+      if (this.TipoHabilidadId!.errors!['pattern']){
+        this.mErrTipoHabilidad = "El tipo de habilidad no es correcto";
         return true;
       }
     }
