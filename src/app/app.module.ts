@@ -33,6 +33,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { AlertDangerComponent } from './components/alert-danger/alert-danger.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { CardEmptyComponent } from './components/card-empty/card-empty.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     HomeComponent,
     RegistroComponent,
     AlertDangerComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    CardEmptyComponent
   ],
   imports: [
     CommonModule,

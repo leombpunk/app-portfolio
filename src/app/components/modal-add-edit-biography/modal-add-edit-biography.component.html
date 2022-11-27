@@ -113,7 +113,13 @@
         aria-labelledby="tab-contact"
       >
         <div class="mb-3">
-          <label for="github" class="form-label">GitHub:</label>
+          <label for="github" class="form-label">GitHub: <span
+            placement="end"
+            ngbTooltip="ej.: https://url-de-github.com/tu-nickname"
+            class="customTooltip"
+          >
+            <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+        ></label>
           <input
             type="text"
             name="github"
@@ -126,7 +132,13 @@
               <span *ngIf="GithubError" class="errorMessage"> {{ mErrGithub }} </span>
         </div>
         <div class="mb-3">
-          <label for="linkedin" class="form-label">LinkedIn:</label>
+          <label for="linkedin" class="form-label">LinkedIn: <span
+            placement="end"
+            ngbTooltip="ej.: https://url-de-linkedin.com/tu-nickname"
+            class="customTooltip"
+          >
+            <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+        ></label>
           <input
             type="text"
             name="linkedin"
@@ -139,7 +151,13 @@
               <span *ngIf="LinkedinError" class="errorMessage"> {{ mErrLinkedin }} </span>
         </div>
         <div class="mb-3">
-          <label for="correo" class="form-label">Correo:</label>
+          <label for="correo" class="form-label">Correo: <span
+            placement="end"
+            ngbTooltip="ej.: nickname@dominio.com"
+            class="customTooltip"
+          >
+            <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+        ></label>
           <input
             type="mail"
             name="correo"

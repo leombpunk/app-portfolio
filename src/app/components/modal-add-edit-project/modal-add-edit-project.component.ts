@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Project } from 'src/app/model/projects';
@@ -14,6 +14,8 @@ import { customRegExp } from 'src/app/utils/customRegExp';
   styleUrls: ['./modal-add-edit-project.component.css']
 })
 export class ModalAddEditProjectComponent implements OnInit {
+
+  faCircleQuestion = faCircleQuestion;
 
   @Input() titleModal: string = "";
   @Input() usuario_id: number = 0;

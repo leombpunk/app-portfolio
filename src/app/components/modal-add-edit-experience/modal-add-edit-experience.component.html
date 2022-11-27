@@ -54,7 +54,14 @@
           <span *ngIf="DesdeError" class="errorMessage">{{ mErrDesde }}</span>
         </div>
         <div class="col-6">
-          <label for="hasta" class="form-label">Hasta: <span data-bs-toggle="tooltip" data-bs-placement="right" title="Dejar en blanco si es hasta la fecha actual">(?)</span></label>
+          <label for="hasta" class="form-label">Hasta: <span
+            placement="end"
+            ngbTooltip="Si aun sigue 'trabajando' por favor deje en blanco este campo, si guarda una fecha no podra ser borrada mas adelante, pero si la puede modificar"
+            class="customTooltip"
+            style="color: red;"
+          >
+            <fa-icon [icon]="faCircleQuestion"></fa-icon
+          ></span> </label>
           <input
             type="date"
             name="hasta"
@@ -94,7 +101,13 @@
         <span *ngIf="RefnombreError" class="errorMessage">{{ mErrRefnombre }}</span>
       </div>
     <div class="mb-3">
-      <label for="tareas" class="form-label">Tareas realizadas:</label>
+      <label for="tareas" class="form-label">Tareas realizadas: <span
+        placement="end"
+        ngbTooltip="Asegurese de usar comas (,) para citar las tareas que le asignaron para armar una lista ¡es muy importante!"
+        class="customTooltip"
+      >
+        <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+    ></label>
       <textarea
         name="tarea"
         id="tarea"

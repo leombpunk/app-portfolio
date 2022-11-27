@@ -117,7 +117,14 @@
           <span *ngIf="DesdeError" class="errorMessage"> {{ mErrDesde }} </span>
         </div>
         <div class="col-6">
-          <label for="hasta" class="form-label">Hasta:</label>
+          <label for="hasta" class="form-label">Hasta: <span
+            placement="end"
+            ngbTooltip="Si aun sigue 'cursando' por favor deje en blanco este campo, si guarda una fecha no podra ser borrada mas adelante, pero si la puede modificar"
+            class="customTooltip"
+            style="color: red;"
+          >
+            <fa-icon [icon]="faCircleQuestion"></fa-icon
+          ></span> </label>
           <input
             type="date"
             id="hasta"

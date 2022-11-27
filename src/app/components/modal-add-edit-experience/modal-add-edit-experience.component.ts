@@ -6,6 +6,7 @@ import { WalkietalkieService } from '../../services/walkietalkie.service';
 import { Experience } from '../../model/experience';
 import { ToastrService } from 'ngx-toastr';
 import { customRegExp } from 'src/app/utils/customRegExp';
+import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-modal-add-edit-experience',
@@ -13,6 +14,8 @@ import { customRegExp } from 'src/app/utils/customRegExp';
   styleUrls: ['./modal-add-edit-experience.component.css']
 })
 export class ModalAddEditExperienceComponent implements OnInit {
+
+  faCircleQuestion = faCircleQuestion;
 
   @Input() titleModal: string = '';
   @Input() formExperience: FormGroup;

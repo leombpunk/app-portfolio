@@ -235,7 +235,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
     // console.log(this.Habilidades);
     if(this.formAcademic.valid){
       // console.log("form: ");
-      // console.log(this.formAcademic.value);
+      console.log(this.formAcademic.value);
       // console.log("el fomrulario es valido");
       this.spinner = true;
       if (this.academ.titulo !== ''){
@@ -256,7 +256,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
           },
           error: (e: any) => {
             // console.log("error: ");
-            // console.log(e);
+            console.log(e);
             this.toastr.error(
               'Error al intentar actualizar su Formación Academica.',
               'Error!',
