@@ -18,6 +18,9 @@ export class LoginComponent implements OnInit {
   mErrPass: string = '';
   mErrTokenService: string = '';
 
+  mErrStatus: string = '';
+  mErrStatusText: string = '';
+
   isLogged: boolean = false;
   isLogginFail: boolean = false;
   login: Login = new Login('', '');
@@ -34,29 +37,23 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.formLogin = this.form.group({
-      usuario: [
-        '',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(16)]
-      ],
-      contrasena: [
-        '',
-        [Validators.required, Validators.minLength(8), Validators.maxLength(16)]
-      ]
+      usuario: ['',[Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
+      contrasena: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(16)]]
     });
   }
 
   ngOnInit(): void {
     //comprobar si se esta loggeado
-    this.toastr.info(
-      'El web service de Render.com es lento, puede demorar hasta 5 minutos hasta arrancar el contenedor',
-      'Aguarde por favor!',
-      {
+    // this.toastr.info(
+    //   'El web service de Render.com es lento, puede demorar hasta 5 minutos hasta arrancar el contenedor',
+    //   'Aguarde por favor!',
+    //   {
         
-        timeOut: 0,
-        extendedTimeOut: 0,
-        positionClass: 'toast-center-center'
-      }
-    );
+    //     timeOut: 0,
+    //     extendedTimeOut: 0,
+    //     positionClass: 'toast-center-center'
+    //   }
+    // );
     if (this.tokenService.getToken()) {
       this.isLogged = true;
       this.isLogginFail = false;
@@ -112,6 +109,16 @@ export class LoginComponent implements OnInit {
     if (this.formLogin.valid) {
       // console.log("el formulario es valido");
       // console.log(this.formLogin.value);
+      this.toastr.info(
+        'El web service de Render.com es lento, puede demorar hasta 5 minutos hasta arrancar el contenedor',
+        'Aguarde por favor!',
+        {
+          
+          timeOut: 0,
+          extendedTimeOut: 0,
+          positionClass: 'toast-center-center'
+        }
+      );
       //instancio el la clase login
       this.login = new Login(this.User!.value, this.Pass!.value);
       // console.log(this.login);
@@ -144,16 +151,18 @@ export class LoginComponent implements OnInit {
         },
         error: (e: any) => {
           // console.log("error: ");
-          // console.log(e);
+          console.log(e);
           this.spinner = false;
           this.isLogged = false;
           this.isLogginFail = true;
 
           //asumo que esto no funcionara porque no tengo la clase mensaje en el backend
-          this.mErrTokenService = e.error.message;
+          this.mErrTokenService = e.error.mensaje || e.message;
+          this.mErrStatus = e.status;
+          this.mErrStatusText = e.statusText;
           // console.log(this.mErrTokenService);
           this.toastr.error(
-            'Error al iniciar sesión. ' + this.mErrTokenService,
+            'Error al iniciar sesión. ' /*+ this.mErrTokenService*/,
             'Error!',
             {
               timeOut: 3000,

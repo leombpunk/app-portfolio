@@ -23,6 +23,10 @@ export class ModalAddEditAcademicComponent implements OnInit {
   mErrHabilidades: string = "";
   mErrDesde: string = "";
   mErrHasta: string = "";
+
+  mErrMessage: string = '';
+  mErrStatus: string = '';
+  mErrStatusText: string = '';
   
   formAcademic: FormGroup;
 
@@ -30,7 +34,6 @@ export class ModalAddEditAcademicComponent implements OnInit {
   @Input() usuario_id: number = 0;
   @Input() academ: Academics = new Academics();
 
-  mensaje: string = "";
   spinner: boolean = false;
 
   constructor(
@@ -266,7 +269,9 @@ export class ModalAddEditAcademicComponent implements OnInit {
               }
             );
             this.spinner = false;
-            this.mensaje = "Error al actualizar. " + e;
+            this.mErrMessage = e.error.mensaje || e.message;
+            this.mErrStatus = e.status;
+            this.mErrStatusText = e.statusText;
           },
           complete: () => {
             this.comunicationService.actualizarAca(true);
@@ -291,7 +296,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
                 positionClass: 'toast-bottom-right'
               }
             );
-            this.mensaje = "";
+            this.mErrMessage = "";
           },
           error: (e: any) => {
             // console.log("error: ");
@@ -304,7 +309,9 @@ export class ModalAddEditAcademicComponent implements OnInit {
                 positionClass: 'toast-bottom-right'
               }
             );
-            this.mensaje = "Error al intentar agregar. " + e;
+            this.mErrMessage = e.error.mensaje || e.message;
+            this.mErrStatus = e.status;
+            this.mErrStatusText = e.statusText;
             this.spinner = false;
           },
           complete: () => {
@@ -328,7 +335,7 @@ export class ModalAddEditAcademicComponent implements OnInit {
           positionClass: 'toast-bottom-right'
         }
       );
-      this.mensaje = "Revise los campos.";
+      this.mErrMessage = "Revise los campos.";
       this.spinner = false;
     }
   }

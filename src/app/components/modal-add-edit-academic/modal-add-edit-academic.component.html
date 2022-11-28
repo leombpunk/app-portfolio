@@ -11,8 +11,10 @@
 <form [formGroup]="formAcademic" (ngSubmit)="onSubmit($event)">
   <div class="modal-body">
     <app-alert-danger
-      *ngIf="mensaje"
-      [mensajeAlert]="mensaje"
+      *ngIf="mErrMessage"
+      [mensajeAlert]="mErrMessage"
+      [mensajeStatus]="mErrStatus"
+      [mensajeStatusText]="mErrStatusText"
     ></app-alert-danger>
     <input
       type="text"

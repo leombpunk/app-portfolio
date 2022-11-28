@@ -1,14 +1,12 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAddEditBiographyComponent } from '../modal-add-edit-biography/modal-add-edit-biography.component';
 import { ModalAddEditAcademicComponent } from '../modal-add-edit-academic/modal-add-edit-academic.component';
 import { ModalAddEditExperienceComponent } from '../modal-add-edit-experience/modal-add-edit-experience.component';
 import { ModalAddEditProjectComponent } from '../modal-add-edit-project/modal-add-edit-project.component';
 import { ModalAddEditSkillComponent } from '../modal-add-edit-skill/modal-add-edit-skill.component';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
-
 import { Biography } from '../../model/biography';
 import { Experience } from 'src/app/model/experience';
 import { Academics } from '../../model/academic';
@@ -22,6 +20,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./button-edit.component.css']
 })
 export class ButtonEditComponent implements OnInit {
+
   faPenToSquare = faPenToSquare;
 
   @Input() modalTarget: string = '';
@@ -158,7 +157,6 @@ export class ButtonEditComponent implements OnInit {
           backdrop: 'static',
           centered: true
         });
-
         wea4.componentInstance.titleModal = 'Editar Educación';
         if (this.type === '1') {
           // console.log("boton editar educacion: (datos-object)");
@@ -223,7 +221,6 @@ export class ButtonEditComponent implements OnInit {
           });
         }
         break;
-
       default:
         // console.log('que forro que sos!');
         this.toastr.warning(

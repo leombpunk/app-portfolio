@@ -65,6 +65,9 @@
           />
           <div class="card-body">
             <h4 class="card-title text-center">Registro</h4>
+            <div *ngIf="isRegistredFail">
+              <app-alert-danger [mensajeAlert]="mErrResgistro" [mensajeStatus]="mErrStatus" [mensajeStatusText]="mErrStatusText"></app-alert-danger>
+            </div>
             <form
               [formGroup]="formRegistro"
               (ngSubmit)="onSubmit($event)"

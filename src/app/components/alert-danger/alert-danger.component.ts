@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AlertDangerComponent implements OnInit {
 
   @Input() mensajeAlert: string = "";
+  @Input() mensajeStatus: string = "";
+  @Input() mensajeStatusText: string = "";
 
   constructor() { }
 

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UsuarioNuevo } from 'src/app/model/usuario-nuevo';
 import { TokenService } from 'src/app/services/token.service';
 import { ToastrService } from 'ngx-toastr';
+import { customRegExp } from 'src/app/utils/customRegExp';
 
 @Component({
   selector: 'app-registro',
@@ -12,15 +13,17 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
+  mErrResgistro: string = '';
+  mErrUser: string = '';
+  mErrPass: string = '';
+  mErrStatus: string = '';
+  mErrStatusText: string = '';
 
-  mErrResgistro: string = "";
-  mErrUser: string = "";
-  mErrPass: string = "";
   isLogged: boolean = false;
   isRegistred: boolean = false;
   isRegistredFail: boolean = false;
   formRegistro: FormGroup;
-  usuarioNuevo: UsuarioNuevo = new UsuarioNuevo("","");
+  usuarioNuevo: UsuarioNuevo = new UsuarioNuevo('', '');
   spinner: boolean = false;
 
   constructor(
@@ -29,63 +32,87 @@ export class RegistroComponent implements OnInit {
     private router: Router,
     private tokenService: TokenService,
     private toastr: ToastrService
-  ) { 
+  ) {
     this.formRegistro = this.form.group({
-      usuario: ['',[Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-      contrasena: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(16)]]
+      usuario: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(16),
+          Validators.pattern(customRegExp.userNamePassword)
+        ]
+      ],
+      contrasena: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(16),
+          Validators.pattern(customRegExp.userNamePassword)
+        ]
+      ]
     });
   }
 
   ngOnInit(): void {
-    this.toastr.info(
-      'El web service de Render.com es lento, puede demorar hasta 5 minutos hasta arrancar el contenedor',
-      'Aguarde por favor!',
-      {
-        timeOut: 0,
-        extendedTimeOut: 0,
-        positionClass: 'toast-center-center'
-      }
-    );
-    if (this.tokenService.getToken()){
+    // this.toastr.info(
+    //   'El web service de Render.com es lento, puede demorar hasta 5 minutos hasta arrancar el contenedor',
+    //   'Aguarde por favor!',
+    //   {
+    //     timeOut: 0,
+    //     extendedTimeOut: 0,
+    //     positionClass: 'toast-center-center'
+    //   }
+    // );
+    if (this.tokenService.getToken()) {
       this.isLogged = true;
     }
   }
 
-  public get User(){
+  public get User() {
     return this.formRegistro.get('usuario');
   }
-  public get Pass(){
+  public get Pass() {
     return this.formRegistro.get('contrasena');
   }
 
-  public get UserValid(){
+  public get UserValid() {
     return this.User!.touched && !this.User!.valid;
   }
-  public get UserError(){
+  public get UserError() {
     if (this.User!.touched && this.User!.errors) {
-      if (this.User!.hasError('required')){
-        this.mErrUser = "El usuario es requerido";
+      if (this.User!.hasError('required')) {
+        this.mErrUser = 'El usuario es requerido';
         return true;
       }
-      if (this.User!.errors!['minlength'] || this.User!.errors!['maxlength']){
-        this.mErrUser = "El usuario debe contener entre 4 y 16 caracteres";
+      if (this.User!.errors!['minlength'] || this.User!.errors!['maxlength']) {
+        this.mErrUser = 'El usuario debe contener entre 4 y 16 caracteres';
+        return true;
+      }
+      if (this.User!.errors!['pattern']) {
+        this.mErrUser = 'El usuario acpeta numeros 0-9, letras a-z y A-Z';
         return true;
       }
     }
     return false;
   }
 
-  public get PassValid(){
+  public get PassValid() {
     return this.Pass!.touched && !this.Pass!.valid;
   }
-  public get PassError(){
+  public get PassError() {
     if (this.Pass!.touched && this.Pass!.errors) {
-      if (this.Pass!.hasError('required')){
-        this.mErrPass = "La contraseña es requerida";
+      if (this.Pass!.hasError('required')) {
+        this.mErrPass = 'La contraseña es requerida';
         return true;
       }
-      if (this.Pass!.errors!['minlength'] || this.Pass!.errors!['maxlength']){
-        this.mErrPass = "La contraseña debe contener entre 8 y 16 caracteres";
+      if (this.Pass!.errors!['minlength'] || this.Pass!.errors!['maxlength']) {
+        this.mErrPass = 'La contraseña debe contener entre 8 y 16 caracteres';
+        return true;
+      }
+      if (this.Pass!.errors!['pattern']) {
+        this.mErrPass = 'La contraseña acpeta numeros 0-9, letras a-z y A-Z';
         return true;
       }
     }
@@ -94,9 +121,18 @@ export class RegistroComponent implements OnInit {
 
   onSubmit(event: Event) {
     event.preventDefault();
-    if (this.formRegistro.valid){
+    if (this.formRegistro.valid) {
       // console.log("el formulario es valido");
       // console.log(this.formRegistro.value);
+      this.toastr.info(
+        'El web service de Render.com es lento, puede demorar hasta 5 minutos hasta arrancar el contenedor',
+        'Aguarde por favor!',
+        {
+          timeOut: 0,
+          extendedTimeOut: 0,
+          positionClass: 'toast-center-center'
+        }
+      );
       //instancio el la clase login
       this.usuarioNuevo = new UsuarioNuevo(this.User!.value, this.Pass!.value);
       // console.log(this.usuarioNuevo);
@@ -109,7 +145,8 @@ export class RegistroComponent implements OnInit {
           this.isRegistred = true;
           this.isRegistredFail = false;
           this.toastr.success('Cuenta Creada', 'Bien', {
-            timeOut: 3000, positionClass: 'toast-bottom-right'
+            timeOut: 3000,
+            positionClass: 'toast-bottom-right'
           });
           this.router.navigate(['/login']);
         },
@@ -120,31 +157,29 @@ export class RegistroComponent implements OnInit {
           this.isRegistred = false;
           this.isRegistredFail = true;
           //asumo que esto no funcionara porque no tengo la clase mensaje en el backend
-          this.mErrResgistro = e.error;
+          this.mErrResgistro = e.error.mensaje || e.message;
+          this.mErrStatus = e.status;
+          this.mErrStatusText = e.statusText;
 
-          this.toastr.error(this.mErrResgistro, 'Error', {
-            timeOut: 3000,  positionClass: 'toast-bottom-right',
+          this.toastr.error('No se puede registrar. '+this.mErrResgistro, 'Error', {
+            timeOut: 3000,
+            positionClass: 'toast-bottom-right'
           });
-        }, 
+        },
         complete: () => {
           // console.log("complete");
           this.spinner = false;
         }
       });
-    }
-    else {
+    } else {
       this.formRegistro.markAllAsTouched();
       // console.log("el formulario es invalido");
       // console.log(this.formRegistro.value);
       // console.log(this.formRegistro.errors);
-      this.toastr.warning(
-        'Revisa los campos.',
-        'Ateención!',
-        {
-          timeOut: 3000,
-          positionClass: 'toast-bottom-right'
-        }
-      );
+      this.toastr.warning('Revisa los campos.', 'Ateención!', {
+        timeOut: 3000,
+        positionClass: 'toast-bottom-right'
+      });
     }
   }
 }

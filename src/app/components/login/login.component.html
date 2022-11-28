@@ -59,13 +59,16 @@
           />
           <div class="card-body">
             <h4 class="card-title text-center">Inicio de sesión</h4>
-            <div
+            <!-- <div
               *ngIf="isLogginFail"
               class="alert alert-danger alert-dismissible"
               role="alert"
             >
               {{ mErrTokenService }}
-              <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div> -->
+            <div *ngIf="isLogginFail">
+              <app-alert-danger [mensajeAlert]="mErrTokenService" [mensajeStatus]="mErrStatus" [mensajeStatusText]="mErrStatusText"></app-alert-danger>
             </div>
             <form
               [formGroup]="formLogin"
