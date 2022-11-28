@@ -10,7 +10,12 @@
 </div>
 <div class="modal-body text-center">
   <h6>Desea eliminar {{ descpCard }}?</h6>
-  <app-alert-danger *ngIf="mensaje" [mensajeAlert]="mensaje"></app-alert-danger>
+  <app-alert-danger
+    *ngIf="mErrMessage"
+    [mensajeAlert]="mErrMessage"
+    [mensajeStatus]="mErrStatus"
+    [mensajeStatusText]="mErrStatusText"
+  ></app-alert-danger>
 </div>
 <div class="modal-footer">
   <button
@@ -21,7 +26,12 @@
   >
     Cerrar
   </button>
-  <button [disabled]="spinner" type="button" class="btn btn-danger" (click)="deleteSome()">
+  <button
+    [disabled]="spinner"
+    type="button"
+    class="btn btn-danger"
+    (click)="deleteSome()"
+  >
     <app-spinner *ngIf="spinner"></app-spinner>
     Aceptar
   </button>

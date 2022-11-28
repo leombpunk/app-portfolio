@@ -10,9 +10,26 @@
 </div>
 <form [formGroup]="formSkill" (ngSubmit)="onSubmit($event)">
   <div class="modal-body">
-    <app-alert-danger *ngIf="mensaje" [mensajeAlert]="mensaje"></app-alert-danger>
-    <input type="text" id="id" formControlName="id" value="0" style="display: none;">
-    <input type="text" id="usuarios_id" formControlName="usuarios_id" value="0" style="display: none;">
+    <app-alert-danger
+      *ngIf="mErrMessage"
+      [mensajeAlert]="mErrMessage"
+      [mensajeStatus]="mErrStatus"
+      [mensajeStatusText]="mErrStatusText"
+    ></app-alert-danger>
+    <input
+      type="text"
+      id="id"
+      formControlName="id"
+      value="0"
+      style="display: none;"
+    />
+    <input
+      type="text"
+      id="usuarios_id"
+      formControlName="usuarios_id"
+      value="0"
+      style="display: none;"
+    />
     <div class="mb-3">
       <label for="descripcion" class="form-label">Descripción:</label>
       <input
@@ -24,10 +41,14 @@
         placeholder="Ej.: PHP, JavaScript, MS Word, MS Excel, etc."
         [class.border-danger]="DescripcionValid"
       />
-      <span *ngIf="DescripcionError" class="errorMessage">{{ mErrDescripcion }}</span>
+      <span *ngIf="DescripcionError" class="errorMessage">{{
+        mErrDescripcion
+      }}</span>
     </div>
     <div class="mb-3">
-      <label for="nivel" class="form-label">Nivel(0-10): {{ Nivel?.value }}</label>
+      <label for="nivel" class="form-label"
+        >Nivel(0-10): {{ Nivel?.value }}</label
+      >
       <input
         type="range"
         name="nivel"
@@ -57,7 +78,9 @@
         <option value="2">Habilidad Blanda</option>
         <option value="3">Herramienta</option>
       </select>
-      <span *ngIf="TipoHabilidadIdError" class="errorMessage">{{ mErrTipoHabilidad }}</span>
+      <span *ngIf="TipoHabilidadIdError" class="errorMessage">{{
+        mErrTipoHabilidad
+      }}</span>
     </div>
   </div>
   <div class="modal-footer">

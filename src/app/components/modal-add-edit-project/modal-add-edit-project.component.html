@@ -10,7 +10,12 @@
 </div>
 <form [formGroup]="formProject" (ngSubmit)="onSubmit($event)">
   <div class="modal-body">
-    <app-alert-danger *ngIf="mensaje" [mensajeAlert]="mensaje"></app-alert-danger>
+    <app-alert-danger
+      *ngIf="mErrMessage"
+      [mensajeAlert]="mErrMessage"
+      [mensajeStatus]="mErrStatus"
+      [mensajeStatusText]="mErrStatusText"
+    ></app-alert-danger>
     <input
       type="text"
       id="id"
@@ -50,16 +55,20 @@
         placeholder="Describa su proyecto, herramientas utilizadas, ect..."
         [class.border-danger]="DescripcionValid"
       ></textarea>
-      <span *ngIf="DescripcionError" class="errorMessage">{{ mErrDescripcion }}</span>
+      <span *ngIf="DescripcionError" class="errorMessage">{{
+        mErrDescripcion
+      }}</span>
     </div>
     <div class="mb-3">
-      <label for="repositorio" class="form-label">Repositorio (enlace): <span
-        placement="end"
-        ngbTooltip="Por favor intoruzca aquí la URL donde tenga documentación de su proyecto! (anteponer http:// ó https://)"
-        class="customTooltip"
-      >
-        <fa-icon [icon]="faCircleQuestion"></fa-icon></span
-    ></label>
+      <label for="repositorio" class="form-label"
+        >Repositorio (enlace):
+        <span
+          placement="end"
+          ngbTooltip="Por favor intoruzca aquí la URL donde tenga documentación de su proyecto! (anteponer http:// ó https://)"
+          class="customTooltip"
+        >
+          <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+      ></label>
       <input
         type="text"
         id="repositorio"
@@ -72,13 +81,15 @@
       <span *ngIf="EnlaceError" class="errorMessage">{{ mErrEnlace }}</span>
     </div>
     <div class="mb-3">
-      <label for="sitio" class="form-label">Sitio (demo): <span
-        placement="end"
-        ngbTooltip="Si su proyecto tiene una demo, ponga la URL aquí (anteponer http:// ó https://)"
-        class="customTooltip"
-      >
-        <fa-icon [icon]="faCircleQuestion"></fa-icon></span
-    ></label>
+      <label for="sitio" class="form-label"
+        >Sitio (demo):
+        <span
+          placement="end"
+          ngbTooltip="Si su proyecto tiene una demo, ponga la URL aquí (anteponer http:// ó https://)"
+          class="customTooltip"
+        >
+          <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+      ></label>
       <input
         type="text"
         id="sitio"
@@ -104,14 +115,16 @@
           <span *ngIf="DesdeError" class="errorMessage"> {{ mErrDesde }} </span>
         </div>
         <div class="col-6">
-          <label for="hasta" class="form-label">Fin: <span
-            placement="end"
-            ngbTooltip="Si su proyecto aun sigue en 'desarrollo' por favor deje en blanco este campo, si guarda una fecha no podra ser borrada mas adelante, pero si la puede modificar"
-            class="customTooltip"
-            style="color: red;"
-          >
-            <fa-icon [icon]="faCircleQuestion"></fa-icon></span
-        ></label>
+          <label for="hasta" class="form-label"
+            >Fin:
+            <span
+              placement="end"
+              ngbTooltip="Si su proyecto aun sigue en 'desarrollo' por favor deje en blanco este campo, si guarda una fecha no podra ser borrada mas adelante, pero si la puede modificar"
+              class="customTooltip"
+              style="color: red;"
+            >
+              <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+          ></label>
           <input
             type="date"
             id="hasta"

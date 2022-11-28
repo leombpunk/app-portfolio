@@ -12,46 +12,47 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-modal-edit-image',
   templateUrl: './modal-edit-image.component.html',
   styleUrls: ['./modal-edit-image.component.css']
-}) 
+})
 export class ModalEditImageComponent implements OnInit {
-
   @Input() formBiographyImg: FormGroup;
-  @Input() titleModal: string = "";
-  mErrImage: string = "";
+  @Input() titleModal: string = '';
+  mErrImage: string = '';
   imgBandera: boolean = false;
   @Input() id: number = 0;
-  @Input() usuario_id: string = "";
-  filecito:any;
-  whatEdit: string = "";//para el switch, para saber que seccion va editar la foto/imagen/logo
+  @Input() usuario_id: string = '';
+  filecito: any;
+  whatEdit: string = ''; //para el switch, para saber que seccion va editar la foto/imagen/logo
 
-  mensaje: string = "";
+  mErrMessage: string = '';
+  mErrStatus: string = '';
+  mErrStatusText: string = '';
   spinner: boolean = false;
 
   constructor(
-    private modalActive: NgbActiveModal, 
-    private form: FormBuilder, 
-    private serviceBio: BiographyService, 
+    private modalActive: NgbActiveModal,
+    private form: FormBuilder,
+    private serviceBio: BiographyService,
     private serviceExpe: ExperienceService,
     private serviceAca: AcademicService,
     private servicePro: ProjectService,
     private comunicationService: WalkietalkieService,
-    private toastr: ToastrService) {
-      this.formBiographyImg = this.form.group({
-        id:[this.id,[Validators.required]],
-        img:['',[Validators.required]],
-      });
+    private toastr: ToastrService
+  ) {
+    this.formBiographyImg = this.form.group({
+      id: [this.id, [Validators.required]],
+      img: ['', [Validators.required]]
+    });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  public get Image(){
-    return this.formBiographyImg.get("img");
+  public get Image() {
+    return this.formBiographyImg.get('img');
   }
-  public get ImageValid(){
+  public get ImageValid() {
     return this.Image!.touched && !this.Image!.valid;
   }
-  public get ImageError(){
+  public get ImageError() {
     // let id = this.formBiographyImg.get("id");
     // let img = this.Image ? this.Image.value : '';
     // console.log(this.Image);
@@ -59,53 +60,53 @@ export class ModalEditImageComponent implements OnInit {
     //   this.mErrImage = "La imagen es requerida (. )( .)";
     //   return true;
     // }
-    if (this.imgBandera){
+    if (this.imgBandera) {
       return true;
     }
     if (this.Image!.touched) {
-      if(this.Image!.hasError('required')){
-        this.mErrImage = "La imagen es requerida";
+      if (this.Image!.hasError('required')) {
+        this.mErrImage = 'La imagen es requerida';
         return true;
       }
     }
-    
+
     return false;
   }
 
-  onFileSelected(event:any){
+  onFileSelected(event: any) {
     const imgFile: File = event.target.files[0];
     // console.log(imgFile);
     this.imgBandera = false;
     // console.log(imgFile.type);
-    if (imgFile){
-      if (imgFile.type !== "image/jpeg" && imgFile.type !== "image/png"){
-        this.mErrImage = "El formato de imagen no es correcto";
+    if (imgFile) {
+      if (imgFile.type !== 'image/jpeg' && imgFile.type !== 'image/png') {
+        this.mErrImage = 'El formato de imagen no es correcto';
         this.imgBandera = true;
-        this.Image!.setErrors({status: "INVALID"});
+        this.Image!.setErrors({ status: 'INVALID' });
       }
-      if (imgFile.size >= 5000000){ // casi 5mb, esta expresado en bytes
-        this.mErrImage = "El tamaño de la imagen es muy grande";
+      if (imgFile.size >= 5000000) {
+        // casi 5mb, esta expresado en bytes
+        this.mErrImage = 'El tamaño de la imagen es muy grande';
         this.imgBandera = true;
-        this.Image!.setErrors({status: "INVALID"});
+        this.Image!.setErrors({ status: 'INVALID' });
       }
       //si es el formato que espero recibir guardo el archivo en la variable
-      if (imgFile.type === "image/jpeg" || imgFile.type === "image/png"){
+      if (imgFile.type === 'image/jpeg' || imgFile.type === 'image/png') {
         this.filecito = event.target.files[0];
         this.imgBandera = false;
       }
-    }
-    else {
+    } else {
       this.imgBandera = false;
     }
     // console.log(this.filecito);
   }
 
-  onSubmit(event: Event){
+  onSubmit(event: Event) {
     event.preventDefault();
-    if(this.formBiographyImg.valid){
+    if (this.formBiographyImg.valid) {
       this.spinner = true;
       //agregar el switch
-      if (this.whatEdit === "biography"){
+      if (this.whatEdit === 'biography') {
         const formData: FormData = new FormData();
         formData.append('img', this.filecito);
         // console.log(this.filecito);
@@ -113,20 +114,18 @@ export class ModalEditImageComponent implements OnInit {
           next: (result: any) => {
             // console.log("response: ");
             // console.log(result);
-            this.mensaje = "";
-            this.toastr.success(
-              'Foto modificada correctamente.',
-              'Bien!',
-              {
-                timeOut: 3000,
-                positionClass: 'toast-bottom-right'
-              }
-            );
+            this.mErrMessage = '';
+            this.toastr.success('Foto modificada correctamente.', 'Bien!', {
+              timeOut: 3000,
+              positionClass: 'toast-bottom-right'
+            });
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
-            this.mensaje = "Error al actualizar. " + e;
+            this.mErrMessage = e.error.mensaje || e.message;
+            this.mErrStatus = e.status;
+            this.mErrStatusText = e.statusText;
             this.toastr.error(
               'Error al intentar actualizar la foto.',
               'Error!',
@@ -143,7 +142,7 @@ export class ModalEditImageComponent implements OnInit {
           }
         });
       }
-      if (this.whatEdit === "experience"){
+      if (this.whatEdit === 'experience') {
         const formData: FormData = new FormData();
         formData.append('img', this.filecito);
         // console.log("id (expe): " + this.id);
@@ -152,20 +151,18 @@ export class ModalEditImageComponent implements OnInit {
           next: (result: any) => {
             // console.log("response: ");
             // console.log(result);
-            this.mensaje = "";
-            this.toastr.success(
-              'Logotipo modificado correctamente.',
-              'Bien!',
-              {
-                timeOut: 3000,
-                positionClass: 'toast-bottom-right'
-              }
-            );
+            this.mErrMessage = '';
+            this.toastr.success('Logotipo modificado correctamente.', 'Bien!', {
+              timeOut: 3000,
+              positionClass: 'toast-bottom-right'
+            });
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
-            this.mensaje = "Error al actualizar. " + e;
+            this.mErrMessage = e.error.mensaje || e.message;
+            this.mErrStatus = e.status;
+            this.mErrStatusText = e.statusText;
             this.toastr.error(
               'Error al intentar actualizar el logotipo.',
               'Error!',
@@ -182,7 +179,7 @@ export class ModalEditImageComponent implements OnInit {
           }
         });
       }
-      if (this.whatEdit === "academic"){
+      if (this.whatEdit === 'academic') {
         const formData: FormData = new FormData();
         formData.append('img', this.filecito);
         // console.log("id (expe): " + this.id);
@@ -191,20 +188,18 @@ export class ModalEditImageComponent implements OnInit {
           next: (result: any) => {
             // console.log("response: ");
             // console.log(result);
-            this.mensaje = "";
-            this.toastr.success(
-              'Logo modificado correctamente.',
-              'Bien!',
-              {
-                timeOut: 3000,
-                positionClass: 'toast-bottom-right'
-              }
-            );
+            this.mErrMessage = '';
+            this.toastr.success('Logo modificado correctamente.', 'Bien!', {
+              timeOut: 3000,
+              positionClass: 'toast-bottom-right'
+            });
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
-            this.mensaje = "Error al actualizar. " + e;
+            this.mErrMessage = e.error.mensaje || e.message;
+            this.mErrStatus = e.status;
+            this.mErrStatusText = e.statusText;
             this.toastr.error(
               'Error al intentar actualizar su Formación Academica.',
               'Error!',
@@ -221,10 +216,10 @@ export class ModalEditImageComponent implements OnInit {
           }
         });
       }
-      if (this.whatEdit === "skill"){
+      if (this.whatEdit === 'skill') {
         // console.log("no hay imagen");
       }
-      if (this.whatEdit === "project"){
+      if (this.whatEdit === 'project') {
         const formData: FormData = new FormData();
         formData.append('img', this.filecito);
         // console.log("id (expe): " + this.id);
@@ -233,20 +228,18 @@ export class ModalEditImageComponent implements OnInit {
           next: (result: any) => {
             // console.log("response: ");
             // console.log(result);
-            this.mensaje = "";
-            this.toastr.success(
-              'Logo modificado correctamente.',
-              'Bien!',
-              {
-                timeOut: 3000,
-                positionClass: 'toast-bottom-right'
-              }
-            );
+            this.mErrMessage = '';
+            this.toastr.success('Logo modificado correctamente.', 'Bien!', {
+              timeOut: 3000,
+              positionClass: 'toast-bottom-right'
+            });
           },
           error: (e: any) => {
             // console.log("errorcito");
             // console.log(e);
-            this.mensaje = "Error al actualizar. " + e;
+            this.mErrMessage = e.error.mensaje || e.message;
+            this.mErrStatus = e.status;
+            this.mErrStatusText = e.statusText;
             this.toastr.error(
               'Error al intentar actualizar el logotipo.',
               'Error!',
@@ -264,19 +257,14 @@ export class ModalEditImageComponent implements OnInit {
         });
       }
       // console.log("el fomrulario es valido");
-    }
-    else {
+    } else {
       this.formBiographyImg.markAllAsTouched();
       // console.log(this.formBiographyImg.value);
       // console.log("el formulario es invalido");
-      this.toastr.error(
-        'Revise los campos.',
-        'Error!',
-        {
-          timeOut: 3000,
-          positionClass: 'toast-bottom-right'
-        }
-      );
+      this.toastr.error('Revise los campos.', 'Error!', {
+        timeOut: 3000,
+        positionClass: 'toast-bottom-right'
+      });
       this.spinner = false;
     }
   }
@@ -285,7 +273,7 @@ export class ModalEditImageComponent implements OnInit {
     this.modalActive.close('Modal Closed');
   }
 
-  dismissModal(){
+  dismissModal() {
     this.modalActive.dismiss('Cross click');
   }
 }

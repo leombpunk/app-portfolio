@@ -23,7 +23,9 @@ export class ModalAddEditSkillComponent implements OnInit {
   mErrTipoHabilidad: string = "";
   mErrNivel: string = "";
 
-  mensaje: string = "";
+  mErrMessage: string = '';
+  mErrStatus: string = '';
+  mErrStatusText: string = '';
   spinner: boolean = false;
 
   constructor(
@@ -130,7 +132,7 @@ export class ModalAddEditSkillComponent implements OnInit {
           next: (result: any) => {
             // console.log("result");
             // console.log(result);
-            this.mensaje = "";
+            this.mErrMessage = "";
             this.toastr.success(
               'Habilidad actualizada correctamente.',
               'Bien!',
@@ -143,7 +145,9 @@ export class ModalAddEditSkillComponent implements OnInit {
           error: (e: any) => {
             // console.log("error");
             // console.log(e);
-            this.mensaje = "Error al actualizar. " + e;
+            this.mErrMessage = e.error.mensaje || e.message;
+            this.mErrStatus = e.status;
+            this.mErrStatusText = e.statusText;
             this.toastr.error(
               'Error al intentar actualizar la habilidad.',
               'Error!',
@@ -169,7 +173,7 @@ export class ModalAddEditSkillComponent implements OnInit {
           next: (result: any) => {
             // console.log("result");
             // console.log(result);
-            this.mensaje = "";
+            this.mErrMessage = "";
             this.toastr.success(
               'Habilidad agregada correctamente.',
               'Bien!',
@@ -182,7 +186,9 @@ export class ModalAddEditSkillComponent implements OnInit {
           error: (e: any) => {
             // console.log("error");
             // console.log(e);
-            this.mensaje = "Error al intentar agregar.";
+            this.mErrMessage = e.error.mensaje || e.message;
+            this.mErrStatus = e.status;
+            this.mErrStatusText = e.statusText;
             this.toastr.error(
               'Error al intentar agregar la habilidad.',
               'Error!',
@@ -214,7 +220,7 @@ export class ModalAddEditSkillComponent implements OnInit {
         }
       );
       this.spinner = false;
-      this.mensaje = "Revise los campos";
+      this.mErrMessage = "Revise los campos";
     }
   }
 

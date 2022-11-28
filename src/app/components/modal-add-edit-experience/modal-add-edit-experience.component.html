@@ -10,10 +10,27 @@
 </div>
 <form [formGroup]="formExperience" (ngSubmit)="onSubmit($event)">
   <div class="modal-body">
-    <app-alert-danger *ngIf="mensaje" [mensajeAlert]="mensaje"></app-alert-danger>
+    <app-alert-danger
+      *ngIf="mErrMessage"
+      [mensajeAlert]="mErrMessage"
+      [mensajeStatus]="mErrStatus"
+      [mensajeStatusText]="mErrStatusText"
+    ></app-alert-danger>
     <div class="mb-3">
-      <input type="text" id="id" formControlName="id" value="0" style="display: none;">
-      <input type="text" id="usuarios_id" formControlName="usuarios_id" value="0" style="display: none;">
+      <input
+        type="text"
+        id="id"
+        formControlName="id"
+        value="0"
+        style="display: none;"
+      />
+      <input
+        type="text"
+        id="usuarios_id"
+        formControlName="usuarios_id"
+        value="0"
+        style="display: none;"
+      />
       <label for="cargo" class="form-label">Cargo:</label>
       <input
         type="text"
@@ -54,14 +71,17 @@
           <span *ngIf="DesdeError" class="errorMessage">{{ mErrDesde }}</span>
         </div>
         <div class="col-6">
-          <label for="hasta" class="form-label">Hasta: <span
-            placement="end"
-            ngbTooltip="Si aun sigue 'trabajando' por favor deje en blanco este campo, si guarda una fecha no podra ser borrada mas adelante, pero si la puede modificar"
-            class="customTooltip"
-            style="color: red;"
-          >
-            <fa-icon [icon]="faCircleQuestion"></fa-icon
-          ></span> </label>
+          <label for="hasta" class="form-label"
+            >Hasta:
+            <span
+              placement="end"
+              ngbTooltip="Si aun sigue 'trabajando' por favor deje en blanco este campo, si guarda una fecha no podra ser borrada mas adelante, pero si la puede modificar"
+              class="customTooltip"
+              style="color: red;"
+            >
+              <fa-icon [icon]="faCircleQuestion"></fa-icon
+            ></span>
+          </label>
           <input
             type="date"
             name="hasta"
@@ -88,26 +108,32 @@
       <span *ngIf="ReftelefError" class="errorMessage">{{ mErrReftelef }}</span>
     </div>
     <div class="mb-3">
-        <label for="refnombre" class="form-label">Nombre del Contacto de Referencia:</label>
-        <input
-          type="text"
-          name="refnombre"
-          id="refnombre"
-          formControlName="refnombre"
-          class="form-control shadow"
-          placeholder="Nombre del contacto de referencia"
-          [class.border-danger]="RefnombreValid"
-        />
-        <span *ngIf="RefnombreError" class="errorMessage">{{ mErrRefnombre }}</span>
-      </div>
-    <div class="mb-3">
-      <label for="tareas" class="form-label">Tareas realizadas: <span
-        placement="end"
-        ngbTooltip="Asegurese de usar comas (,) para citar las tareas que le asignaron para armar una lista ¡es muy importante!"
-        class="customTooltip"
+      <label for="refnombre" class="form-label"
+        >Nombre del Contacto de Referencia:</label
       >
-        <fa-icon [icon]="faCircleQuestion"></fa-icon></span
-    ></label>
+      <input
+        type="text"
+        name="refnombre"
+        id="refnombre"
+        formControlName="refnombre"
+        class="form-control shadow"
+        placeholder="Nombre del contacto de referencia"
+        [class.border-danger]="RefnombreValid"
+      />
+      <span *ngIf="RefnombreError" class="errorMessage">{{
+        mErrRefnombre
+      }}</span>
+    </div>
+    <div class="mb-3">
+      <label for="tareas" class="form-label"
+        >Tareas realizadas:
+        <span
+          placement="end"
+          ngbTooltip="Asegurese de usar comas (,) para citar las tareas que le asignaron para armar una lista ¡es muy importante!"
+          class="customTooltip"
+        >
+          <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+      ></label>
       <textarea
         name="tarea"
         id="tarea"

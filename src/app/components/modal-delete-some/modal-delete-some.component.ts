@@ -23,7 +23,9 @@ export class ModalDeleteSomeComponent implements OnInit {
 
   @Output() onDeleteSome: EventEmitter<string> = new EventEmitter(); //mandar el numero o el nombre para saber que seccion recargar
 
-  mensaje: string = "";
+  mErrMessage: string = '';
+  mErrStatus: string = '';
+  mErrStatusText: string = '';
   spinner: boolean = false;
 
   constructor(
@@ -41,7 +43,7 @@ export class ModalDeleteSomeComponent implements OnInit {
 
   deleteSome() {
     let response: any;
-    console.log("idModule: "+this.idModule);
+    console.log('idModule: ' + this.idModule);
     switch (this.idModule) {
       case 'biography':
         this.spinner = true;
@@ -57,7 +59,7 @@ export class ModalDeleteSomeComponent implements OnInit {
               response = result;
               // console.log('response: ');
               // console.log(response);
-              this.mensaje = "";
+              this.mErrMessage = '';
               this.toastr.success(
                 'Foto del perfil borrada correctamente.',
                 'Bien!',
@@ -71,7 +73,9 @@ export class ModalDeleteSomeComponent implements OnInit {
               // console.log('errorcito');
               // console.log(e);
               // console.log(e.ok);
-              this.mensaje = "Error al borrar! " + e;
+              this.mErrMessage = e.error.mensaje || e.message;
+              this.mErrStatus = e.status;
+              this.mErrStatusText = e.statusText;
               this.toastr.error(
                 'Error al intentar eliminar la foto.',
                 'Error!',
@@ -91,14 +95,14 @@ export class ModalDeleteSomeComponent implements OnInit {
         break;
       case 'academic':
         this.spinner = true;
-        if (this.idTarget === '1'){
+        if (this.idTarget === '1') {
           //borrar datos
           this.acaService.deleteAcademic(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
               // console.log('response (educacion): ');
               // console.log(response);
-              this.mensaje = "";
+              this.mErrMessage = '';
               this.toastr.success(
                 'Información borrada correctamente.',
                 'Bien!',
@@ -111,7 +115,9 @@ export class ModalDeleteSomeComponent implements OnInit {
             error: (e: any) => {
               // console.log('errorcito (educacion)');
               // console.log(e);
-              this.mensaje = "Error al borrar! " + e;
+              this.mErrMessage = e.error.mensaje || e.message;
+              this.mErrStatus = e.status;
+              this.mErrStatusText = e.statusText;
               this.toastr.error(
                 'Error al intentar eliminar la información.',
                 'Error!',
@@ -126,16 +132,16 @@ export class ModalDeleteSomeComponent implements OnInit {
               this.comunicationService.actualizarAca(true);
               this.closeModal();
             }
-          })
+          });
         }
-        if (this.idTarget === '2'){
+        if (this.idTarget === '2') {
           //borrar imagen
           this.acaService.deleteAcademImage(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
               // console.log('response (educacion imagen): ');
               // console.log(response);
-              this.mensaje = "";
+              this.mErrMessage = '';
               this.toastr.success(
                 'Logo del Instituto borrado correctamente.',
                 'Bien!',
@@ -149,7 +155,9 @@ export class ModalDeleteSomeComponent implements OnInit {
               // console.log('errorcito (educacion)');
               // console.log(e);
               // console.log(e.ok);
-              this.mensaje = "Error al borrar! " + e;
+              this.mErrMessage = e.error.mensaje || e.message;
+              this.mErrStatus = e.status;
+              this.mErrStatusText = e.statusText;
               this.toastr.error(
                 'Error al intentar eliminar el logotipo.',
                 'Error!',
@@ -170,14 +178,14 @@ export class ModalDeleteSomeComponent implements OnInit {
       case 'skill':
         this.spinner = true;
         // console.log("idTarget: "+this.idTarget);
-        if (this.idTarget === '1'){
+        if (this.idTarget === '1') {
           //borrar datos
           this.skillService.deleteSkill(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
               // console.log('response (experiencia): ');
               // console.log(response);
-              this.mensaje = "";
+              this.mErrMessage = '';
               this.toastr.success(
                 'Información borrada correctamente.',
                 'Bien!',
@@ -191,7 +199,9 @@ export class ModalDeleteSomeComponent implements OnInit {
               // console.log('errorcito (experiencia)');
               // console.log(e);
               // console.log(e.ok);
-              this.mensaje = "Error al borrar! " + e;
+              this.mErrMessage = e.error.mensaje || e.message;
+              this.mErrStatus = e.status;
+              this.mErrStatusText = e.statusText;
               this.toastr.error(
                 'Error al intentar eliminar los datos.',
                 'Error!',
@@ -206,23 +216,23 @@ export class ModalDeleteSomeComponent implements OnInit {
               this.comunicationService.actualizarSkill(true);
               this.closeModal();
             }
-          })
+          });
         }
-        if (this.idTarget === '2'){
+        if (this.idTarget === '2') {
           // console.log("no hay imagen para borrar");
         }
         break;
       case 'experience':
         this.spinner = true;
         // console.log("idTarget: "+this.idTarget);
-        if (this.idTarget === '1'){
+        if (this.idTarget === '1') {
           //borrar datos
           this.expeService.deleteExperience(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
               // console.log('response (experiencia): ');
               // console.log(response);
-              this.mensaje = "";
+              this.mErrMessage = '';
               this.toastr.success(
                 'Información borrada correctamente.',
                 'Bien!',
@@ -236,7 +246,9 @@ export class ModalDeleteSomeComponent implements OnInit {
               // console.log('errorcito (experiencia)');
               // console.log(e);
               // console.log(e.ok);
-              this.mensaje = "Error al borrar! " + e;
+              this.mErrMessage = e.error.mensaje || e.message;
+              this.mErrStatus = e.status;
+              this.mErrStatusText = e.statusText;
               this.toastr.error(
                 'Error al intentar eliminar los datos.',
                 'Error!',
@@ -251,16 +263,16 @@ export class ModalDeleteSomeComponent implements OnInit {
               this.comunicationService.actualizarExpe(true);
               this.closeModal();
             }
-          })
+          });
         }
-        if (this.idTarget === '2'){
+        if (this.idTarget === '2') {
           //borrar imagen
           this.expeService.deleteExpeImage(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
               // console.log('response (experiencia imagen): ');
               // console.log(response);
-              this.mensaje = "";
+              this.mErrMessage = '';
               this.toastr.success(
                 'Logo del trabajo borrado correctamente.',
                 'Bien!',
@@ -274,7 +286,9 @@ export class ModalDeleteSomeComponent implements OnInit {
               // console.log('errorcito (experiencia)');
               // console.log(e);
               // console.log(e.ok);
-              this.mensaje = "Error al borrar! " + e;
+              this.mErrMessage = e.error.mensaje || e.message;
+              this.mErrStatus = e.status;
+              this.mErrStatusText = e.statusText;
               this.toastr.error(
                 'Error al intentar eliminar el logotipo.',
                 'Error!',
@@ -294,14 +308,14 @@ export class ModalDeleteSomeComponent implements OnInit {
         break;
       case 'project':
         this.spinner = true;
-        if (this.idTarget === '1'){
+        if (this.idTarget === '1') {
           //borrar datos
           this.proService.deleteProject(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
               // console.log('response (proyecto): ');
               // console.log(response);
-              this.mensaje = "";
+              this.mErrMessage = '';
               this.toastr.success(
                 'Información borrada correctamente.',
                 'Bien!',
@@ -315,7 +329,9 @@ export class ModalDeleteSomeComponent implements OnInit {
               // console.log('errorcito (proyecto)');
               // console.log(e);
               // console.log(e.ok);
-              this.mensaje = "Error al borrar! " + e;
+              this.mErrMessage = e.error.mensaje || e.message;
+              this.mErrStatus = e.status;
+              this.mErrStatusText = e.statusText;
               this.toastr.error(
                 'Error al intentar eliminar los datos.',
                 'Error!',
@@ -330,16 +346,16 @@ export class ModalDeleteSomeComponent implements OnInit {
               this.comunicationService.actualizarProj(true);
               this.closeModal();
             }
-          })
+          });
         }
-        if (this.idTarget === '2'){
+        if (this.idTarget === '2') {
           //borrar imagen
           this.proService.deleteProjectImage(this.idItem).subscribe({
             next: (result: any) => {
               response = result;
               // console.log('response (proyecto imagen): ');
               // console.log(response);
-              this.mensaje = "";
+              this.mErrMessage = '';
               this.toastr.success(
                 'Logo del proyecto borrado correctamente.',
                 'Bien!',
@@ -353,7 +369,9 @@ export class ModalDeleteSomeComponent implements OnInit {
               // console.log('errorcito (proyecto)');
               // console.log(e);
               // console.log(e.ok);
-              this.mensaje = "Error al borrar! " + e;
+              this.mErrMessage = e.error.mensaje || e.message;
+              this.mErrStatus = e.status;
+              this.mErrStatusText = e.statusText;
               this.toastr.error(
                 'Error al intentar eliminar el logotipo.',
                 'Error!',
@@ -373,14 +391,10 @@ export class ModalDeleteSomeComponent implements OnInit {
         break;
       default:
         // console.log('forro');
-        this.toastr.info(
-          'Me quieres trollear?.',
-          'Atención!',
-          {
-            timeOut: 3000,
-            positionClass: 'toast-bottom-right'
-          }
-        );
+        this.toastr.info('Me quieres trollear?.', 'Atención!', {
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
+        });
         this.spinner = false;
         break;
     }

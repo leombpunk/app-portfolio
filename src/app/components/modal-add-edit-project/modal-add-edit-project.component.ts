@@ -29,7 +29,9 @@ export class ModalAddEditProjectComponent implements OnInit {
   mErrSitio: string = "";
   mErrEnlace: string = "";
 
-  mensaje: string = "";
+  mErrMessage: string = '';
+  mErrStatus: string = '';
+  mErrStatusText: string = '';
   spinner: boolean = false;
 
   @Input() project: Project = new Project();
@@ -243,7 +245,7 @@ export class ModalAddEditProjectComponent implements OnInit {
           next: (result: any) => {
             // console.log("result");
             // console.log(result);
-            this.mensaje = "";
+            this.mErrMessage = "";
             this.toastr.success(
               'Proyecto actualizado correctamente.',
               'Bien!',
@@ -265,7 +267,9 @@ export class ModalAddEditProjectComponent implements OnInit {
               }
             );
             this.spinner = false;
-            this.mensaje = "Error al actualizar. " +e;
+            this.mErrMessage = e.error.mensaje || e.message;
+            this.mErrStatus = e.status;
+            this.mErrStatusText = e.statusText;
           }, 
           complete: () => {
             this.comunicationService.actualizarProj(true);
@@ -282,7 +286,7 @@ export class ModalAddEditProjectComponent implements OnInit {
           next: (result: any) => {
             // console.log("result");
             // console.log(result);
-            this.mensaje = "";
+            this.mErrMessage = "";
             this.toastr.success(
               'Proyecto agregado correctamente.',
               'Bien!',
@@ -304,7 +308,9 @@ export class ModalAddEditProjectComponent implements OnInit {
               }
             );
             this.spinner = false;
-            this.mensaje = "Error al intentar agregar.";
+            this.mErrMessage = e.error.mensaje || e.message;
+            this.mErrStatus = e.status;
+            this.mErrStatusText = e.statusText;
           }, 
           complete: () => {
             this.comunicationService.actualizarProj(true);
@@ -327,7 +333,7 @@ export class ModalAddEditProjectComponent implements OnInit {
         }
       );
       this.spinner = false;
-      this.mensaje = "Revise los campos.";
+      this.mErrMessage = "Revise los campos.";
     }
   }
 

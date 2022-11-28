@@ -1,14 +1,15 @@
 <div class="modal-header">
   <h5 class="modal-title" id="modal-basic-title">{{ titleModal }}</h5>
-  <button
-    type="button"
-    class="btn-close"
-    (click)="dismissModal()"
-  ></button>
+  <button type="button" class="btn-close" (click)="dismissModal()"></button>
 </div>
 <form [formGroup]="formBiography" (ngSubmit)="onSubmit($event)">
   <div class="modal-body">
-    <app-alert-danger *ngIf="mensaje" [mensajeAlert]="mensaje"></app-alert-danger>
+    <app-alert-danger
+      *ngIf="mErrMessage"
+      [mensajeAlert]="mErrMessage"
+      [mensajeStatus]="mErrStatus"
+      [mensajeStatusText]="mErrStatusText"
+    ></app-alert-danger>
     <!-- tabs inicio -->
     <ul class="nav nav-tabs" role="tablist" id="pestañas">
       <li class="nav-item" role="presentation">
@@ -50,8 +51,20 @@
         role="tabpanel"
         aria-labelledby="tab-biography"
       >
-        <input type="text" id="id" formControlName="id" value="0" style="display: none;">
-        <input type="text" id="usuarios_id" formControlName="usuarios_id" value="0" style="display: none;">
+        <input
+          type="text"
+          id="id"
+          formControlName="id"
+          value="0"
+          style="display: none;"
+        />
+        <input
+          type="text"
+          id="usuarios_id"
+          formControlName="usuarios_id"
+          value="0"
+          style="display: none;"
+        />
         <div class="mb-3">
           <label for="titulo" class="form-label">Titulo:</label>
           <input
@@ -63,7 +76,9 @@
             placeholder="Ej.: Su titulo académico o puesto de trabajo"
             [class.border-danger]="TituloValid"
           />
-          <span *ngIf="TituloError" class="errorMessage"> {{ mErrTitulo }} </span>
+          <span *ngIf="TituloError" class="errorMessage">
+            {{ mErrTitulo }}
+          </span>
         </div>
         <div class="mb-3">
           <label for="nombre" class="form-label">Nombre:</label>
@@ -76,7 +91,9 @@
             placeholder="Ingrese su nombre"
             [class.border-danger]="NombreValid"
           />
-            <span *ngIf="NombreError" class="errorMessage"> {{ mErrNombre }} </span>
+          <span *ngIf="NombreError" class="errorMessage">
+            {{ mErrNombre }}
+          </span>
         </div>
         <div class="mb-3">
           <label for="apellido" class="form-label">Apellido:</label>
@@ -89,7 +106,9 @@
             placeholder="Ingrese su apellido"
             [class.border-danger]="ApellidoValid"
           />
-            <span *ngIf="ApellidoError" class="errorMessage"> {{ mErrApellido }} </span>
+          <span *ngIf="ApellidoError" class="errorMessage">
+            {{ mErrApellido }}
+          </span>
         </div>
         <div class="mb-3">
           <label for="about-you" class="form-label">Acerca de tí:</label>
@@ -102,8 +121,11 @@
             class="form-control shadow"
             placeholder="Escriba aqui algo acerca de usted..."
             [class.border-danger]="AcercadeValid"
-          >{{ bio.acercade }}</textarea>
-          <span *ngIf="AcercadeError" class="errorMessage"> {{ mErrAcercade }} </span>
+            >{{ bio.acercade }}</textarea
+          >
+          <span *ngIf="AcercadeError" class="errorMessage">
+            {{ mErrAcercade }}
+          </span>
         </div>
       </div>
       <div
@@ -113,13 +135,15 @@
         aria-labelledby="tab-contact"
       >
         <div class="mb-3">
-          <label for="github" class="form-label">GitHub: <span
-            placement="end"
-            ngbTooltip="ej.: https://url-de-github.com/tu-nickname"
-            class="customTooltip"
-          >
-            <fa-icon [icon]="faCircleQuestion"></fa-icon></span
-        ></label>
+          <label for="github" class="form-label"
+            >GitHub:
+            <span
+              placement="end"
+              ngbTooltip="ej.: https://url-de-github.com/tu-nickname"
+              class="customTooltip"
+            >
+              <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+          ></label>
           <input
             type="text"
             name="github"
@@ -129,16 +153,20 @@
             placeholder="GitHub"
             [class.border-danger]="GithubValid"
           />
-              <span *ngIf="GithubError" class="errorMessage"> {{ mErrGithub }} </span>
+          <span *ngIf="GithubError" class="errorMessage">
+            {{ mErrGithub }}
+          </span>
         </div>
         <div class="mb-3">
-          <label for="linkedin" class="form-label">LinkedIn: <span
-            placement="end"
-            ngbTooltip="ej.: https://url-de-linkedin.com/tu-nickname"
-            class="customTooltip"
-          >
-            <fa-icon [icon]="faCircleQuestion"></fa-icon></span
-        ></label>
+          <label for="linkedin" class="form-label"
+            >LinkedIn:
+            <span
+              placement="end"
+              ngbTooltip="ej.: https://url-de-linkedin.com/tu-nickname"
+              class="customTooltip"
+            >
+              <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+          ></label>
           <input
             type="text"
             name="linkedin"
@@ -148,16 +176,20 @@
             placeholder="LinkedIn"
             [class.border-danger]="LinkedinValid"
           />
-              <span *ngIf="LinkedinError" class="errorMessage"> {{ mErrLinkedin }} </span>
+          <span *ngIf="LinkedinError" class="errorMessage">
+            {{ mErrLinkedin }}
+          </span>
         </div>
         <div class="mb-3">
-          <label for="correo" class="form-label">Correo: <span
-            placement="end"
-            ngbTooltip="ej.: nickname@dominio.com"
-            class="customTooltip"
-          >
-            <fa-icon [icon]="faCircleQuestion"></fa-icon></span
-        ></label>
+          <label for="correo" class="form-label"
+            >Correo:
+            <span
+              placement="end"
+              ngbTooltip="ej.: nickname@dominio.com"
+              class="customTooltip"
+            >
+              <fa-icon [icon]="faCircleQuestion"></fa-icon></span
+          ></label>
           <input
             type="mail"
             name="correo"
@@ -167,7 +199,9 @@
             placeholder="Correo"
             [class.border-danger]="CorreoValid"
           />
-              <span *ngIf="CorreoError" class="errorMessage"> {{ mErrCorreo }} </span>
+          <span *ngIf="CorreoError" class="errorMessage">
+            {{ mErrCorreo }}
+          </span>
         </div>
       </div>
     </div>
@@ -177,7 +211,6 @@
     <button
       type="button"
       class="btn btn-secondary shadow"
-      
       (click)="closeModal()"
     >
       Cerrar

@@ -20,8 +20,13 @@
       </div>
     </div> -->
     <div class="row justify-content-center">
-      <app-alert-danger *ngIf="mensaje" [mensajeAlert]="mensaje"></app-alert-danger>
-      <input type="text" formControlName="id" name="id" style="display:none;">
+      <app-alert-danger
+        *ngIf="mErrMessage"
+        [mensajeAlert]="mErrMessage"
+        [mensajeStatus]="mErrStatus"
+        [mensajeStatusText]="mErrStatusText"
+      ></app-alert-danger>
+      <input type="text" formControlName="id" name="id" style="display:none;" />
       <input
         class="form-control shadow"
         type="file"
@@ -32,7 +37,9 @@
         [class.border-danger]="ImageValid"
         (change)="onFileSelected($event)"
       />
-      <span *ngIf="ImageError" class="errorMessage text-center"> {{ mErrImage }} </span>
+      <span *ngIf="ImageError" class="errorMessage text-center">
+        {{ mErrImage }}
+      </span>
     </div>
   </div>
   <div class="modal-footer">
