@@ -23,6 +23,16 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.toastr.info(
+      'El contenedor en Fly.io tarda unos minutos en iniciar. Si la operación falla vuelva a intentar luego de unos segundos y aguarde a que se complete. Esto puede suceder varias veces!',
+      'Aguarde por favor!',
+      {
+        
+        timeOut: 0,
+        extendedTimeOut: 0,
+        positionClass: 'toast-center-center'
+      }
+    );
     this.routeActive.params.subscribe((params: Params) => {
       // this.authService.buscarUsuario(params['usuario']).subscribe({
       //   next: (result: any) => {
