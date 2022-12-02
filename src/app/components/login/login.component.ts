@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
       // console.log("el formulario es valido");
       // console.log(this.formLogin.value);
       this.toastr.info(
-        'El contenedor en Fly.io tarda unos minutos en iniciar. Si la operación falla vuelva a intentar luego de unos segundos y aguarde a que se complete. Esto puede suceder varias veces!',
+        'El contenedor del backend tarda unos minutos en iniciar. Si la operación falla vuelva a intentar luego de unos segundos y aguarde a que se complete. Esto puede suceder varias veces!',
         'Aguarde por favor!',
         {
           
