@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Biography } from '../../model/biography';
-import { Academics } from '../../model/academic';
-import { Experience } from '../../model/experience';
-import { Project } from '../../model/projects';
-import { Skill } from '../../model/skills';
+import { Biography } from '../../models/biography';
+import { Academics } from '../../models/academic';
+import { Experience } from '../../models/experience';
+import { Project } from '../../models/projects';
+import { Skill } from '../../models/skills';
 import { BiographyService } from 'src/app/services/biography.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 import { AcademicService } from '../../services/academic.service';

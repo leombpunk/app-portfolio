@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDeleteSomeComponent } from '../modal-delete-some/modal-delete-some.component';
-import { Biography } from '../../model/biography';
-import { Experience } from '../../model/experience';
-import { Academics } from '../../model/academic';
-import { Project } from 'src/app/model/projects';
-import { Skill } from 'src/app/model/skills';
+import { Biography } from '../../models/biography';
+import { Experience } from '../../models/experience';
+import { Academics } from '../../models/academic';
+import { Project } from 'src/app/models/projects';
+import { Skill } from 'src/app/models/skills';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

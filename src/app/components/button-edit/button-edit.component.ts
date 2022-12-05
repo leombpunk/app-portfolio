@@ -7,11 +7,11 @@ import { ModalAddEditExperienceComponent } from '../modal-add-edit-experience/mo
 import { ModalAddEditProjectComponent } from '../modal-add-edit-project/modal-add-edit-project.component';
 import { ModalAddEditSkillComponent } from '../modal-add-edit-skill/modal-add-edit-skill.component';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
-import { Biography } from '../../model/biography';
-import { Experience } from 'src/app/model/experience';
-import { Academics } from '../../model/academic';
-import { Project } from 'src/app/model/projects';
-import { Skill } from 'src/app/model/skills';
+import { Biography } from '../../models/biography';
+import { Experience } from 'src/app/models/experience';
+import { Academics } from '../../models/academic';
+import { Project } from 'src/app/models/projects';
+import { Skill } from 'src/app/models/skills';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

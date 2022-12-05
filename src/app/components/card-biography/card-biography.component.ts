@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { Biography } from '../../model/biography';
+import { Biography } from '../../models/biography';
 
 @Component({
   selector: 'app-card-biography',

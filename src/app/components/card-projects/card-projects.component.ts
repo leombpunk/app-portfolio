@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faBook, faGlobe } from '@fortawesome/free-solid-svg-icons';
-import { Project } from '../../model/projects';
+import { Project } from '../../models/projects';
 @Component({
   selector: 'app-card-projects',
   templateUrl: './card-projects.component.html',

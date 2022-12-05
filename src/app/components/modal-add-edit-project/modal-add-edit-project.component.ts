@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Project } from 'src/app/model/projects';
+import { Project } from 'src/app/models/projects';
 import { ProjectService } from 'src/app/services/project.service';
 import { WalkietalkieService } from 'src/app/services/walkietalkie.service';
 import { ToastrService } from 'ngx-toastr';

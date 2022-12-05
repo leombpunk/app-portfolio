@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Experience } from '../../model/experience';
-import { Academics } from '../../model/academic';
+import { Experience } from '../../models/experience';
+import { Academics } from '../../models/academic';
 
 @Component({
   selector: 'app-card-default',

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 import { AcademicService } from '../../services/academic.service';
-import { Academics } from 'src/app/model/academic';
+import { Academics } from 'src/app/models/academic';
 import { WalkietalkieService } from 'src/app/services/walkietalkie.service';
 import { ToastrService } from 'ngx-toastr';
 import { customRegExp } from '../../utils/customRegExp';

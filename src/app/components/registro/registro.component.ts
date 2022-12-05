@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { UsuarioNuevo } from 'src/app/model/usuario-nuevo';
+import { UsuarioNuevo } from 'src/app/models/usuario-nuevo';
 import { TokenService } from 'src/app/services/token.service';
 import { ToastrService } from 'ngx-toastr';
 import { customRegExp } from 'src/app/utils/customRegExp';

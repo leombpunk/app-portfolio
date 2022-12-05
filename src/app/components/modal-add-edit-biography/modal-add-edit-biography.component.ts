@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Biography } from '../../model/biography';
+import { Biography } from '../../models/biography';
 import { BiographyService } from '../../services/biography.service';
 import { WalkietalkieService } from '../../services/walkietalkie.service';
 import { ToastrService } from 'ngx-toastr';
