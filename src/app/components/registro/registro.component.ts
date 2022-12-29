@@ -47,7 +47,7 @@ export class RegistroComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(8),
+          Validators.minLength(6),
           Validators.maxLength(16),
           Validators.pattern(customRegExp.userNamePassword)
         ]
@@ -108,7 +108,7 @@ export class RegistroComponent implements OnInit {
         return true;
       }
       if (this.Pass!.errors!['minlength'] || this.Pass!.errors!['maxlength']) {
-        this.mErrPass = 'La contraseña debe contener entre 8 y 16 caracteres';
+        this.mErrPass = 'La contraseña debe contener entre 6 y 16 caracteres';
         return true;
       }
       if (this.Pass!.errors!['pattern']) {

@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
         return true;
       }
       if (this.Pass!.errors!['minlength'] || this.Pass!.errors!['maxlength']) {
-        this.mErrPass = 'La contraseña debe contener entre 8 y 16 caracteres';
+        this.mErrPass = 'La contraseña debe contener entre 6 y 16 caracteres';
         return true;
       }
     }

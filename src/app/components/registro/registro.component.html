@@ -82,8 +82,6 @@
                   formControlName="usuario"
                   class="form-control shadow"
                   placeholder="Usuario"
-                  minlength="4"
-                  maxlength="16"
                   [class.border-danger]="UserValid"
                 />
                 <span *ngIf="UserError" class="errorMessage">{{
@@ -99,8 +97,6 @@
                   formControlName="contrasena"
                   class="form-control shadow"
                   placeholder="Contraseña"
-                  minlength="8"
-                  maxlength="16"
                   [class.border-danger]="PassValid"
                 />
                 <span *ngIf="PassError" class="errorMessage">{{
