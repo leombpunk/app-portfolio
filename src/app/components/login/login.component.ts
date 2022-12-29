@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   ) {
     this.formLogin = this.form.group({
       usuario: ['',[Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
-      contrasena: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(16)]]
+      contrasena: ['',[Validators.required, Validators.minLength(6), Validators.maxLength(16)]]
     });
   }
 
